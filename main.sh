@@ -1,19 +1,22 @@
-# Install lx keymap manager
+# Add ppa's
+sudo add-apt-repository ppa:team-xbmc/ppa
+sudo add-apt-repository ppa:graphics-drivers/ppa
+
+# Update apt
+sudo apt-get update
+sudo apt-get upgrade
+
+# Install additional software
 sudo apt-get install lxkeymap
+sudo apt-get install pulseaudio pavucontrol
+sudo apt-get install nvidia-graphics-driver-364 vdpauinfo
+sudo apt-get install kodi
 
 #force locale and keymap settings
 
 #install graphics-drivers ppa
 
 #install nvidia graphics drivers
-
-# install pulse
-sudo apt-get install pulseaudio pavucontrol
-
-# add kodi ppa
-
-#install kodi
-sudo apt-get install kodi
 
 #disable unneeded xsessions
 
