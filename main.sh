@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Add ppa's
 sudo add-apt-repository ppa:team-xbmc/ppa
 sudo add-apt-repository ppa:graphics-drivers/ppa
@@ -11,6 +13,7 @@ sudo apt-get install lxkeymap
 sudo apt-get install pulseaudio pavucontrol
 sudo apt-get install nvidia-graphics-driver-364 vdpauinfo
 sudo apt-get install kodi
+sudo apt-get install samba
 
 #force locale and keymap settings
 

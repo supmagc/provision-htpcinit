@@ -14,7 +14,7 @@ sudo ./HtpcInit/main.sh
 # Update
 Run the following commands:
 ```
-git -C HtpcInit pull origin/master
+git -C HtpcInit pull origin master
 sudo ./HtpcInit/main.sh
 
 ```
