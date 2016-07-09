@@ -18,7 +18,7 @@ sudo apt-get dist-upgrade -y
 sudo apt-get install -y openssl
 sudo apt-get install -y lxkeymap
 sudo apt-get install -y pulseaudio pavucontrol
-sudo apt-get install -y nvidia-graphics-driver-364 vdpauinfo
+sudo apt-get install -y nvidia-364 vdpauinfo
 sudo apt-get install -y kodi
 sudo apt-get install -y samba
 
@@ -39,5 +39,5 @@ sudo apt-get install -y samba
 #install lirc config
 
 #install samba config
-sudo sed 's/{HOSTNAME}/$HOSTNAME/:s/{WORKGROUO}/$WORKGROUP/' templates/smb.conf > /etc/samba/smb.conf
+sudo sed 's/{HOSTNAME}/$HOSTNAME/^; s/{WORKGROUO}/$WORKGROUP/' templates/smb.conf > /etc/samba/smb.conf
 sudo service samba restart
