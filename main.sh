@@ -12,7 +12,7 @@ sudo add-apt-repository ppa:graphics-drivers/ppa
 # Update apt
 sudo apt-get update -y
 sudo apt-get upgrade -y
-sudo apt-get dist-update -y
+sudo apt-get dist-upgrade -y
 
 # Install additional software
 sudo apt-get install -y openssl
