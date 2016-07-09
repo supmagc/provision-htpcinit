@@ -12,5 +12,5 @@ git clone https://github.com/supmagc/HtpcInit.git HtpcInit && sudo chmod a+x Htp
 # Update
 Run the following commands:
 ```
-git -C HtpcInit pull origin master && sudo chmod a=x HtpcInit/main.sh && sudo HtpcInit/main.sh
+git -C HtpcInit pull origin master && sudo chmod a+x HtpcInit/main.sh && sudo HtpcInit/main.sh
 ```
