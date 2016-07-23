@@ -6,11 +6,11 @@ Run the following commands:
 ```
 sudo apt-get update
 sudo apt-get install git
-git clone https://github.com/supmagc/HtpcInit.git HtpcInit && sudo HtpcInit/main.sh
+git clone https://github.com/supmagc/HtpcInit.git HtpcInit && cd HtpcInit && sudo ./main.sh && cd ../
 ```
 
 # Update
 Run the following commands:
 ```
-git -C HtpcInit pull && sudo HtpcInit/main.sh
+git -C HtpcInit pull && cd HtpcInit && sudo ./main.sh && cd ../
 ```
