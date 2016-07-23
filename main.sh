@@ -124,6 +124,10 @@ sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=0/" /etc/default/grub
 update-grub2
 
 # Basic configuration for kodi
+mkdir /home/$USERNAME/.kodi/userdata
+cp templates/advancedsettings.xml  /home/$USERNAME/.kodi/userdata/advancedsettings.xml
+chown -R $USERNAME:$USERNAME /home/$USERNAME/.kodi
+chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 
 #install samba config
 sed -e "s/{HOSTNAME}/$HOSTNAME/" -e "s/{WORKGROUO}/$WORKGROUP/" templates/smb.conf > /etc/samba/smb.conf
