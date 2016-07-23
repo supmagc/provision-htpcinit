@@ -73,14 +73,6 @@ echo "$SSH_KEY" > /home/$USERNAME/.ssh/authorized_keys
 chown $USERNAME /home/$USERNAME/.ssh/authorized_keys
 chmod 0744 /home/$USERNAME/.ssh/authorized_keys
 
-# Configure network
-hostname "$HOSTNAME"
-sed -i "/127.0.0.1/d" /etc/hosts
-sed -i "1 i 127.0.0.1\t$HOSTNAME" /etc/hosts
-resolvconf -u
-nmcli connection modify "$NET_CONN" ipv4.method "manual" ipv4.dns "$NET_DNS" ipv4.addresses "$NET_IP" ipv4.gateway "$NET_GATE"
-systemctl restart network-manager.service
-
 # Force locale and keymap settings
 locale-gen "$LOCALE_LANG"
 localectl set-x11-keymap "$LOCALE_KEYMAP"
@@ -127,6 +119,9 @@ if [ -z $(which google-chrome) ]; then
   dpkg -i /var/tmp/chrome.deb
 fi
 
+# Change GRUB config
+sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=0/" /etc/default/grub
+update-grub2
 
 # Basic configuration for kodi
 
@@ -134,3 +129,11 @@ fi
 sed -e "s/{HOSTNAME}/$HOSTNAME/" -e "s/{WORKGROUO}/$WORKGROUP/" templates/smb.conf > /etc/samba/smb.conf
 systemctl restart smbd.service
 systemctl restart nmbd.service
+
+# Configure network
+hostname "$HOSTNAME"
+sed -i "/127.0.0.1/d" /etc/hosts
+sed -i "1 i 127.0.0.1\t$HOSTNAME" /etc/hosts
+resolvconf -u
+nmcli connection modify "$NET_CONN" ipv4.method "manual" ipv4.dns "$NET_DNS" ipv4.addresses "$NET_IP" ipv4.gateway "$NET_GATE"
+systemctl restart network-manager.service
