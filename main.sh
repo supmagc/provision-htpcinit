@@ -117,10 +117,10 @@ sed -i "/UseEdidDpi/i\
 \    Option         \"DPI\" \"$SCREEN_DPI x $SCREEN_DPI\"" /etc/X11/xorg.conf
 
 # Download and install chrome
-#if [ -z $(which google-chrome) ]; then
-#  wget -O /var/tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-#  dpkg -i /var/tmp/chrome.deb
-#fi
+if [ -z $(which google-chrome) ]; then
+  wget -O /var/tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  dpkg -i /var/tmp/chrome.deb
+fi
 
 # Change GRUB config
 sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=$BOOT_TIMEOUT/" /etc/default/grub
