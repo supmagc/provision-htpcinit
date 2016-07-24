@@ -36,6 +36,7 @@ request_variable "SSH_KEY" "ssh key"
 request_variable "LOCALE_LANG" "system language"
 request_variable "LOCALE_KEYMAP" "default keymap"
 request_variable "SCREEN_DPI" "screen dpi"
+request_variable "BOOT_TIMEOUT" "boot timeout"
 
 echo "#User specified overrides for HtpcInit configuration" > ~/.config/htpcinit.user.conf
 for i in ${!DEFAULT_*}; do
@@ -58,20 +59,21 @@ apt-get dist-upgrade -y
 
 # Install additional software
 apt-get install -y openssl \
-  lxkeymap \
   pulseaudio pavucontrol \
   nvidia-364 vdpauinfo \
   kodi \
   samba \
+  google-chrome-stable \
   steam retroarch
 
 # Remove no longer needed packages
 apt-get autoremove -y
 
 # Create and configure ssl
+mkdir -p /home/$USERNAME/.ssh
 echo "$SSH_KEY" > /home/$USERNAME/.ssh/authorized_keys
-chown $USERNAME /home/$USERNAME/.ssh/authorized_keys
-chmod 0744 /home/$USERNAME/.ssh/authorized_keys
+chown -R $USERNAME /home/$USERNAME/.ssh
+chmod -R u=rwX,go=rX /home/$USERNAME/.ssh
 
 # Force locale and keymap settings
 locale-gen "$LOCALE_LANG"
@@ -79,9 +81,9 @@ localectl set-x11-keymap "$LOCALE_KEYMAP"
 localectl set-keymap "$LOCALE_KEYMAP"
 
 # Disable unneeded xsessions and add htpc xsession
-mkdir /usr/share/xsessions/hidden
+mkdir -p /usr/share/xsessions/hidden
 for f in $(ls /usr/share/xsessions | grep -e ".*\.desktop$"); do
-  if [ ! $f == htpc.desktop ] && [ ! $f == kodi.desktop ] && [ ! $f == Lubuntu.desktop ]; then
+  if [ ! $f == htpc.desktop ] && [ ! $f == kodi.desktop ] && [ ! $f == Lubuntu.desktop ] && [ ! $f == xubuntu.desktop ]; then
 	sudo dpkg-divert --rename \
 	  --divert /usr/share/xsessions/hidden/$f \
 	  --add /usr/share/xsessions/$f
@@ -110,26 +112,29 @@ chmod 0755 /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
 
 # Configure nvidia
 nvidia-xconfig --no-use-edid-dpi
+sed -i "/DPI/d" /etc/X11/xorg.conf
 sed -i "/UseEdidDpi/i\
 \    Option         \"DPI\" \"$SCREEN_DPI x $SCREEN_DPI\"" /etc/X11/xorg.conf
 
 # Download and install chrome
-if [ -z $(which google-chrome) ]; then
-  wget -O /var/tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  dpkg -i /var/tmp/chrome.deb
-fi
+#if [ -z $(which google-chrome) ]; then
+#  wget -O /var/tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#  dpkg -i /var/tmp/chrome.deb
+#fi
 
 # Change GRUB config
-sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=0/" /etc/default/grub
+sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=$BOOT_TIMEOUT/" /etc/default/grub
 update-grub2
 
 # Basic configuration for kodi
-mkdir /home/$USERNAME/.kodi/userdata
+mkdir -p /home/$USERNAME/.kodi/userdata
 cp templates/advancedsettings.xml  /home/$USERNAME/.kodi/userdata/advancedsettings.xml
 chown -R $USERNAME:$USERNAME /home/$USERNAME/.kodi
 chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 
-#install samba config
+# Install plymouth theme
+
+# Install samba config
 sed -e "s/{HOSTNAME}/$HOSTNAME/" -e "s/{WORKGROUO}/$WORKGROUP/" templates/smb.conf > /etc/samba/smb.conf
 systemctl restart smbd.service
 systemctl restart nmbd.service
