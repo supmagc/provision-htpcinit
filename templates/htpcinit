@@ -1,4 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-openbox &
+if hash openbox 2>/dev/null; then
+  openbox &
+elif hash xfwm4 2>/dev/null; then
+  xfwm4 &
+fi
+
 kodi-standalone
