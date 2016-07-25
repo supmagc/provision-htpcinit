@@ -121,7 +121,7 @@ sed -i "/UseEdidDpi/i\
 # Download and install chrome
 if [ -z $(which google-chrome) ]; then
   wget -O /var/tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  dpkg -i /var/tmp/chrome.deb
+  apt-get install /var/tmp/chrome.deb
 fi
 
 # Change GRUB config
