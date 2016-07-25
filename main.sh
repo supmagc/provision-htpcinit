@@ -79,6 +79,11 @@ chmod -R u=rwX,go=rX /home/$USERNAME/.ssh
 locale-gen "$LOCALE_LANG"
 localectl set-x11-keymap "$LOCALE_KEYMAP"
 localectl set-keymap "$LOCALE_KEYMAP"
+cp templates/htpcinit-display-setup /usr/local/bin/htpcinit-display-setup
+chmod 0755 /usr/local/bin/htpcinit-display-setup
+echo "[Seat:*]" > /etc/lightdm/lightdm.conf.d/75-htpcinit-display-setup.conf
+echo "display-setup-script=htpcinit-display-setup" >> /etc/lightdm/lightdm.conf.d/75-htpcinit-display-setup.conf
+chmod 0644 /etc/lightdm/lightdm.conf.d/75-htpcinit-display-setup.conf
 
 # Disable unneeded xsessions and add htpc xsession
 mkdir -p /usr/share/xsessions/hidden
@@ -90,12 +95,10 @@ for f in $(ls /usr/share/xsessions | grep -e ".*\.desktop$"); do
   fi
 done
 cp templates/htpc.desktop /usr/share/xsessions/htpc.desktop
-chown -R root:root /usr/share/xsessions/*
 chmod u=rwX,go=rX /usr/share/xsessions/*
 
 # Add xsession entrypoint
 cp templates/htpcinit /usr/local/bin/htpcinit
-chown root:root /usr/local/bin/htpcinit
 chmod 0755 /usr/local/bin/htpcinit
 
 # Enable autologon
@@ -103,8 +106,7 @@ echo "[Seat:*]" > /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
 echo "autologin-user=$USERNAME" >> /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
 echo "autologin-user-timeout=0" >> /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
 echo "user-session=htpc" >> /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
-chown root:root /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
-chmod 0755 /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
+chmod 0644 /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
 
 # Install lirc from source
 
