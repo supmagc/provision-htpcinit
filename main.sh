@@ -60,7 +60,6 @@ apt-get dist-upgrade -y
 # Install additional software
 apt-get install -y openssl \
   pulseaudio pavucontrol \
-  nvidia-364 vdpauinfo \
   kodi \
   samba \
   steam retroarch
@@ -112,10 +111,13 @@ chmod 0644 /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
 # Install lirc config
 
 # Configure nvidia
-nvidia-xconfig --no-use-edid-dpi
-sed -i "/DPI/d" /etc/X11/xorg.conf
-sed -i "/UseEdidDpi/i\
+if [ "$(lspci -v | grep nvidia)" ]; then
+  apt-get install -y nvidia-364 vdpauinfo
+  nvidia-xconfig --no-use-edid-dpi
+  sed -i "/DPI/d" /etc/X11/xorg.conf
+  sed -i "/UseEdidDpi/i\
 \    Option         \"DPI\" \"$SCREEN_DPI x $SCREEN_DPI\"" /etc/X11/xorg.conf
+fi
 
 # Download and install chrome
 if [ -z $(which google-chrome) ]; then
