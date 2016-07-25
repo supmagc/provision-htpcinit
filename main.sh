@@ -63,7 +63,6 @@ apt-get install -y openssl \
   nvidia-364 vdpauinfo \
   kodi \
   samba \
-  google-chrome-stable \
   steam retroarch
 
 # Remove no longer needed packages
