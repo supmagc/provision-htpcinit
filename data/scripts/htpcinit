@@ -4,5 +4,4 @@ if hash openbox 2>/dev/null; then
   openbox &
 fi
 
-steam -bigpicture -silent &
 kodi-standalone &
