@@ -1,8 +1,23 @@
 #!/bin/bash
 
+if [ $(id -u) -ne 0 ]; then
+  echo "HtpcInit main.sh must be run as root"
+  exit
+fi
+
+if [ $(echo $DESKTOP_SESSION) -ne "Lubuntu" ]; then
+  echo "HtpcInit is only compatible with x64 Lubuntu"
+  exit
+fi
+
+if [ $(uname -m) -ne "x86_64" ]; then
+  echo "HtpcInit is only compatible with x64 Lubuntu"
+  exit
+fi
+
 echo "Loading default config:"
-cat ./templates/default.conf
-source ./templates/default.conf
+cat ./templates/config/default.conf
+source ./templates/config/default.conf
 
 if [ -f ~/.config/htpcinit.user.conf ]; then
   echo "Loading overriding user config:"
@@ -20,6 +35,23 @@ function request_variable {
   eval "$VAR_NAME=\"$VAR\""
 }
 
+function copy_and_parse_file {
+  local FILE_SOURCE_PATH="$1"
+  local FILE_TARGET_PATH="$2"
+  if [ -z "$FILE_TARGET_PATH" ]; then
+    FILE_TARGET_PATH="$FILE_SOURCE_PATH"
+  else
+    cp -v "$FILE_SOURCE_PATH" "$FILE_TARGET_PATH"
+  fi
+  for i in ${!DEFAULT_*}; do
+    local VAR_NAME=${i:8}
+	local VAR_VALUE="${!VAR_NAME}"
+	local VAR_VALUE="${VAR_VALUE//\//\\\/}"
+    sed -i "s/{$VAR_NAME}/$VAR_VALUE/" "$FILE_TARGET_PATH"
+  done
+  chmod 0644 "$FILE_TARGET_PATH"
+}
+
 # Request userdata updates
 echo "Current IP:"
 ip addr
@@ -32,6 +64,7 @@ request_variable "NET_CONN" "network connection"
 request_variable "USERNAME" "username"
 request_variable "HOSTNAME" "hostname"
 request_variable "WORKGROUP" "workgroup"
+request_variable "INSTALLATION" "install location"
 request_variable "SSH_KEY" "ssh key"
 request_variable "LOCALE_LANG" "system language"
 request_variable "LOCALE_KEYMAP" "default keymap"
@@ -60,51 +93,44 @@ apt-get dist-upgrade -y
 # Install additional software
 apt-get install -y openssl \
   pulseaudio pavucontrol \
+  wmctrl xdotool \
   kodi \
   samba \
-  steam retroarch
+  steam \
+  retroarch
 
 # Remove no longer needed packages
 apt-get autoremove -y
 
+# Copy scripts etc
+mkdir -vp "$INSTALLATION"
+cp -avr data/* "$INSTALLATION"
+
 # Create and configure ssl
-mkdir -p /home/$USERNAME/.ssh
+mkdir -vp /home/$USERNAME/.ssh
 echo "$SSH_KEY" > /home/$USERNAME/.ssh/authorized_keys
-chown -R $USERNAME /home/$USERNAME/.ssh
-chmod -R u=rwX,go=rX /home/$USERNAME/.ssh
+chown -vR $USERNAME /home/$USERNAME/.ssh
+chmod -vR u=rwX,go=rX /home/$USERNAME/.ssh
 
 # Force locale and keymap settings
 locale-gen "$LOCALE_LANG"
 localectl set-x11-keymap "$LOCALE_KEYMAP"
 localectl set-keymap "$LOCALE_KEYMAP"
-cp templates/htpcinit-display-setup /usr/local/bin/htpcinit-display-setup
-chmod 0755 /usr/local/bin/htpcinit-display-setup
-echo "[Seat:*]" > /etc/lightdm/lightdm.conf.d/75-htpcinit-display-setup.conf
-echo "display-setup-script=htpcinit-display-setup" >> /etc/lightdm/lightdm.conf.d/75-htpcinit-display-setup.conf
-chmod 0644 /etc/lightdm/lightdm.conf.d/75-htpcinit-display-setup.conf
+copy_and_parse_file "templates/75-htpcinit-display-setup.conf" "/etc/lightdm/lightdm.conf.d/75-htpcinit-display-setup.conf"
 
 # Disable unneeded xsessions and add htpc xsession
 mkdir -p /usr/share/xsessions/hidden
 for f in $(ls /usr/share/xsessions | grep -e ".*\.desktop$"); do
-  if [ ! $f == htpc.desktop ] && [ ! $f == kodi.desktop ] && [ ! $f == Lubuntu.desktop ] && [ ! $f == xubuntu.desktop ]; then
+  if [ ! $f == htpc.desktop ] && [ ! $f == kodi.desktop ] && [ ! $f == Lubuntu.desktop ]; then
 	sudo dpkg-divert --rename \
 	  --divert /usr/share/xsessions/hidden/$f \
 	  --add /usr/share/xsessions/$f
   fi
 done
-cp templates/htpc.desktop /usr/share/xsessions/htpc.desktop
-chmod u=rwX,go=rX /usr/share/xsessions/*
-
-# Add xsession entrypoint
-cp templates/htpcinit /usr/local/bin/htpcinit
-chmod 0755 /usr/local/bin/htpcinit
+copy_and_parse_file "templates/htpc.desktop" "/usr/share/xsessions/htpc.desktop"
 
 # Enable autologon
-echo "[Seat:*]" > /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
-echo "autologin-user=$USERNAME" >> /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
-echo "autologin-user-timeout=0" >> /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
-echo "user-session=htpc" >> /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
-chmod 0644 /etc/lightdm/lightdm.conf.d/75-htpcinit.conf
+copy_and_parse_file "templates/75-htpcinit.conf" "/etc/lightdm/lightdm.conf.d/75-htpcinit.conf"
 
 # Install lirc from source
 
@@ -122,7 +148,7 @@ fi
 # Download and install chrome
 if [ -z $(which google-chrome) ]; then
   wget -O /var/tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  apt-get install /var/tmp/chrome.deb
+  apt-get install -y /var/tmp/chrome.deb
 fi
 
 # Change GRUB config
@@ -131,14 +157,14 @@ update-grub2
 
 # Basic configuration for kodi
 mkdir -p /home/$USERNAME/.kodi/userdata
-cp templates/advancedsettings.xml  /home/$USERNAME/.kodi/userdata/advancedsettings.xml
+copy_and_parse_file "templates/advancedsettings.xml"  "/home/$USERNAME/.kodi/userdata/advancedsettings.xml"
 chown -R $USERNAME:$USERNAME /home/$USERNAME/.kodi
 chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 
 # Install plymouth theme
 
 # Install samba config
-sed -e "s/{HOSTNAME}/$HOSTNAME/" -e "s/{WORKGROUO}/$WORKGROUP/" templates/smb.conf > /etc/samba/smb.conf
+copy_and_parse_file "templates/smb.conf" "/etc/samba/smb.conf"
 systemctl restart smbd.service
 systemctl restart nmbd.service
 

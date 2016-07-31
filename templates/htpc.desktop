@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Htpc
 Comment=This session will start HtpcInit
-Exec=htpcinit
-TryExec=htpcinit
+Exec={INSTALLATION}/scripts/htpcinit
+TryExec={INSTALLATION}/scripts/htpcinit
 Type=Application
