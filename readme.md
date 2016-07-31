@@ -1,5 +1,5 @@
 # Intended use
-Create a desired setup for a HTPC after a clean Lubuntu/Xubuntu install
+Create a desired setup for a HTPC after a clean x64 Lubuntu install
 
 # Install
 Run the following commands:
