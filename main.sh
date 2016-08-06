@@ -15,9 +15,13 @@ if [ $(uname -m) -ne "x86_64" ]; then
   exit
 fi
 
+if [ ! $DISPLAY ]; then
+  export DISPLAY=:0
+fi
+
 echo "Loading default config:"
-cat ./templates/config/default.conf
-source ./templates/config/default.conf
+cat ./templates/default.conf
+source ./templates/default.conf
 
 if [ -f ~/.config/htpcinit.user.conf ]; then
   echo "Loading overriding user config:"
