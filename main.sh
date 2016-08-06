@@ -164,7 +164,7 @@ update-grub2
 # Basic configuration for kodi
 mkdir -p /home/$USERNAME/.kodi/userdata
 copy_and_parse_file "templates/advancedsettings.xml"  "/home/$USERNAME/.kodi/userdata/advancedsettings.xml"
-chown -R $USERNAME:$USERNAME /home/$USERNAME/.kodi
+chown -R $USERNAME /home/$USERNAME/.kodi
 chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 
 # Install plymouth theme
