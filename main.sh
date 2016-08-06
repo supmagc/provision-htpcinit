@@ -110,7 +110,7 @@ apt-get autoremove -y
 mkdir -vp "$INSTALLATION"
 cp -vr data/* "$INSTALLATION"
 chmod -R a+rX "$INSTALLATION"
-chmod -R a+x "$INSTALLATION/scripts/*"
+chmod -R a+x "$INSTALLATION/scripts"
 
 # Create and configure ssl
 mkdir -vp /home/$USERNAME/.ssh
