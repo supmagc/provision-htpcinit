@@ -1,0 +1,29 @@
+#!/bin/bash
+
+PATH_BASE="$(dirname $0)/../"
+source $PATH_BASE/common/paths
+source $PATH_BASE/common/functions
+
+PID=$(<"$PATH_KODI_PID")
+if [ ! $(validate_pid_for_name $PID "kodi-standalone") ]; then
+  echo "Cannot run command, as kodi-standalone doesn't match it's PID"
+  exit
+fi
+
+case "$1" in
+
+  open) 
+    echo "Closing others"
+	$PATH_KODI_CONTROL close
+    echo "Opening Kodi"
+	xdotool search --name Kodi windowactivate
+	#wmctrl -lp | awk '$3 == Kodi { print $1 }' | xargs -I {} wmctrl -i -r {} -b remove,hidden,above
+    ;;
+    
+  close) 
+    echo "Closing Kodi"
+	xdotool search --name Kodi windowminimize
+	#wmctrl -lp | awk '$3 == Kodi { print $1 }' | xargs -I {} wmctrl -i -r {} -b add,hidden
+    ;;
+
+esac

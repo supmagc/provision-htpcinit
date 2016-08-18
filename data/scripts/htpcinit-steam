@@ -1,0 +1,28 @@
+#!/bin/bash
+
+PATH_BASE="$(dirname $0)/../"
+source $PATH_BASE/common/paths
+source $PATH_BASE/common/functions
+
+PID=$(<"$PATH_STEAM_PID")
+
+case "$1" in
+
+  open) 
+    echo "Closing others"
+	$PATH_KODI_CONTROL close
+    echo "Opening Kodi"
+	if [ ! $(validate_pid_for_name $PID "steam") ]; then
+	  steam -bigpicture &
+      PID=$!
+      echo "$PID">"$PATH_STEAM_PID"
+	else
+	  
+    fi
+    ;;
+    
+  close) 
+    echo "Closing Kodi"
+    ;;
+
+esac

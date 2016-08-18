@@ -1,7 +1,35 @@
 #!/bin/bash
 
+PATH_BASE="$(dirname $0)/../"
+source $PATH_BASE/common/paths
+
+# Make sure openbox is running
 if hash openbox 2>/dev/null; then
-  openbox &
+  ps cax | grep openbox > /dev/null
+  if [ $? -ne 0 ]; then
+    echo "Openbox found but not yet running, starting now"
+    openbox &
+  else
+    echo "Openbox found and already running"
+  fi
 fi
 
+# Kill any previously started kodi-standalone instances
+pkill -f kodi-standalone
+pkill -f kodi
+
+# Start kopdi
 kodi-standalone &
+
+# Remember PID
+PID=$!
+echo "$PID">"$PATH_KODI_PID"
+
+# Wait untill execution is finished
+echo "Waiting for kodi to shut down ..."
+wait $PID
+
+# Remove pid storage
+if [ -f "$PATH_KODI_PID" ]; then
+  rm "$PATH_KODI_PID"
+fi
