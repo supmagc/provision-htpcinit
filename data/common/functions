@@ -7,3 +7,12 @@ function validate_pid_for_name {
     echo "running"
   fi
 }
+
+function get_pid_from_file {
+  local FILE="$1"
+  local PID=0
+  if [ -f "$FILE" ]; then
+    PID=$(<"$FILE")
+  fi
+  echo "$PID"
+}

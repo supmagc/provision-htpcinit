@@ -4,7 +4,7 @@ PATH_BASE="$(dirname $0)/../"
 source $PATH_BASE/common/paths
 source $PATH_BASE/common/functions
 
-PID=$(<"$PATH_STEAM_PID")
+PID=$(get_pid_from_file "$PATH_STEAM_PID")
 
 case "$1" in
 
@@ -16,8 +16,6 @@ case "$1" in
 	  steam -bigpicture &
       PID=$!
       echo "$PID">"$PATH_STEAM_PID"
-	else
-	  
     fi
     ;;
     
