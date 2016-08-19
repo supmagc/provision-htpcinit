@@ -15,9 +15,13 @@ if [ $(uname -m) -ne "x86_64" ]; then
   exit
 fi
 
+if [ ! $DISPLAY ]; then
+  export DISPLAY=:0
+fi
+
 echo "Loading default config:"
-cat ./templates/config/default.conf
-source ./templates/config/default.conf
+cat ./templates/default.conf
+source ./templates/default.conf
 
 if [ -f ~/.config/htpcinit.user.conf ]; then
   echo "Loading overriding user config:"
@@ -106,7 +110,7 @@ apt-get autoremove -y
 mkdir -vp "$INSTALLATION"
 cp -vr data/* "$INSTALLATION"
 chmod -R a+rX "$INSTALLATION"
-chmod -R a+x "$INSTALLATION/scripts/*"
+chmod -R a+x "$INSTALLATION/scripts"
 
 # Create and configure ssl
 mkdir -vp /home/$USERNAME/.ssh
@@ -160,7 +164,7 @@ update-grub2
 # Basic configuration for kodi
 mkdir -p /home/$USERNAME/.kodi/userdata
 copy_and_parse_file "templates/advancedsettings.xml"  "/home/$USERNAME/.kodi/userdata/advancedsettings.xml"
-chown -R $USERNAME:$USERNAME /home/$USERNAME/.kodi
+chown -R $USERNAME /home/$USERNAME/.kodi
 chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 
 # Install plymouth theme
