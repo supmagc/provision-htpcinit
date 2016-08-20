@@ -95,7 +95,7 @@ apt-get upgrade -y
 apt-get dist-upgrade -y
 
 # Install additional software
-apt-get install -y openssl \
+apt-get install -y openssh-server \
   pulseaudio pavucontrol \
   wmctrl xdotool \
   kodi \
