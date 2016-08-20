@@ -8,19 +8,28 @@ PID=$(get_pid_from_file "$PATH_STEAM_PID")
 
 case "$1" in
 
-  open) 
-    echo "Closing others"
+  open_and_wait) 
 	$PATH_KODI_CONTROL close
-    echo "Opening Kodi"
-	if [ ! $(validate_pid_for_name $PID "steam") ]; then
+    echo "Opening Steam"
+	validate_pid_for_name "$PID" "steam"
+	if [ ! $(validate_pid_for_name "$PID" "steam") ]; then
+	  echo "No current steam process found, starting anew"
+	  pkill -f steam
 	  steam -bigpicture &
       PID=$!
       echo "$PID">"$PATH_STEAM_PID"
+	else
+	  echo "Existing steam process found, resuming"
+	  steam -bigpicture &
     fi
-    ;;
-    
-  close) 
-    echo "Closing Kodi"
+	
+	IS_RUNNING=$(validate_pid_for_name "$PID" "steam")
+	IS_MAXIMIZED
+	while [ "$IS_RUNNING" -or "$IS_MAXIMIZED" ]; do
+	  sleep 10
+	done
+	
+	$PATH_KODI_CONTROL open
     ;;
 
 esac

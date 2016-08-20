@@ -15,8 +15,7 @@ if hash openbox 2>/dev/null; then
 fi
 
 # Kill any previously started kodi-standalone instances
-pkill -f kodi-standalone
-pkill -f kodi
+$PATH_KODI_CONTROL terminate
 
 # Start kopdi
 kodi-standalone &

@@ -2,8 +2,7 @@
 function validate_pid_for_name {
   local PID="$1"
   local NAME="$2"
-  local TEST=
-  if [ $NAME == $(ps -e | grep $PID | awk '{print $4}') ]; then
+  if [ "$NAME" == "$(ps -e | grep $PID | awk '{print $4}')" ]; then
     echo "running"
   fi
 }
