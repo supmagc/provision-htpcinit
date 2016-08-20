@@ -25,7 +25,7 @@ case "$1" in
 	
 	IS_RUNNING=$(validate_pid_for_name "$PID" "steam")
 	IS_MAXIMIZED
-	while [ "$IS_RUNNING" -or "$IS_MAXIMIZED" ]; do
+	while [ "$IS_RUNNING" || "$IS_MAXIMIZED" ]; do
 	  sleep 10
 	done
 	
