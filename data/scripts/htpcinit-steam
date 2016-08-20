@@ -15,12 +15,12 @@ case "$1" in
 	if [ ! $(validate_pid_for_name "$PID" "steam") ]; then
 	  echo "No current steam process found, starting anew"
 	  #pkill -f steam
-	  steam -bigpicture &
+	  steam -bigpicture -steamos &
       PID=$!
       echo "$PID">"$PATH_STEAM_PID"
 	else
 	  echo "Existing steam process found, resuming"
-	  steam -bigpicture &
+	  steam -bigpicture -steamos &
     fi
 	
 	IS_RUNNING=$(validate_pid_for_name "$PID" "steam")
