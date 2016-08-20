@@ -24,7 +24,7 @@ case "$1" in
     fi
 	
 	IS_RUNNING=$(validate_pid_for_name "$PID" "steam")
-	IS_MAXIMIZED
+	IS_MAXIMIZED=""
 	while [ "$IS_RUNNING" || "$IS_MAXIMIZED" ]; do
 	  sleep 10
 	done
