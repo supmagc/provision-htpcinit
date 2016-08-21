@@ -66,6 +66,7 @@ echo "Available network connections:"
 nmcli connection
 request_variable "NET_CONN" "network connection"
 request_variable "USERNAME" "username"
+request_variable "PASSWORD" "password"
 request_variable "HOSTNAME" "hostname"
 request_variable "WORKGROUP" "workgroup"
 request_variable "INSTALLATION" "install location"
@@ -176,9 +177,10 @@ chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 
 # Install plymouth theme
 
-# Install samba config
+# Install samba config and match password
 copy_and_parse_file "templates/smb.conf" "/etc/samba/smb.conf"
-systemctl restart smbd.service
+echo -e "$PASSWORD\n$PASSWORD" | smbpasswd -s -a $USERNAME
+echo -e "$PASSWORD\n$PASSWORD" | passwd $USERNAME
 systemctl restart nmbd.service
 
 # Configure network
