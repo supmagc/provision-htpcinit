@@ -1,7 +1,12 @@
 <advancedsettings>
 	<network>
 	   <buffermode>1</buffermode> <!-- Default is 1 -->
-	   <cachemembuffersize>52428800</cachemembuffersize> <!-- Default is 20971520 bytes or 20 MB -->
-	   <readbufferfactor>2.0</readbufferfactor> <!-- Default is 1.0 -->
+	   <cachemembuffersize>104857600</cachemembuffersize> <!-- Default is 20971520 bytes or 20 MB -->
+	   <readbufferfactor>10.0</readbufferfactor> <!-- Default is 1.0 -->
 	</network>
+	<cache> <!-- Since Kodi 17 Krypton -->
+	   <buffermode>1</buffermode> <!-- Default is 1 -->
+	   <memorysize>104857600</memorysize> <!-- Default is 20971520 bytes or 20 MB -->
+	   <readfactor>10.0</readfactor> <!-- Default is 1.0 -->
+	</cache>
 </advancedsettings>
