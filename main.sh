@@ -139,6 +139,9 @@ copy_and_parse_file "templates/htpc.desktop" "/usr/share/xsessions/htpc.desktop"
 # Enable autologon
 copy_and_parse_file "templates/75-htpcinit.conf" "/etc/lightdm/lightdm.conf.d/75-htpcinit.conf"
 
+# Enable steam controller support
+copy_and_parse_file "templates/99-steam-controller-perms.rules" "/lib/udev/rules.d/99-steam-controller-perms.rules"
+
 # Install lirc from source
 
 # Install lirc config
