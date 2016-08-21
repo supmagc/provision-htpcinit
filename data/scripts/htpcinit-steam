@@ -14,7 +14,6 @@ case "$1" in
 	validate_pid_for_name "$PID" "steam"
 	if [ ! $(validate_pid_for_name "$PID" "steam") ]; then
 	  echo "No current steam process found, starting anew"
-	  #pkill -f steam
 	  steam -bigpicture -steamos &
       PID=$!
       echo "$PID">"$PATH_STEAM_PID"
@@ -23,13 +22,16 @@ case "$1" in
 	  steam -bigpicture -steamos &
     fi
 	
-	IS_RUNNING=$(validate_pid_for_name "$PID" "steam")
-	IS_MAXIMIZED=""
-	while [ "$IS_RUNNING" || "$IS_MAXIMIZED" ]; do
+	while [ $(validate_pid_for_name "$PID" "steam") ]; do
 	  sleep 10
 	done
 	
 	$PATH_KODI_CONTROL open
+    ;;
+
+  close)
+    echo "Closing Steam"
+	pkill -f steam
     ;;
 
 esac
