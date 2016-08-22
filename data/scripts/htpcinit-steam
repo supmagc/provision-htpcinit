@@ -19,7 +19,7 @@ case "$1" in
       echo "$PID">"$PATH_STEAM_PID"
 	else
 	  echo "Existing steam process found, resuming"
-	  steam -bigpicture -steamos &
+	  steam steam://open/bigpicture
     fi
 	
 	while [ $(validate_pid_for_name "$PID" "steam") ]; do
