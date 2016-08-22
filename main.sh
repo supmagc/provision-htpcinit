@@ -169,12 +169,14 @@ update-grub2
 mkdir -p /home/$USERNAME/.kodi/userdata
 copy_and_parse_file "templates/advancedsettings.xml"  "/home/$USERNAME/.kodi/userdata/advancedsettings.xml"
 mkdir -p /home/$USERNAME/.kodi/addons
-wget -O /var/tmp/repository.supmagc.zip https://github.com/supmagc/kodiaddons/raw/master/repository.supmagc/repository.supmagc-1.2.0.zip
-if [ -d "/var/tmp/repository.supmagc" ]; then
-  rm -R "/var/tmp/repository.supmagc"
+if [ ! -d "/home/$USERNAME/.kodi/addons/repository.supmagc" ]; then
+  wget -O /var/tmp/repository.supmagc.zip https://github.com/supmagc/kodiaddons/raw/master/repository.supmagc/repository.supmagc-1.2.0.zip
+  if [ -d "/var/tmp/repository.supmagc" ]; then
+    rm -R "/var/tmp/repository.supmagc"
+  fi
+  unzip /var/tmp/repository.supmagc.zip -d /var/tmp/repository.supmagc
+  mv -v /var/tmp/repository.supmagc /home/$USERNAME/.kodi/addons/
 fi
-unzip /var/tmp/repository.supmagc.zip -d /var/tmp/repository.supmagc
-mv -v /var/tmp/repository.supmagc /home/$USERNAME/.kodi/addons/
 chown -R $USERNAME /home/$USERNAME/.kodi
 chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 
