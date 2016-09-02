@@ -56,6 +56,29 @@ function copy_and_parse_file {
   chmod 0644 "$FILE_TARGET_PATH"
 }
 
+function add_files_to_kodi_sources {
+  local KS_FILE="$1"
+  local KS_NAME="$2"
+  local KS_PATH="$3"
+  if [ -z "$(xmlstarlet sel -t -v "/sources/files/source[name='$KS_NAME']" "$KS_FILE")" ]; then
+    if [ -z "$(xmlstarlet sel -t -v "/sources/files/source" "$KS_FILE")" ]; then
+      xmlstarlet ed -P -L \
+        -s "/sources/files" -t elem -n source -v "" \
+        "$KS_FILE"
+    else
+      xmlstarlet ed -P -L \
+        -i "/sources/files/source[1]" -t elem -n source -v "" \
+        "$KS_FILE"
+    fi
+	xmlstarlet ed -P -L \
+      -s "/sources/files/source[1]" -t elem -n name -v "$KS_NAME" \
+      -s "/sources/files/source[1]" -t elem -n path -v "$KS_PATH" \
+      -s "/sources/files/source[1]/path" -t attr -n pathversion -v "1" \
+      -s "/sources/files/source[1]" -t elem -n allowsharing -v "true" \
+      "$KS_FILE"
+  fi
+}
+
 # Request userdata updates
 echo "Current IP:"
 ip addr
@@ -97,6 +120,7 @@ apt-get dist-upgrade -y
 
 # Install additional software
 apt-get install -y openssh-server \
+  xmlstarlet \
   pulseaudio pavucontrol \
   wmctrl xdotool \
   kodi \
@@ -165,18 +189,27 @@ fi
 sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=$BOOT_TIMEOUT/" /etc/default/grub
 update-grub2
 
+
 # Basic configuration for kodi
-mkdir -p /home/$USERNAME/.kodi/userdata
-copy_and_parse_file "templates/advancedsettings.xml"  "/home/$USERNAME/.kodi/userdata/advancedsettings.xml"
-mkdir -p /home/$USERNAME/.kodi/addons
-if [ ! -d "/home/$USERNAME/.kodi/addons/repository.supmagc" ]; then
+KODI_USERDATA=/home/$USERNAME/.kodi/userdata
+KODI_ADDONS=/home/$USERNAME/.kodi/addons
+mkdir -p $KODI_USERDATA
+copy_and_parse_file "templates/advancedsettings.xml" "$KODI_USERDATA/advancedsettings.xml"
+if [ ! -f "$KODI_USERDATA/sources.xml" ]; then
+  copy_and_parse_file "templates/sources.xml" "$KODI_USERDATA/sources.xml"
+fi
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "SuperRepo" "http://srp.nu/"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/"
+mkdir -p $KODI_ADDONS
+if [ ! -d $KODI_ADDONS/repository.supmagc ]; then
   wget -O /var/tmp/repository.supmagc.zip https://github.com/supmagc/kodiaddons/raw/master/repository.supmagc/repository.supmagc-1.2.0.zip
-  if [ -d "/var/tmp/repository.supmagc" ]; then
-    rm -R "/var/tmp/repository.supmagc"
+  if [ -d /var/tmp/repository.supmagc ]; then
+    rm -R /var/tmp/repository.supmagc
   fi
   unzip /var/tmp/repository.supmagc.zip -d /var/tmp/repository.supmagc
-  mv -v /var/tmp/repository.supmagc /home/$USERNAME/.kodi/addons/
+  mv -v /var/tmp/repository.supmagc $KODI_ADDONS
 fi
+
 chown -R $USERNAME /home/$USERNAME/.kodi
 chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 
