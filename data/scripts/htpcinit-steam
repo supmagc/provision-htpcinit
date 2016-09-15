@@ -22,16 +22,14 @@ case "$1" in
 	  steam steam://open/bigpicture
     fi
 	
-	while [ $(validate_pid_for_name "$PID" "steam") ]; do
-	  sleep 10
-	done
-	
+	wait $PID
 	$PATH_KODI_CONTROL open
     ;;
 
   close)
     echo "Closing Steam"
-	pkill -f steam
+	killall -q steam.sh
+	killall -q steam
     ;;
 
 esac

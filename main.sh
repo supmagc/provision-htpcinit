@@ -170,7 +170,7 @@ copy_and_parse_file "templates/99-steam-controller-perms.rules" "/lib/udev/rules
 
 # Install lirc config
 
-# Configure nvidia
+# Configure graphics
 if [ "$(lspci -v | grep nvidia)" ]; then
   apt-get install -y nvidia-364 vdpauinfo
   nvidia-xconfig --no-use-edid-dpi
@@ -178,6 +178,20 @@ if [ "$(lspci -v | grep nvidia)" ]; then
   sed -i "/UseEdidDpi/i\
 \    Option         \"DPI\" \"$SCREEN_DPI x $SCREEN_DPI\"" /etc/X11/xorg.conf
 fi
+
+# Configure Steam on virtualbox
+if [ -z "$(lspci -v | grep nvidia)" ]; then
+  STARTDIR=$(pwd)
+  cd /home/$USERNAME/.steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu
+  if [ -f "libstdc++.so.6" ]; then mv libstdc++.so.6 libstdc++.so.6.bak; fi
+  cd /home/$USERNAME/.steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu
+  if [ -f "libstdc++.so.6" ]; then mv libstdc++.so.6 libstdc++.so.6.bak; fi
+  cd "$STARTDIR"
+fi
+
+# Install 'go-back' app for steam
+copy_and_parse_file "templates/closesteambacktokodi.desktop" "/usr/share/applications/closesteambacktokodi.desktop"
+desktop-file-install "/usr/share/applications/closesteambacktokodi.desktop"
 
 # Download and install chrome
 if [ -z $(which google-chrome) ]; then
