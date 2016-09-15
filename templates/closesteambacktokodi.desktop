@@ -1,8 +1,10 @@
 [Desktop Entry]
+Version=1.0
 Name=Back to Kodi
+GenericName=Back to Kodi
 Comment=Close Steam and return to Kodi
 Exec={INSTALLATION}/scripts/htpcinit-steam close
 Icon=kodi
 Terminal=false
 Type=Application
-Categories=AudioVideo;
+Categories=AudioVideo;Video;Games;
