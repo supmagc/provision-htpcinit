@@ -190,8 +190,8 @@ if [ -z "$(lspci -v | grep nvidia)" ]; then
 fi
 
 # Install 'go-back' app for steam
-copy_and_parse_file "templates/closesteambacktokodi" "/usr/local/bin/applications/closesteambacktokodi"
-chmod a+x "/usr/local/bin/applications/closesteambacktokodi"
+copy_and_parse_file "templates/closesteambacktokodi" "/usr/local/bin/closesteambacktokodi"
+chmod a+x "/usr/local/bin/closesteambacktokodi"
 copy_and_parse_file "templates/closesteambacktokodi.desktop" "/usr/share/applications/closesteambacktokodi.desktop"
 desktop-file-install "/usr/share/applications/closesteambacktokodi.desktop"
 
