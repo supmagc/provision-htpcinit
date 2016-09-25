@@ -8,7 +8,7 @@ xdotool mousemove 10000 10000
 # Make sure openbox is running
 if hash openbox 2>/dev/null; then
   ps cax | grep openbox > /dev/null
-  if [ $? -ne 0 ]; then
+  if [[ $? -ne 0 ]]; then
     echo "Openbox found but not yet running, starting now"
     openbox &
   else
@@ -31,6 +31,6 @@ echo "Waiting for kodi to shut down ..."
 wait $PID
 
 # Remove pid storage
-if [ -f "$PATH_KODI_PID" ]; then
+if [[ -f "$PATH_KODI_PID" ]]; then
   rm "$PATH_KODI_PID"
 fi

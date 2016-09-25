@@ -1,21 +1,21 @@
 #!/bin/bash
 
-if [ $(id -u) -ne 0 ]; then
+if [[ $(id -u) -ne 0 ]]; then
   echo "HtpcInit main.sh must be run as root"
   exit
 fi
 
-if [ $(echo $DESKTOP_SESSION) -ne "Lubuntu" ]; then
+if [[ $(echo $DESKTOP_SESSION) -ne "Lubuntu" ]]; then
   echo "HtpcInit is only compatible with x64 Lubuntu"
   exit
 fi
 
-if [ $(uname -m) -ne "x86_64" ]; then
+if [[ $(uname -m) -ne "x86_64" ]]; then
   echo "HtpcInit is only compatible with x64 Lubuntu"
   exit
 fi
 
-if [ ! $DISPLAY ]; then
+if [[ ! $DISPLAY ]]; then
   export DISPLAY=:0
 fi
 
@@ -23,7 +23,7 @@ echo "Loading default config:"
 cat ./templates/default.conf
 source ./templates/default.conf
 
-if [ -f ~/.config/htpcinit.user.conf ]; then
+if [[ -f ~/.config/htpcinit.user.conf ]]; then
   echo "Loading overriding user config:"
   cat ~/.config/htpcinit.user.conf
   source ~/.config/htpcinit.user.conf
@@ -34,7 +34,7 @@ function request_variable {
   local VAR_DEFAULT_NAME="DEFAULT_$VAR_NAME"
   local VAR_DESCRIPTION="$2"
   read -p "What is your $VAR_DESCRIPTION [default: ${!VAR_DEFAULT_NAME}]? " VAR
-  if [ -z "$VAR" ]; then VAR="${!VAR_DEFAULT_NAME}"; fi
+  if [[ -z "$VAR" ]]; then VAR="${!VAR_DEFAULT_NAME}"; fi
   eval "$VAR_DEFAULT_NAME=\"$VAR\""
   eval "$VAR_NAME=\"$VAR\""
 }
@@ -42,7 +42,7 @@ function request_variable {
 function copy_and_parse_file {
   local FILE_SOURCE_PATH="$1"
   local FILE_TARGET_PATH="$2"
-  if [ -z "$FILE_TARGET_PATH" ]; then
+  if [[ -z "$FILE_TARGET_PATH" ]]; then
     FILE_TARGET_PATH="$FILE_SOURCE_PATH"
   else
     cp -v "$FILE_SOURCE_PATH" "$FILE_TARGET_PATH"
@@ -61,8 +61,8 @@ function add_files_to_kodi_sources {
   local KS_FILE="$1"
   local KS_NAME="$2"
   local KS_PATH="$3"
-  if [ -z "$(xmlstarlet sel -t -v "/sources/files/source[name='$KS_NAME']" "$KS_FILE")" ]; then
-    if [ -z "$(xmlstarlet sel -t -v "/sources/files/source" "$KS_FILE")" ]; then
+  if [[ -z "$(xmlstarlet sel -t -v "/sources/files/source[name='$KS_NAME']" "$KS_FILE")" ]]; then
+    if [[ -z "$(xmlstarlet sel -t -v "/sources/files/source" "$KS_FILE")" ]]; then
       xmlstarlet ed -P -L \
         -s "/sources/files" -t elem -n source -v "" \
         "$KS_FILE"
@@ -152,7 +152,7 @@ copy_and_parse_file "templates/75-htpcinit-display-setup.conf" "/etc/lightdm/lig
 # Disable unneeded xsessions and add htpc xsession
 mkdir -p /usr/share/xsessions/hidden
 for f in $(ls /usr/share/xsessions | grep -e ".*\.desktop$"); do
-  if [ ! $f == htpc.desktop ] && [ ! $f == kodi.desktop ] && [ ! $f == Lubuntu.desktop ]; then
+  if [[ ! $f == htpc.desktop && ! $f == kodi.desktop && ! $f == Lubuntu.desktop ]]; then
 	sudo dpkg-divert --rename \
 	  --divert /usr/share/xsessions/hidden/$f \
 	  --add /usr/share/xsessions/$f
@@ -175,7 +175,7 @@ copy_and_parse_file "templates/99-steam-controller-perms.rules" "/lib/udev/rules
 # Install lirc config
 
 # Configure graphics
-if [ "$(lspci -v | grep nvidia)" ]; then
+if [[ "$(lspci -v | grep nvidia)" ]]; then
   apt-get install -y nvidia-364 vdpauinfo
   nvidia-xconfig --no-use-edid-dpi
   sed -i "/DPI/d" /etc/X11/xorg.conf
@@ -184,17 +184,17 @@ if [ "$(lspci -v | grep nvidia)" ]; then
 fi
 
 # Configure Steam on virtualbox
-if [ -z "$(lspci -v | grep nvidia)" ]; then
+if [[ -z "$(lspci -v | grep nvidia)" ]]; then
   STARTDIR=$(pwd)
   cd /home/$USERNAME/.steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu
-  if [ -f "libstdc++.so.6" ]; then mv libstdc++.so.6 libstdc++.so.6.bak; fi
+  if [[ -f "libstdc++.so.6" ]]; then mv libstdc++.so.6 libstdc++.so.6.bak; fi
   cd /home/$USERNAME/.steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu
-  if [ -f "libstdc++.so.6" ]; then mv libstdc++.so.6 libstdc++.so.6.bak; fi
+  if [[ -f "libstdc++.so.6" ]]; then mv libstdc++.so.6 libstdc++.so.6.bak; fi
   cd "$STARTDIR"
 fi
 
 # Download and install chrome
-if [ -z $(which google-chrome) ]; then
+if [[ -z $(which google-chrome) ]]; then
   wget -O /var/tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   apt-get install -y /var/tmp/chrome.deb
 fi
@@ -209,15 +209,15 @@ KODI_USERDATA=/home/$USERNAME/.kodi/userdata
 KODI_ADDONS=/home/$USERNAME/.kodi/addons
 mkdir -p $KODI_USERDATA
 copy_and_parse_file "templates/advancedsettings.xml" "$KODI_USERDATA/advancedsettings.xml"
-if [ ! -f "$KODI_USERDATA/sources.xml" ]; then
+if [[ ! -f "$KODI_USERDATA/sources.xml" ]]; then
   copy_and_parse_file "templates/sources.xml" "$KODI_USERDATA/sources.xml"
 fi
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "SuperRepo" "http://srp.nu/"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/"
 mkdir -p $KODI_ADDONS
-if [ ! -d $KODI_ADDONS/repository.supmagc ]; then
+if [[ ! -d $KODI_ADDONS/repository.supmagc ]]; then
   wget -O /var/tmp/repository.supmagc.zip https://github.com/supmagc/kodiaddons/raw/master/repository.supmagc/repository.supmagc-1.2.0.zip
-  if [ -d /var/tmp/repository.supmagc ]; then
+  if [[ -d /var/tmp/repository.supmagc ]]; then
     rm -R /var/tmp/repository.supmagc
   fi
   unzip /var/tmp/repository.supmagc.zip -d /var/tmp/repository.supmagc

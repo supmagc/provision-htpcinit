@@ -13,7 +13,7 @@ function terminate {
 function terminate_if_pid_invalid {
   PID=$(get_pid_from_file "$PATH_KODI_PID")
   local VALID=$(is_pid_valid_for_name "$PID" "kodi-standalone")
-  if [ "$VALID" = "false" ]; then
+  if [[ "$VALID" = "false" ]]; then
     echo "No valid existing kodi instance found, killing all to ensure PID file cannot be invalid"
     terminate
   fi
