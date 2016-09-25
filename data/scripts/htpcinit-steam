@@ -6,16 +6,7 @@ source $PATH_BASE/common/functions
 
 PID=$(get_pid_from_file "$PATH_STEAM_PID")
 
-function no_active_window {
-  xdotool getactivewindow
-  EC=$?
-  if [ $EC -ne 0 ]; then
-    echo "true"
-  else
-    echo "false"
-  fi
-}
-
+# Start steam of resume is already running
 function steam_start {
   local VALID=$(is_pid_valid_for_name "$PID" "steam")
   if [ "$VALID" = "false" ]; then
@@ -29,11 +20,13 @@ function steam_start {
   fi
 }
 
+# Activate an existing steam process
 function steam_activate {
   echo "(Re)Activating steam"
   steam steam://open/bigpicture
 }
 
+# See if an open steam window exists
 function steam_has_open_window {
   local WINDOW_NAME=$(xdotool getactivewindow getwindowname)
   local EC=$?
@@ -46,6 +39,7 @@ function steam_has_open_window {
   fi
 }
 
+# See if the active window is fullscreen, this check should follow a steam_has_open_window
 function steam_is_active_fullscreen {
   WINDOW=$(echo $(xwininfo -id $(xdotool getactivewindow) -stats | \
                   egrep '(Width|Height):' | \

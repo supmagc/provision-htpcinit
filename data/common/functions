@@ -1,4 +1,4 @@
-
+# Validate if the given PID matches the given executable name
 function is_pid_valid_for_name {
   local PID="$1"
   local NAME="$2"
@@ -9,6 +9,7 @@ function is_pid_valid_for_name {
   fi
 }
 
+# Get the PID from a file
 function get_pid_from_file {
   local FILE="$1"
   local PID=0
@@ -16,4 +17,15 @@ function get_pid_from_file {
     PID=$(<"$FILE")
   fi
   echo "$PID"
+}
+
+# See if we can find an active window (an active window should also have a name)
+function no_active_window {
+  xdotool getactivewindow getwindowname
+  EC=$?
+  if [ $EC -ne 0 ]; then
+    echo "true"
+  else
+    echo "false"
+  fi
 }
