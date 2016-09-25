@@ -17,8 +17,8 @@ function no_active_window {
 }
 
 function steam_start {
-  validate_pid_for_name "$PID" "steam"
-  if [ ! $(validate_pid_for_name "$PID" "steam") ]; then
+  local VALID=$(is_pid_valid_for_name "$PID" "steam")
+  if [ "$VALID" = "false" ]; then
 	echo "No current steam process found, starting anew"
 	steam -bigpicture &
     PID=$!
@@ -61,11 +61,11 @@ function steam_is_active_fullscreen {
 
 # Detect when steam closed
 function steam_is_closed {
-  validate_pid_for_name "$PID" "steam"
-  if [ $(validate_pid_for_name "$PID" "steam") ]; then
-    echo "true"
-  else
+  local VALID=$(is_pid_valid_for_name "$PID" "steam")
+  if [ "$VALID" = "true" ]; then
     echo "false"
+  else
+    echo "true"
   fi
 }
 

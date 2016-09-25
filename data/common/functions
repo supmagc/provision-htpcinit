@@ -1,9 +1,11 @@
 
-function validate_pid_for_name {
+function is_pid_valid_for_name {
   local PID="$1"
   local NAME="$2"
-  if [ "$NAME" == "$(ps -e | grep $PID | awk '{print $4}')" ]; then
-    echo "running"
+  if [ "$NAME" = "$(ps -e | grep $PID | awk '{print $4}')" ]; then
+    echo "true"
+  else
+    echo "false"
   fi
 }
 
