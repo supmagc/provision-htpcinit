@@ -34,13 +34,16 @@ function steam_activate {
   steam steam://open/bigpicture
 }
 
-function steam_is_open_and_active {
+function steam_has_open_window {
   if [ "$(no_active_window)" = "true" ]; then
     echo "false"
-  elif [ "$(xdotool getactivewindow getwindowname)" = "Steam" ] || [ "$(xdotool getactivewindow getwindowname)" = "[Streaming]" ]; then
-    echo "true"
-  else
-    echo "false"
+  else 
+    local WINDOW_NAME=$(xdotool getactivewindow getwindowname)
+	if [ "$WINDOW_NAME" = "Steam" ] || [ "$WINDOW_NAME" = "[Streaming]" ]; then
+      echo "true"
+    else
+      echo "false"
+	fi
   fi
 }
 
@@ -61,9 +64,9 @@ function steam_is_active_fullscreen {
 function steam_is_closed {
   validate_pid_for_name "$PID" "steam"
   if [ $(validate_pid_for_name "$PID" "steam") ]; then
-    echo "false"
-  else
     echo "true"
+  else
+    echo "false"
   fi
 }
 
@@ -87,7 +90,7 @@ case "$1" in
 	steam_start
 	
 	WAIT=0
-	while [ "$(steam_is_open_and_active)" = "false" ] && [ $WAIT -lt 60 ]; do
+	while [ "$(steam_has_open_window)" = "false" ] && [ $WAIT -lt 60 ]; do
 	  echo "Waiting for steam to open up"
 	  sleep 1s
 	  WAIT=$(($WAIT+1))
@@ -103,7 +106,7 @@ case "$1" in
   	    fi
 	  fi
 	  
-	  if [ "$(steam_is_open_and_active)" = "true" ] && [ "$(steam_is_active_fullscreen)" = "false" ]; then
+	  if [ "$(steam_has_open_window)" = "true" ] && [ "$(steam_is_active_fullscreen)" = "false" ]; then
 	    echo "Steam is open and active, but not fullscreen: maximizing screen"
 	    steam_maximize
 	  fi
