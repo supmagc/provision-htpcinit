@@ -16,14 +16,15 @@ function steam_start {
 	echo "$PID">"$PATH_STEAM_PID"
   else
     echo "Existing steam process found, resuming"
-    steam steam://open/bigpicture
+    steam steam://open/bigpicture &
   fi
-}
-
-# Activate an existing steam process
-function steam_activate {
-  echo "(Re)Activating steam"
-  steam steam://open/bigpicture
+  
+  WAIT=0
+  while [ "$(steam_has_open_window)" = "false" ] && [ $WAIT -lt 60 ]; do
+	echo "Waiting for steam to open up"
+	sleep 1s
+	WAIT=$(($WAIT+1))
+  done
 }
 
 # See if an open steam window exists
@@ -65,7 +66,7 @@ function steam_is_closed {
 
 # Detect when steam minimized
 function steam_is_minimized {
-  if [ "$(no_active_window)" = "true" ] && [ ! -z "$(wmctrl -l | grep Steam)" ]; then
+  if [ "$(no_active_window)" = "true" ] && [ -n "$(wmctrl -l | grep Steam)" ]; then
     echo "true"
   else
     echo "false"
@@ -85,27 +86,22 @@ case "$1" in
 	$PATH_KODI_CONTROL close
     echo "Opening Steam"
 	steam_start
-	
-	WAIT=0
-	while [ "$(steam_has_open_window)" = "false" ] && [ $WAIT -lt 60 ]; do
-	  echo "Waiting for steam to open up"
-	  sleep 1s
-	  WAIT=$(($WAIT+1))
-	done
-	
+		
 	while [ "$(steam_is_closed)" = "false" ] && [ "$(steam_is_minimized)" = "false" ]; do
+	  echo "Steam is running, and the script is waiting"
+	
 	  if [ "$(no_active_window)" = "true" ]; then
 	    echo "No active window found"
 	    sleep 5s
 	    if [ "$(no_active_window)" = "true" ]; then
 	    echo "Still no active window after 5sec: (re)activating steam"
-		  steam_activate
+		  steam_start
   	    fi
 	  fi
 	  
 	  if [ "$(steam_has_open_window)" = "true" ] && [ "$(steam_is_active_fullscreen)" = "false" ]; then
 	    echo "Steam is open and active, but not fullscreen: maximizing screen"
-	    steam_activate
+	    steam_start
 	  fi
 	  sleep 1s
 	done
