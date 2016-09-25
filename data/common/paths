@@ -3,7 +3,7 @@ if [ ! $PATH_BASE ]; then
 fi
 
 PATH_KODI_CONTROL="$PATH_BASE/scripts/htpcinit-kodi"
-PATH_KODI_PID="$HOME/.kodipid"
+PATH_KODI_PID="$HOME/.htpcinit-kodi.pid"
 
 PATH_STEAM_CONTROL="$PATH_BASE/scripts/htpcinit-steam"
-PATH_STEAM_PID="$HOME/.steampid"
+PATH_STEAM_PID="$HOME/.htpcinit-steam.pid"

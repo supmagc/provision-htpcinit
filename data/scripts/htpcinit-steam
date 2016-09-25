@@ -12,7 +12,8 @@ function steam_start {
   if [ "$VALID" = "false" ]; then
 	echo "No current steam process found, starting anew"
 	steam -bigpicture &
-    PID=$(get_pid_from_file "$PATH_STEAM_PID")
+    PID=$!
+	echo "$PID">"$PATH_STEAM_PID"
   else
     echo "Existing steam process found, resuming"
     steam steam://open/bigpicture
