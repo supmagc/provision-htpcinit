@@ -6,30 +6,109 @@ source $PATH_BASE/common/functions
 
 PID=$(get_pid_from_file "$PATH_STEAM_PID")
 
+function no_active_window {
+  echo "false"
+}
+
+function steam_start {
+  validate_pid_for_name "$PID" "steam"
+  if [ ! $(validate_pid_for_name "$PID" "steam") ]; then
+	echo "No current steam process found, starting anew"
+	steam -bigpicture &
+    PID=$!
+    echo "$PID">"$PATH_STEAM_PID"
+  else
+    echo "Existing steam process found, resuming"
+    steam steam://open/bigpicture
+  fi
+}
+
+function steam_activate {
+  echo "(Re)Activating steam"
+  steam steam://open/bigpicture
+}
+
+function steam_is_open_and_active {
+  if [ "$(xdotool getactivewindow getwindowname)" = "Steam" ] || [ "$(xdotool getactivewindow getwindowname)" = "[Streaming]" ]; then
+    echo "true"
+  else
+    echo "false"
+  fi
+}
+
+function steam_is_active_fullscreen {
+  WINDOW=$(echo $(xwininfo -id $(xdotool getactivewindow) -stats | \
+                  egrep '(Width|Height):' | \
+                  awk '{print $NF}') | \
+           sed -e 's/ /x/')
+  SCREEN=$(xdpyinfo | grep -m1 dimensions | awk '{print $2}')
+  if [ "$WINDOW" = "$SCREEN" ]; then
+    echo "true"
+  else
+    echo "false"
+  fi
+}
+
+# Detect when steam closed
+function steam_is_closed {
+  validate_pid_for_name "$PID" "steam"
+  if [ $(validate_pid_for_name "$PID" "steam") ]; then
+    echo "false"
+  else
+    echo "true"
+  fi
+}
+
+# Detect when steam minimized
+function steam_is_minimized {
+  echo "false"
+}
+
+# Force close steam and all subprocesses
+function steam_close {
+  killall -q steam.sh
+  killall -q steam
+  killall -q steamwebhelper
+}
+
 case "$1" in
 
   open_and_wait) 
 	$PATH_KODI_CONTROL close
     echo "Opening Steam"
-	validate_pid_for_name "$PID" "steam"
-	if [ ! $(validate_pid_for_name "$PID" "steam") ]; then
-	  echo "No current steam process found, starting anew"
-	  steam -bigpicture -steamos &
-      PID=$!
-      echo "$PID">"$PATH_STEAM_PID"
-	else
-	  echo "Existing steam process found, resuming"
-	  steam steam://open/bigpicture
-    fi
+	steam_start
 	
-	wait $PID
+	WAIT=0
+	while [ "$(steam_is_open_and_active)" = "false" ] && [ $WAIT -lt 60 ]; do
+	  echo "Waiting for steam to open up"
+	  sleep 1000
+	  WAIT=$(($WAIT+1))
+	done
+	
+	while [ "$(steam_is_closed)" = "false" ] && [ "$(steam_is_minimized)" = "false" ]; do
+	  if [ "$(no_active_window)" = "true" ]; then
+	    echo "No active window found"
+	    sleep 10000
+	    if [ "$(no_active_window)" = "true" ]; then
+	    echo "Still no active window after 10sec: (re)activating steam"
+		  steam_activate
+  	    fi
+	  fi
+	  
+	  if [ "$(steam_is_open_and_active)" = "true" ] && [ "$(steam_is_active_fullscreen)" = "false" ]; then
+	    echo "Steam is open and active, but not fullscreen: maximizing screen"
+	    steam_maximize
+	  fi
+	  sleep 500
+	done
+	
+	echo "Steam closed or minimized"
 	$PATH_KODI_CONTROL open
     ;;
 
   close)
     echo "Closing Steam"
-	killall -q steam.sh
-	killall -q steam
+	steam_close
     ;;
 
 esac

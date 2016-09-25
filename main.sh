@@ -47,6 +47,7 @@ function copy_and_parse_file {
   else
     cp -v "$FILE_SOURCE_PATH" "$FILE_TARGET_PATH"
   fi
+  mkdir -p $(dirname "$FILE_TARGET_PATH")
   for i in ${!DEFAULT_*}; do
     local VAR_NAME=${i:8}
 	local VAR_VALUE="${!VAR_NAME}"
@@ -90,6 +91,7 @@ nmcli connection
 request_variable "NET_CONN" "network connection"
 request_variable "USERNAME" "username"
 request_variable "PASSWORD" "password"
+request_variable "STEAMID" "steam-id"
 request_variable "HOSTNAME" "hostname"
 request_variable "WORKGROUP" "workgroup"
 request_variable "INSTALLATION" "install location"
@@ -119,12 +121,11 @@ apt-get upgrade -y
 apt-get dist-upgrade -y
 
 # Install additional software
-apt-get install -y openssh-server \
-  xmlstarlet \
+apt-get install -y openssh-server samba \
+  xmlstarlet aptitude \
   pulseaudio pavucontrol \
   wmctrl xdotool \
   kodi \
-  samba \
   steam \
   retroarch
 
@@ -190,10 +191,11 @@ if [ -z "$(lspci -v | grep nvidia)" ]; then
 fi
 
 # Install 'go-back' app for steam
-copy_and_parse_file "templates/closesteambacktokodi" "/usr/local/bin/closesteambacktokodi"
-chmod a+x "/usr/local/bin/closesteambacktokodi"
-copy_and_parse_file "templates/closesteambacktokodi.desktop" "/usr/share/applications/closesteambacktokodi.desktop"
-desktop-file-install "/usr/share/applications/closesteambacktokodi.desktop"
+#copy_and_parse_file "templates/closesteambacktokodi" "/usr/local/bin/closesteambacktokodi"
+#chmod a+x "/usr/local/bin/closesteambacktokodi"
+#copy_and_parse_file "templates/closesteambacktokodi.desktop" "/usr/local/share/applications/closesteambacktokodi.desktop"
+#desktop-file-install --delete-original "/usr/local/share/applications/closesteambacktokodi.desktop"
+#copy_and_parse_file "templates/shortcuts.vdf" "/home/$USERNAME/.steam/steam/userdata/$STEAMID/config/shortcuts.vdf"
 
 # Download and install chrome
 if [ -z $(which google-chrome) ]; then
