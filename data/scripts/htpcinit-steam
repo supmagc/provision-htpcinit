@@ -9,7 +9,7 @@ PID=$(get_pid_from_file "$PATH_STEAM_PID")
 # Start steam of resume is already running
 function steam_start {
   local VALID=$(is_pid_valid_for_name "$PID" "steam")
-  if [ "$VALID" = "false" ]; then
+  if [[ "$VALID" = "false" ]]; then
 	echo "No current steam process found, starting anew"
 	steam -bigpicture &
     PID=$!
@@ -20,7 +20,7 @@ function steam_start {
   fi
   
   WAIT=0
-  while [ "$(steam_has_open_window)" = "false" ] && [ $WAIT -lt 60 ]; do
+  while [[ "$(steam_has_open_window)" = "false" && $WAIT -lt 60 ]]; do
 	echo "Waiting for steam to open up"
 	sleep 1s
 	WAIT=$(($WAIT+1))
@@ -33,7 +33,7 @@ function steam_has_open_window {
   local EC=$?
   if [ $EC -ne 0 ]; then
     echo "false"
-  elif [ "$WINDOW_NAME" = "Steam" ] || [ "$WINDOW_NAME" = "[Streaming]" ]; then
+  elif [[ "$WINDOW_NAME" = "Steam" || "$WINDOW_NAME" = "[Streaming]" ]]; then
     echo "true"
   else
     echo "false"
@@ -47,7 +47,7 @@ function steam_is_active_fullscreen {
                   awk '{print $NF}') | \
            sed -e 's/ /x/')
   SCREEN=$(xdpyinfo | grep -m1 dimensions | awk '{print $2}')
-  if [ "$WINDOW" = "$SCREEN" ]; then
+  if [[ "$WINDOW" = "$SCREEN" ]]; then
     echo "true"
   else
     echo "false"
@@ -57,7 +57,7 @@ function steam_is_active_fullscreen {
 # Detect when steam closed
 function steam_is_closed {
   local VALID=$(is_pid_valid_for_name "$PID" "steam")
-  if [ "$VALID" = "true" ]; then
+  if [[ "$VALID" = "true" ]]; then
     echo "false"
   else
     echo "true"
@@ -66,7 +66,7 @@ function steam_is_closed {
 
 # Detect when steam minimized
 function steam_is_minimized {
-  if [ "$(no_active_window)" = "true" ] && [ -n "$(wmctrl -l | grep Steam)" ]; then
+  if [[ "$(no_active_window)" = "true" && -n "$(wmctrl -l | grep Steam)" ]]; then
     echo "true"
   else
     echo "false"
@@ -87,19 +87,19 @@ case "$1" in
     echo "Opening Steam"
 	steam_start
 		
-	while [ "$(steam_is_closed)" = "false" ] && [ "$(steam_is_minimized)" = "false" ]; do
+	while [[ "$(steam_is_closed)" = "false" && "$(steam_is_minimized)" = "false" ]]; do
 	  echo "Steam is running, and the script is waiting"
 	
-	  if [ "$(no_active_window)" = "true" ]; then
+	  if [[ "$(no_active_window)" = "true" ]]; then
 	    echo "No active window found"
 	    sleep 5s
-	    if [ "$(no_active_window)" = "true" ]; then
+	    if [[ "$(no_active_window)" = "true" ]]; then
 	    echo "Still no active window after 5sec: (re)activating steam"
 		  steam_start
   	    fi
 	  fi
 	  
-	  if [ "$(steam_has_open_window)" = "true" ] && [ "$(steam_is_active_fullscreen)" = "false" ]; then
+	  if [[ "$(steam_has_open_window)" = "true" && "$(steam_is_active_fullscreen)" = "false" ]]; then
 	    echo "Steam is open and active, but not fullscreen: maximizing screen"
 	    steam_start
 	  fi
