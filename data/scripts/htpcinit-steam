@@ -96,9 +96,9 @@ case "$1" in
 	while [ "$(steam_is_closed)" = "false" ] && [ "$(steam_is_minimized)" = "false" ]; do
 	  if [ "$(no_active_window)" = "true" ]; then
 	    echo "No active window found"
-	    sleep 10s
+	    sleep 5s
 	    if [ "$(no_active_window)" = "true" ]; then
-	    echo "Still no active window after 10sec: (re)activating steam"
+	    echo "Still no active window after 5sec: (re)activating steam"
 		  steam_activate
   	    fi
 	  fi
