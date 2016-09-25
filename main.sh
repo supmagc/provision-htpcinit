@@ -165,6 +165,7 @@ copy_and_parse_file "templates/75-htpcinit.conf" "/etc/lightdm/lightdm.conf.d/75
 
 # Set default wallpaper
 copy_and_parse_file "templates/40-htpcinit-greeter.conf" "/etc/lightdm/lightdm-gtk-greeter.conf.d/40-htpcinit-greeter.conf"
+nitrogen --save --set-auto "$INSTALLATION/assets/wallpaper.png"
 
 # Enable steam controller support
 copy_and_parse_file "templates/99-steam-controller-perms.rules" "/lib/udev/rules.d/99-steam-controller-perms.rules"

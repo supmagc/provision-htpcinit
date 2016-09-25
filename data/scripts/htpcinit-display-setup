@@ -1,3 +1,4 @@
 #!/bin/sh
 
 setxkbmap
+nitrogen --restore
