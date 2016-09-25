@@ -121,7 +121,7 @@ apt-get dist-upgrade -y
 
 # Install additional software
 apt-get install -y openssh-server samba \
-  xmlstarlet aptitude \
+  xmlstarlet aptitude nitrogen \
   pulseaudio pavucontrol \
   wmctrl xdotool \
   kodi \
