@@ -3,6 +3,8 @@
 PATH_BASE="$(dirname $0)/../"
 source $PATH_BASE/common/paths
 
+xdotool mousemove 10000 10000
+
 # Make sure openbox is running
 if hash openbox 2>/dev/null; then
   ps cax | grep openbox > /dev/null

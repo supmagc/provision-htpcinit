@@ -12,8 +12,7 @@ function steam_start {
   if [ "$VALID" = "false" ]; then
 	echo "No current steam process found, starting anew"
 	steam -bigpicture &
-    PID=$!
-    echo "$PID">"$PATH_STEAM_PID"
+    PID=$(get_pid_from_file "$PATH_STEAM_PID")
   else
     echo "Existing steam process found, resuming"
     steam steam://open/bigpicture
@@ -105,7 +104,7 @@ case "$1" in
 	  
 	  if [ "$(steam_has_open_window)" = "true" ] && [ "$(steam_is_active_fullscreen)" = "false" ]; then
 	    echo "Steam is open and active, but not fullscreen: maximizing screen"
-	    steam_maximize
+	    steam_activate
 	  fi
 	  sleep 1s
 	done
