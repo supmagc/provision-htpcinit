@@ -91,7 +91,6 @@ nmcli connection
 request_variable "NET_CONN" "network connection"
 request_variable "USERNAME" "username"
 request_variable "PASSWORD" "password"
-request_variable "STEAMID" "steam-id"
 request_variable "HOSTNAME" "hostname"
 request_variable "WORKGROUP" "workgroup"
 request_variable "INSTALLATION" "install location"
@@ -164,6 +163,9 @@ copy_and_parse_file "templates/htpc.desktop" "/usr/share/xsessions/htpc.desktop"
 # Enable autologon
 copy_and_parse_file "templates/75-htpcinit.conf" "/etc/lightdm/lightdm.conf.d/75-htpcinit.conf"
 
+# Set default wallpaper
+copy_and_parse_file "templates/40-htpcinit-greeter.conf" "/etc/lightdm/lightdm-gtk-greeter.conf.d/40-htpcinit-greeter.conf"
+
 # Enable steam controller support
 copy_and_parse_file "templates/99-steam-controller-perms.rules" "/lib/udev/rules.d/99-steam-controller-perms.rules"
 
@@ -189,13 +191,6 @@ if [ -z "$(lspci -v | grep nvidia)" ]; then
   if [ -f "libstdc++.so.6" ]; then mv libstdc++.so.6 libstdc++.so.6.bak; fi
   cd "$STARTDIR"
 fi
-
-# Install 'go-back' app for steam
-#copy_and_parse_file "templates/closesteambacktokodi" "/usr/local/bin/closesteambacktokodi"
-#chmod a+x "/usr/local/bin/closesteambacktokodi"
-#copy_and_parse_file "templates/closesteambacktokodi.desktop" "/usr/local/share/applications/closesteambacktokodi.desktop"
-#desktop-file-install --delete-original "/usr/local/share/applications/closesteambacktokodi.desktop"
-#copy_and_parse_file "templates/shortcuts.vdf" "/home/$USERNAME/.steam/steam/userdata/$STEAMID/config/shortcuts.vdf"
 
 # Download and install chrome
 if [ -z $(which google-chrome) ]; then

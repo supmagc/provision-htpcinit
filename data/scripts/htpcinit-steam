@@ -65,14 +65,18 @@ function steam_is_closed {
 
 # Detect when steam minimized
 function steam_is_minimized {
-  echo "false"
+  if [ "$(no_active_window)" = "true" ] && [ ! -z "$(wmctrl -l | grep Steam)" ]; then
+    echo "true"
+  else
+    echo "false"
+  fi
 }
 
 # Force close steam and all subprocesses
 function steam_close {
-  killall -q steam.sh
-  killall -q steam
-  killall -q steamwebhelper
+  killall -s 9 -q steam.sh
+  killall -s 9 -q steam
+  killall -s 9 -q steamwebhelper
 }
 
 case "$1" in
@@ -88,10 +92,6 @@ case "$1" in
 	  sleep 1s
 	  WAIT=$(($WAIT+1))
 	done
-
-	echo ""
-	echo "$PID should be steam"
-	echo ""
 	
 	while [ "$(steam_is_closed)" = "false" ] && [ "$(steam_is_minimized)" = "false" ]; do
 	  if [ "$(no_active_window)" = "true" ]; then
