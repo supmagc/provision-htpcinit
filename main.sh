@@ -126,7 +126,8 @@ apt-get install -y openssh-server samba \
   wmctrl xdotool \
   kodi \
   steam \
-  retroarch
+  retroarch \
+  libdvd-pkg
 
 # Remove no longer needed packages
 apt-get autoremove -y
@@ -203,6 +204,8 @@ fi
 sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=$BOOT_TIMEOUT/" /etc/default/grub
 update-grub2
 
+# Configure dvd support
+dpkg-reconfigure libdvd-pkg
 
 # Basic configuration for kodi
 KODI_USERDATA=/home/$USERNAME/.kodi/userdata
