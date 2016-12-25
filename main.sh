@@ -82,9 +82,9 @@ function add_files_to_kodi_sources {
 
 function add_samba_credential_to_kodi_passwords {
   local KP_FILE="$1"
-  local KP_ADDRESS="$1"
-  local KP_USERNAME="$1"
-  local KP_PASSWORD="$1"
+  local KP_ADDRESS="$2"
+  local KP_USERNAME="$3"
+  local KP_PASSWORD="$4"
   local KP_FROM="smb://$KP_ADDRESS/"
   local KP_TO="smb://$KP_USERNAME:$KP_PASSWORD@$KP_ADDRESS/"
   if [[ -z "$(xmlstarlet sel -t -v "/passwords/path[from=\"$KP_FROM\"]" "$KP_FILE")" ]]; then
