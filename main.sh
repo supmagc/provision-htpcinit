@@ -80,12 +80,47 @@ function add_files_to_kodi_sources {
   fi
 }
 
+function add_samba_credential_to_kodi_passwords {
+  local KP_FILE="$1"
+  local KP_ADDRESS="$1"
+  local KP_USERNAME="$1"
+  local KP_PASSWORD="$1"
+  local KP_FROM="smb://$KP_ADDRESS/"
+  local KP_TO="smb://$KP_USERNAME:$KP_PASSWORD@$KP_ADDRESS/"
+  if [[ -z "$(xmlstarlet sel -t -v "/passwords/path[from=\"$KP_FROM\"]" "$KP_FILE")" ]]; then
+    if [[ -z "$(xmlstarlet sel -t -v "/passwords/path" "$KP_FILE")" ]]; then
+      xmlstarlet ed -P -L \
+  	  -s "/passwords" -t elem -n path -v "" \
+  	  "$KP_FILE"
+    else
+      xmlstarlet ed -P -L \
+  	  -i "/passwords/path[1]" -t elem -n path -v "" \
+  	  "$KP_FILE"
+    fi
+    xmlstarlet ed -P -L \
+      -s "/passwords/path[1]" -t elem -n from -v "$KP_FROM" \
+      -s "/passwords/path[1]" -t elem -n to -v "$KP_TO" \
+      -s "/passwords/path[1]/from" -t attr -n pathversion -v "1" \
+      -s "/passwords/path[1]/to" -t attr -n pathversion -v "1" \
+      "$KP_FILE"	
+  else
+    xmlstarlet ed -P -L \
+      -u "/passwords/path[from=\"$KP_FROM\"]/from" -v "$KP_FROM" \
+  	  -u "/passwords/path[from=\"$KP_FROM\"]/to" -v "$KP_TO" \
+  	  "$KP_FILE"
+  fi
+}
+
 # Request userdata updates
 echo "Current IP:"
 ip addr
 request_variable "NET_IP" "network ip"
 request_variable "NET_DNS" "dns servers"
 request_variable "NET_GATE" "network gateway"
+request_variable "NAS_IP" "NAS ip"
+request_variable "NAS_HOSTNAME" "NAS hostname"
+request_variable "NAS_USERNAME" "NAS username"
+request_variable "NAS_PASSWORD" "NAS password"
 echo "Available network connections:"
 nmcli connection
 request_variable "NET_CONN" "network connection"
@@ -120,14 +155,13 @@ apt-get upgrade -y
 apt-get dist-upgrade -y
 
 # Install additional software
-apt-get install -y openssh-server samba \
+apt-get install -y openssh-server samba nfs-common \
   xmlstarlet aptitude nitrogen \
   pulseaudio pavucontrol \
   wmctrl xdotool \
-  kodi \
+  kodi libdvd-pkg \
   steam \
-  retroarch \
-  libdvd-pkg
+  retroarch
 
 # Remove no longer needed packages
 apt-get autoremove -y
@@ -215,8 +249,13 @@ copy_and_parse_file "templates/advancedsettings.xml" "$KODI_USERDATA/advancedset
 if [[ ! -f "$KODI_USERDATA/sources.xml" ]]; then
   copy_and_parse_file "templates/sources.xml" "$KODI_USERDATA/sources.xml"
 fi
+if [[ ! -f "$KODI_USERDATA/passwords.xml" ]]; then
+  copy_and_parse_file "templates/passwords.xml" "$KODI_USERDATA/passwords.xml"
+fi
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "SuperRepo" "http://srp.nu/"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/"
+add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_IP" "$NAS_USERNAME" "$NAS_PASSWORD"
+add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_HOSTNAME" "$NAS_USERNAME" "$NAS_PASSWORD"
 mkdir -p $KODI_ADDONS
 if [[ ! -d $KODI_ADDONS/repository.supmagc ]]; then
   wget -O /var/tmp/repository.supmagc.zip https://github.com/supmagc/kodiaddons/raw/master/repository.supmagc/repository.supmagc-1.2.0.zip
