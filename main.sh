@@ -127,6 +127,7 @@ request_variable "NET_CONN" "network connection"
 request_variable "USERNAME" "username"
 request_variable "PASSWORD" "password"
 request_variable "HOSTNAME" "hostname"
+request_variable "DOMAIN" "domain"
 request_variable "WORKGROUP" "workgroup"
 request_variable "INSTALLATION" "install location"
 request_variable "SSH_KEY" "ssh key"
@@ -241,6 +242,10 @@ update-grub2
 # Configure dvd support
 dpkg-reconfigure libdvd-pkg
 
+# Mount NFS drives
+sed -i "/mnt/" DELETE
+sed APPEND
+
 # Basic configuration for kodi
 KODI_USERDATA=/home/$USERNAME/.kodi/userdata
 KODI_ADDONS=/home/$USERNAME/.kodi/addons
@@ -280,7 +285,7 @@ systemctl restart nmbd.service
 # Configure network
 hostname "$HOSTNAME"
 sed -i "/127.0.0.1/d" /etc/hosts
-sed -i "1 i 127.0.0.1\t$HOSTNAME" /etc/hosts
+sed -i "1 i 127.0.0.1\t$HOSTNAME.$DOMAIN\t$HOSTNAME" /etc/hosts
 resolvconf -u
 nmcli connection modify "$NET_CONN" ipv4.method "manual" ipv4.dns "$NET_DNS" ipv4.addresses "$NET_IP" ipv4.gateway "$NET_GATE"
 systemctl restart network-manager.service
