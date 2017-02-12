@@ -9,4 +9,38 @@
 	   <memorysize>104857600</memorysize> <!-- Default is 20971520 bytes or 20 MB -->
 	   <readfactor>10.0</readfactor> <!-- Default is 1.0 -->
 	</cache>
+	<pathsubstitution>
+		<substitute>
+			<from>SMB://{NAS_HOSTNAME}/Movies/</from>
+			<to>/mnt/movies/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_IP}/Movies/</from>
+			<to>/mnt/movies/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_HOSTNAME}/Series/</from>
+			<to>/mnt/series/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_IP}/Series/</from>
+			<to>/mnt/series/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_HOSTNAME}/Music/</from>
+			<to>/mnt/music/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_IP}/Music/</from>
+			<to>/mnt/music/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_HOSTNAME}/Pictures/</from>
+			<to>/mnt/pictures/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_IP}/Pictures/</from>
+			<to>/mnt/pictures/</to>
+		</substitute>
+	</pathsubstitution>
 </advancedsettings>

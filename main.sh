@@ -243,8 +243,15 @@ update-grub2
 dpkg-reconfigure libdvd-pkg
 
 # Mount NFS drives
-sed -i "/mnt/" DELETE
-sed APPEND
+sed -i '/mnt\/movies/d' /etc/fstab
+sed -i '/mnt\/series/d' /etc/fstab
+sed -i '/mnt\/music/d' /etc/fstab
+sed -i '/mnt\/pictures/d' /etc/fstab
+echo "$NAS_IP:/mnt/leftpool/multimedia/movies /mnt/movies nfs defaults 0 0" >> /etc/fstab
+echo "$NAS_IP:/mnt/leftpool/multimedia/series /mnt/series nfs defaults 0 0" >> /etc/fstab
+echo "$NAS_IP:/mnt/leftpool/multimedia/music /mnt/music nfs defaults 0 0" >> /etc/fstab
+echo "$NAS_IP:/mnt/leftpool/multimedia/pictures /mnt/pictures nfs defaults 0 0" >> /etc/fstab
+mount -a
 
 # Basic configuration for kodi
 KODI_USERDATA=/home/$USERNAME/.kodi/userdata
