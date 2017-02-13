@@ -247,10 +247,14 @@ sed -i '/mnt\/movies/d' /etc/fstab
 sed -i '/mnt\/series/d' /etc/fstab
 sed -i '/mnt\/music/d' /etc/fstab
 sed -i '/mnt\/pictures/d' /etc/fstab
-echo "$NAS_IP:/mnt/leftpool/multimedia/movies /mnt/movies nfs defaults 0 0" >> /etc/fstab
-echo "$NAS_IP:/mnt/leftpool/multimedia/series /mnt/series nfs defaults 0 0" >> /etc/fstab
-echo "$NAS_IP:/mnt/leftpool/multimedia/music /mnt/music nfs defaults 0 0" >> /etc/fstab
-echo "$NAS_IP:/mnt/leftpool/multimedia/pictures /mnt/pictures nfs defaults 0 0" >> /etc/fstab
+if [[ ! -d /mnt/movies ]]; then mkdir -pv /mnt/movies ; fi
+if [[ ! -d /mnt/series ]]; then mkdir -pv /mnt/series ; fi
+if [[ ! -d /mnt/music ]]; then mkdir -pv /mnt/music ; fi
+if [[ ! -d /mnt/pictures ]]; then mkdir -pv /mnt/pictures ; fi
+echo "$NAS_IP:/mnt/leftpool/multimedia/movies /mnt/movies nfs rw,hard,intr 0 0" >> /etc/fstab
+echo "$NAS_IP:/mnt/leftpool/multimedia/series /mnt/series nfs rw,hard,intr 0 0" >> /etc/fstab
+echo "$NAS_IP:/mnt/leftpool/multimedia/music /mnt/music nfs rw,hard,intr 0 0" >> /etc/fstab
+echo "$NAS_IP:/mnt/leftpool/multimedia/pictures /mnt/pictures nfs rw,hard,intr 0 0" >> /etc/fstab
 mount -a
 
 # Basic configuration for kodi
