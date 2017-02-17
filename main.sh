@@ -111,6 +111,19 @@ function add_samba_credential_to_kodi_passwords {
   fi
 }
 
+function add_kodi_addon {
+  local KR_NAME="$1"
+  local KR_URL="$2"
+if [[ ! -d "$KODI_ADDONS/$KR_NAME" ]]; then
+  wget -O "/var/tmp/$KR_NAME.zip" 
+  if [[ -d "/var/tmp/$KR_NAME" ]]; then
+    rm -R "/var/tmp/$KR_NAME"
+  fi
+  unzip "/var/tmp/$KR_NAME.zip" -d "/var/tmp/$KR_NAME"
+  mv -v "/var/tmp/$KR_NAME" $KODI_ADDONS
+fi
+}
+
 # Request userdata updates
 echo "Current IP:"
 ip addr
@@ -260,6 +273,7 @@ mount -a
 # Basic configuration for kodi
 KODI_USERDATA=/home/$USERNAME/.kodi/userdata
 KODI_ADDONS=/home/$USERNAME/.kodi/addons
+
 mkdir -p $KODI_USERDATA
 copy_and_parse_file "templates/advancedsettings.xml" "$KODI_USERDATA/advancedsettings.xml"
 if [[ ! -f "$KODI_USERDATA/sources.xml" ]]; then
@@ -270,17 +284,12 @@ if [[ ! -f "$KODI_USERDATA/passwords.xml" ]]; then
 fi
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "SuperRepo" "http://srp.nu/"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "XbmcBrasil" "http://files.xbmcbrasil.net/Repository/"
 add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_IP" "$NAS_USERNAME" "$NAS_PASSWORD"
 add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_HOSTNAME" "$NAS_USERNAME" "$NAS_PASSWORD"
+
 mkdir -p $KODI_ADDONS
-if [[ ! -d $KODI_ADDONS/repository.supmagc ]]; then
-  wget -O /var/tmp/repository.supmagc.zip https://github.com/supmagc/kodiaddons/raw/master/repository.supmagc/repository.supmagc-1.2.0.zip
-  if [[ -d /var/tmp/repository.supmagc ]]; then
-    rm -R /var/tmp/repository.supmagc
-  fi
-  unzip /var/tmp/repository.supmagc.zip -d /var/tmp/repository.supmagc
-  mv -v /var/tmp/repository.supmagc $KODI_ADDONS
-fi
+add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodiaddons/raw/master/repository.supmagc/repository.supmagc-1.2.0.zip"
 
 chown -R $USERNAME /home/$USERNAME/.kodi
 chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
