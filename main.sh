@@ -220,7 +220,7 @@ nitrogen --save --set-auto "$INSTALLATION/assets/wallpaper.png"
 copy_and_parse_file "templates/99-steam-controller-perms.rules" "/lib/udev/rules.d/99-steam-controller-perms.rules"
 
 # Enable cdrom lock file
-copy_and_parse_file "templates/10-cdromlock.conf" "/etc/sysctl.d/10-cdromlock.conf"
+copy_and_parse_file "templates/50-cdromlock.conf" "/etc/sysctl.d/50-cdromlock.conf"
 sysctl --system 
 
 # Install lirc from source
