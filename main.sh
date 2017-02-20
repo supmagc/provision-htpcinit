@@ -217,11 +217,14 @@ copy_and_parse_file "templates/40-htpcinit-greeter.conf" "/etc/lightdm/lightdm-g
 nitrogen --save --set-auto "$INSTALLATION/assets/wallpaper.png"
 
 # Enable steam controller support
-copy_and_parse_file "templates/99-steam-controller-perms.rules" "/lib/udev/rules.d/99-steam-controller-perms.rules"
+copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules.d/99-steam-controller-perms.rules"
 
 # Enable cdrom lock file
 copy_and_parse_file "templates/50-cdromlock.conf" "/etc/sysctl.d/50-cdromlock.conf"
-sysctl --system 
+copy_and_parse_file "templates/60-cdrom_id.rules" "/etc/udev/rules.d/60-cdrom_id.rules"
+sysctl --system
+udevadm control --reload-rules
+udevadm trigger
 
 # Install lirc from source
 
