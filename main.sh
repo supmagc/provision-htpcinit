@@ -222,7 +222,7 @@ copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules
 # Enable cdrom lock file
 copy_and_parse_file "templates/50-cdromlock.conf" "/etc/sysctl.d/50-cdromlock.conf"
 copy_and_parse_file "templates/60-cdrom_id.rules" "/etc/udev/rules.d/60-cdrom_id.rules"
-sysctl --system
+sysctl -p 50-cdromlock.conf
 udevadm control --reload-rules
 udevadm trigger
 
