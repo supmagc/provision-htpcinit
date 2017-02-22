@@ -256,7 +256,12 @@ if [[ -z $(which google-chrome) ]]; then
 fi
 
 # Change GRUB config
-sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=$BOOT_TIMEOUT/" /etc/default/grub
+sed -i "s/^GRUB_HIDDEN_/#GRUB_HIDDEN_/" /etc/default/grub
+if [[ -z $(grep 'GRUB_TIMEOUT=' /etc/default/grub) ]]; then
+  echo "GRUB_TIMEOUT=$BOOT_TIMEOUT" >> /etc/default/grub
+else
+  sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=$BOOT_TIMEOUT/" /etc/default/grub
+fi
 update-grub2
 
 # Configure dvd support
@@ -302,7 +307,7 @@ chown -R $USERNAME /home/$USERNAME/.kodi
 chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 
 # Install plymouth theme
-apt-get install -y data/assets/plymouth-theme-kodi-logo.deb
+apt-get install -y "./data/assets/plymouth-theme-kodi-logo.deb"
 
 # Install samba config and match password
 copy_and_parse_file "templates/smb.conf" "/etc/samba/smb.conf"
