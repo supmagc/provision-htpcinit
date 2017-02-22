@@ -10,7 +10,7 @@ if hash openbox 2>/dev/null; then
   ps cax | grep openbox > /dev/null
   if [[ $? -ne 0 ]]; then
     echo "Openbox found but not yet running, starting now"
-    openbox &
+    openbox-session &
   else
     echo "Openbox found and already running"
   fi
