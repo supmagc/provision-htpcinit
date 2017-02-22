@@ -227,13 +227,6 @@ nitrogen --save --set-auto "$INSTALLATION/assets/wallpaper.png"
 # Enable steam controller support
 copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules.d/99-steam-controller-perms.rules"
 
-# Enable cdrom lock file
-copy_and_parse_file "templates/50-cdromlock.conf" "/etc/sysctl.d/50-cdromlock.conf"
-copy_and_parse_file "templates/60-cdrom_id.rules" "/etc/udev/rules.d/60-cdrom_id.rules"
-sysctl -p 50-cdromlock.conf
-udevadm control --reload-rules
-udevadm trigger
-
 # Install lirc from source
 
 # Install lirc config
@@ -277,8 +270,13 @@ else
 fi
 update-grub2
 
-# Configure dvd support
+# Configure dvd support (and cdrom lock)
 dpkg-reconfigure libdvd-pkg
+copy_and_parse_file "templates/50-cdromlock.conf" "/etc/sysctl.d/50-cdromlock.conf"
+copy_and_parse_file "templates/60-cdrom_id.rules" "/etc/udev/rules.d/60-cdrom_id.rules"
+sysctl -p 50-cdromlock.conf
+udevadm control -p
+udevadm trigger
 
 # Mount NFS drives
 sed -i '/mnt\/movies/d' /etc/fstab
