@@ -148,6 +148,8 @@ request_variable "LOCALE_LANG" "system language"
 request_variable "LOCALE_KEYMAP" "default keymap"
 request_variable "SCREEN_DPI" "screen dpi"
 request_variable "SCREEN_RESOLUTION" "screen resolution"
+ls "$INSTALLATION/assets/wallpaper*"
+request_variable "SCREEN_WALLPAPER" "screen wallpaper"
 request_variable "BOOT_TIMEOUT" "boot timeout"
 
 echo "#User specified overrides for HtpcInit configuration" > ~/.config/htpcinit.user.conf
@@ -220,9 +222,9 @@ chmod 0755 "/home/$USERNAME/.config/openbox/autostart"
 copy_and_parse_file "templates/75-htpcinit.conf" "/etc/lightdm/lightdm.conf.d/75-htpcinit.conf"
 
 # Set default wallpaper
-copy_and_parse_file "templates/75-htpcinit-display-setup.conf" "/etc/lightdm/lightdm.conf.d/75-htpcinit-display-setup.conf"
 copy_and_parse_file "templates/40-htpcinit-greeter.conf" "/etc/lightdm/lightdm-gtk-greeter.conf.d/40-htpcinit-greeter.conf"
-nitrogen --save --set-auto "$INSTALLATION/assets/wallpaper.png"
+nitrogen --save --set-auto "$INSTALLATION/assets/$SCREEN_WALLPAPER.png"
+cp "$INSTALLATION/assets/$SCREEN_WALLPAPER.png" "/usr/share/kodi/media/Splash.png"
 
 # Enable steam controller support
 copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules.d/99-steam-controller-perms.rules"
