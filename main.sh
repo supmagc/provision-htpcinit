@@ -148,7 +148,7 @@ request_variable "LOCALE_LANG" "system language"
 request_variable "LOCALE_KEYMAP" "default keymap"
 request_variable "SCREEN_DPI" "screen dpi"
 request_variable "SCREEN_RESOLUTION" "screen resolution"
-ls "$INSTALLATION/assets/wallpaper*"
+ls -al data/assets/wallpaper*
 request_variable "SCREEN_WALLPAPER" "screen wallpaper"
 request_variable "BOOT_TIMEOUT" "boot timeout"
 
@@ -223,8 +223,8 @@ copy_and_parse_file "templates/75-htpcinit.conf" "/etc/lightdm/lightdm.conf.d/75
 
 # Set default wallpaper
 copy_and_parse_file "templates/40-htpcinit-greeter.conf" "/etc/lightdm/lightdm-gtk-greeter.conf.d/40-htpcinit-greeter.conf"
-nitrogen --save --set-auto "$INSTALLATION/assets/$SCREEN_WALLPAPER.png"
-cp "$INSTALLATION/assets/$SCREEN_WALLPAPER.png" "/usr/share/kodi/media/Splash.png"
+nitrogen --save --set-auto "$INSTALLATION/assets/$SCREEN_WALLPAPER"
+cp "data/assets/$SCREEN_WALLPAPER" "/usr/share/kodi/media/Splash.png"
 
 # Enable steam controller support
 copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules.d/99-steam-controller-perms.rules"
