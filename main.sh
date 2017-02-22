@@ -20,8 +20,8 @@ if [[ ! $DISPLAY ]]; then
 fi
 
 echo "Loading default config:"
-cat ./templates/default.conf
-source ./templates/default.conf
+cat ./install/default.conf
+source ./install/default.conf
 
 if [[ -f ~/.config/htpcinit.user.conf ]]; then
   echo "Loading overriding user config:"
@@ -147,6 +147,7 @@ request_variable "SSH_KEY" "ssh key"
 request_variable "LOCALE_LANG" "system language"
 request_variable "LOCALE_KEYMAP" "default keymap"
 request_variable "SCREEN_DPI" "screen dpi"
+request_variable "SCREEN_RESOLUTION" "screen resolution"
 request_variable "BOOT_TIMEOUT" "boot timeout"
 
 echo "#User specified overrides for HtpcInit configuration" > ~/.config/htpcinit.user.conf
@@ -177,6 +178,9 @@ apt-get install -y openssh-server samba nfs-common \
   steam \
   retroarch
 
+# Remove unwanted packages
+apt-get remove -y os-prober
+
 # Remove no longer needed packages
 apt-get autoremove -y
 
@@ -196,7 +200,6 @@ chmod -vR u=rwX,go=rX /home/$USERNAME/.ssh
 locale-gen "$LOCALE_LANG"
 localectl set-x11-keymap "$LOCALE_KEYMAP"
 localectl set-keymap "$LOCALE_KEYMAP"
-copy_and_parse_file "templates/75-htpcinit-display-setup.conf" "/etc/lightdm/lightdm.conf.d/75-htpcinit-display-setup.conf"
 
 # Disable unneeded xsessions and add htpc xsession
 mkdir -p /usr/share/xsessions/hidden
@@ -209,10 +212,15 @@ for f in $(ls /usr/share/xsessions | grep -e ".*\.desktop$"); do
 done
 copy_and_parse_file "templates/htpc.desktop" "/usr/share/xsessions/htpc.desktop"
 
+# Set openbox autostart
+copy_and_parse_file "templates/openbox-autostart" "/home/$USERNAME/.config/openbox/autostart"
+chmod 0755 "/home/$USERNAME/.config/openbox/autostart"
+
 # Enable autologon
 copy_and_parse_file "templates/75-htpcinit.conf" "/etc/lightdm/lightdm.conf.d/75-htpcinit.conf"
 
 # Set default wallpaper
+copy_and_parse_file "templates/75-htpcinit-display-setup.conf" "/etc/lightdm/lightdm.conf.d/75-htpcinit-display-setup.conf"
 copy_and_parse_file "templates/40-htpcinit-greeter.conf" "/etc/lightdm/lightdm-gtk-greeter.conf.d/40-htpcinit-greeter.conf"
 nitrogen --save --set-auto "$INSTALLATION/assets/wallpaper.png"
 
@@ -262,6 +270,11 @@ if [[ -z $(grep 'GRUB_TIMEOUT=' /etc/default/grub) ]]; then
 else
   sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=$BOOT_TIMEOUT/" /etc/default/grub
 fi
+if [[ -z $(grep 'GRUB_TIMEOUT=' /etc/default/grub) ]]; then
+  echo "GRUB_GFXMODE=$BOOT_TIMEOUT" >> /etc/default/grub
+else
+  sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=$BOOT_TIMEOUT/" /etc/default/grub
+fi
 update-grub2
 
 # Configure dvd support
@@ -307,7 +320,7 @@ chown -R $USERNAME /home/$USERNAME/.kodi
 chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 
 # Install plymouth theme
-apt-get install -y "./data/assets/plymouth-theme-kodi-logo.deb"
+apt-get install -y "./install/plymouth-theme-kodi-logo.deb"
 
 # Install samba config and match password
 copy_and_parse_file "templates/smb.conf" "/etc/samba/smb.conf"
