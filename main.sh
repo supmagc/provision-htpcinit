@@ -214,10 +214,6 @@ for f in $(ls /usr/share/xsessions | grep -e ".*\.desktop$"); do
 done
 copy_and_parse_file "templates/htpc.desktop" "/usr/share/xsessions/htpc.desktop"
 
-# Set openbox autostart
-copy_and_parse_file "templates/openbox-autostart" "/home/$USERNAME/.config/openbox/autostart"
-chmod 0755 "/home/$USERNAME/.config/openbox/autostart"
-
 # Enable autologon
 copy_and_parse_file "templates/75-htpcinit.conf" "/etc/lightdm/lightdm.conf.d/75-htpcinit.conf"
 
@@ -276,7 +272,7 @@ update-grub2
 dpkg-reconfigure libdvd-pkg
 copy_and_parse_file "templates/50-cdromlock.conf" "/etc/sysctl.d/50-cdromlock.conf"
 copy_and_parse_file "templates/60-cdrom_id.rules" "/etc/udev/rules.d/60-cdrom_id.rules"
-sysctl -p 50-cdromlock.conf
+sysctl -p
 udevadm control -p
 udevadm trigger
 
