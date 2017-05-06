@@ -1,7 +1,46 @@
 <advancedsettings>
 	<network>
 	   <buffermode>1</buffermode> <!-- Default is 1 -->
-	   <cachemembuffersize>52428800</cachemembuffersize> <!-- Default is 20971520 bytes or 20 MB -->
-	   <readbufferfactor>2.0</readbufferfactor> <!-- Default is 1.0 -->
+	   <cachemembuffersize>419430400</cachemembuffersize> <!-- Default is 20971520 bytes or 20 MB -->
+	   <readbufferfactor>4.0</readbufferfactor> <!-- Default is 1.0 -->
 	</network>
+	<cache> <!-- Since Kodi 17 Krypton -->
+	   <buffermode>1</buffermode> <!-- Default is 1 -->
+	   <memorysize>419430400</memorysize> <!-- Default is 20971520 bytes or 20 MB -->
+	   <readfactor>4.0</readfactor> <!-- Default is 1.0 -->
+	</cache>
+	<pathsubstitution>
+		<substitute>
+			<from>SMB://{NAS_HOSTNAME}/Movies/</from>
+			<to>/mnt/movies/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_IP}/Movies/</from>
+			<to>/mnt/movies/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_HOSTNAME}/Series/</from>
+			<to>/mnt/series/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_IP}/Series/</from>
+			<to>/mnt/series/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_HOSTNAME}/Music/</from>
+			<to>/mnt/music/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_IP}/Music/</from>
+			<to>/mnt/music/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_HOSTNAME}/Pictures/</from>
+			<to>/mnt/pictures/</to>
+		</substitute>
+		<substitute>
+			<from>SMB://{NAS_IP}/Pictures/</from>
+			<to>/mnt/pictures/</to>
+		</substitute>
+	</pathsubstitution>
 </advancedsettings>

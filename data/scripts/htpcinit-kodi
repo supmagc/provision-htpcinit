@@ -4,26 +4,40 @@ PATH_BASE="$(dirname $0)/../"
 source $PATH_BASE/common/paths
 source $PATH_BASE/common/functions
 
-PID=$(<"$PATH_KODI_PID")
-if [ ! $(validate_pid_for_name $PID "kodi-standalone") ]; then
-  echo "Cannot run command, as kodi-standalone doesn't match it's PID"
-  exit
-fi
+function terminate {
+  killall -q kodi-standalone
+  killall -q kodi
+  killall -q kodi.bin
+}
+
+function terminate_if_pid_invalid {
+  PID=$(get_pid_from_file "$PATH_KODI_PID")
+  local VALID=$(is_pid_valid_for_name "$PID" "kodi-standalone")
+  if [[ "$VALID" = "false" ]]; then
+    echo "No valid existing kodi instance found, killing all to ensure PID file cannot be invalid"
+    terminate
+  fi
+}
 
 case "$1" in
 
   open) 
-    echo "Closing others"
-	$PATH_KODI_CONTROL close
+    terminate_if_pid_invalid
     echo "Opening Kodi"
 	xdotool search --name Kodi windowactivate
 	#wmctrl -lp | awk '$3 == Kodi { print $1 }' | xargs -I {} wmctrl -i -r {} -b remove,hidden,above
     ;;
     
   close) 
+    terminate_if_pid_invalid
     echo "Closing Kodi"
 	xdotool search --name Kodi windowminimize
 	#wmctrl -lp | awk '$3 == Kodi { print $1 }' | xargs -I {} wmctrl -i -r {} -b add,hidden
+    ;;
+    
+  terminate) 
+    echo "Terminating Kodi"
+    terminate
     ;;
 
 esac
