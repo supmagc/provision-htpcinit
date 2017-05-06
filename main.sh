@@ -324,6 +324,12 @@ echo -e "$PASSWORD\n$PASSWORD" | smbpasswd -s -a $USERNAME
 echo -e "$PASSWORD\n$PASSWORD" | passwd $USERNAME
 systemctl restart nmbd.service
 
+# Copy from backup
+mkdir -p ~/Artwork
+mkdir -p ~/Cinema
+smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HTPCINIT\Artwork\;lcd /home/jelle/Artwork/;mget *'
+smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HTPCINIT\Cinema\;lcd /home/jelle/Cinema/;mget *'
+
 # Configure network
 hostname "$HOSTNAME"
 sed -i "/127.0.0.1/d" /etc/hosts
