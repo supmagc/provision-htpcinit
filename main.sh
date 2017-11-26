@@ -126,7 +126,7 @@ function add_kodi_addon {
 
 function add_nfs_mount {
   local KA_NAME="$1"
-  sed -i "/mnt/$KA_NAME/d" /etc/fstab
+  sed -i "/mnt\\/$KA_NAME/d" /etc/fstab
   if [[ ! -d /mnt/$KA_NAME ]]; then mkdir -pv /mnt/$KA_NAME ; fi
   echo "$NAS_IP:/mnt/leftpool/multimedia/$KA_NAME /mnt/$KA_NAME nfs rw,hard,intr 0 0" >> /etc/fstab
 }
