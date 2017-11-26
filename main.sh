@@ -115,7 +115,7 @@ function add_kodi_addon {
   local KR_NAME="$1"
   local KR_URL="$2"
   if [[ ! -d "$KODI_ADDONS/$KR_NAME" ]]; then
-    wget -O "/var/tmp/$KR_NAME.zip" 
+    wget -O "/var/tmp/$KR_NAME.zip" "$KR_URL"
     if [[ -d "/var/tmp/$KR_NAME" ]]; then
       rm -R "/var/tmp/$KR_NAME"
     fi
