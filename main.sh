@@ -114,14 +114,21 @@ function add_samba_credential_to_kodi_passwords {
 function add_kodi_addon {
   local KR_NAME="$1"
   local KR_URL="$2"
-if [[ ! -d "$KODI_ADDONS/$KR_NAME" ]]; then
-  wget -O "/var/tmp/$KR_NAME.zip" 
-  if [[ -d "/var/tmp/$KR_NAME" ]]; then
-    rm -R "/var/tmp/$KR_NAME"
+  if [[ ! -d "$KODI_ADDONS/$KR_NAME" ]]; then
+    wget -O "/var/tmp/$KR_NAME.zip" 
+    if [[ -d "/var/tmp/$KR_NAME" ]]; then
+      rm -R "/var/tmp/$KR_NAME"
+    fi
+    unzip "/var/tmp/$KR_NAME.zip" -d "/var/tmp/$KR_NAME"
+    mv -v "/var/tmp/$KR_NAME" $KODI_ADDONS
   fi
-  unzip "/var/tmp/$KR_NAME.zip" -d "/var/tmp/$KR_NAME"
-  mv -v "/var/tmp/$KR_NAME" $KODI_ADDONS
-fi
+}
+
+function add_nfs_mount {
+  local KA_NAME="$1"
+  sed -i "/mnt/$KA_NAME/d" /etc/fstab
+  if [[ ! -d /mnt/$KA_NAME ]]; then mkdir -pv /mnt/$KA_NAME ; fi
+  echo "$NAS_IP:/mnt/leftpool/multimedia/$KA_NAME /mnt/$KA_NAME nfs rw,hard,intr 0 0" >> /etc/fstab
 }
 
 # Request userdata updates
@@ -277,25 +284,18 @@ udevadm control -p
 udevadm trigger
 
 # Mount NFS drives
-sed -i '/mnt\/movies/d' /etc/fstab
-sed -i '/mnt\/series/d' /etc/fstab
-sed -i '/mnt\/music/d' /etc/fstab
-sed -i '/mnt\/pictures/d' /etc/fstab
-if [[ ! -d /mnt/movies ]]; then mkdir -pv /mnt/movies ; fi
-if [[ ! -d /mnt/series ]]; then mkdir -pv /mnt/series ; fi
-if [[ ! -d /mnt/music ]]; then mkdir -pv /mnt/music ; fi
-if [[ ! -d /mnt/pictures ]]; then mkdir -pv /mnt/pictures ; fi
-echo "$NAS_IP:/mnt/leftpool/multimedia/movies /mnt/movies nfs rw,hard,intr 0 0" >> /etc/fstab
-echo "$NAS_IP:/mnt/leftpool/multimedia/series /mnt/series nfs rw,hard,intr 0 0" >> /etc/fstab
-echo "$NAS_IP:/mnt/leftpool/multimedia/music /mnt/music nfs rw,hard,intr 0 0" >> /etc/fstab
-echo "$NAS_IP:/mnt/leftpool/multimedia/pictures /mnt/pictures nfs rw,hard,intr 0 0" >> /etc/fstab
+add_nfs_mount "movies"
+add_nfs_mount "series"
+add_nfs_mount "music"
+add_nfs_mount "pictures"
+add_nfs_mount "phones"
 mount -a
 
 # Basic configuration for kodi
 KODI_USERDATA=/home/$USERNAME/.kodi/userdata
 KODI_ADDONS=/home/$USERNAME/.kodi/addons
-
 mkdir -p $KODI_USERDATA
+mkdir -p $KODI_ADDONS
 copy_and_parse_file "templates/advancedsettings.xml" "$KODI_USERDATA/advancedsettings.xml"
 if [[ ! -f "$KODI_USERDATA/sources.xml" ]]; then
   copy_and_parse_file "templates/sources.xml" "$KODI_USERDATA/sources.xml"
@@ -303,15 +303,28 @@ fi
 if [[ ! -f "$KODI_USERDATA/passwords.xml" ]]; then
   copy_and_parse_file "templates/passwords.xml" "$KODI_USERDATA/passwords.xml"
 fi
+
+# Add additional files to the sources.xml
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "SuperRepo" "http://srp.nu/"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "XbmcBrasil" "http://files.xbmcbrasil.net/Repository/"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Extras" "smb://192.168.1.101/Extras/"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Movies" "smb://192.168.1.101/Movies"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Series" "smb://192.168.1.101/Series"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Music" "smb://192.168.1.101/Music"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Pictures" "smb://192.168.1.101/Pictures"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Phones" "smb://192.168.1.101/Phones"
+#add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/" # Replaced with direct repo install
+#add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "XbmcBrasil" "http://files.xbmcbrasil.net/Repository/" # Replaced with direct repo install
+
+# Add network credentials
 add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_IP" "$NAS_USERNAME" "$NAS_PASSWORD"
 add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_HOSTNAME" "$NAS_USERNAME" "$NAS_PASSWORD"
 
-mkdir -p $KODI_ADDONS
-add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodiaddons/raw/master/repository.supmagc/repository.supmagc-1.2.0.zip"
+# Add addons
+add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodiaddons/raw/master/kodi-repository.supmagc/repository.supmagc-1.2.0.zip"
+add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip"
+add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.3.zip"
 
+# Ensure correct permissions
 chown -R $USERNAME /home/$USERNAME/.kodi
 chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 
