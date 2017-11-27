@@ -119,7 +119,7 @@ function add_kodi_addon {
     if [[ -d "/var/tmp/$KR_NAME" ]]; then
       rm -R "/var/tmp/$KR_NAME"
     fi
-    unzip "/var/tmp/$KR_NAME.zip" -d "/var/tmp/$KR_NAME"
+    unzip "/var/tmp/$KR_NAME.zip" -d "/var/tmp"
     mv -v "/var/tmp/$KR_NAME" $KODI_ADDONS
   fi
 }
