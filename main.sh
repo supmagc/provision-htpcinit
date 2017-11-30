@@ -338,6 +338,8 @@ echo -e "$PASSWORD\n$PASSWORD" | passwd $USERNAME
 systemctl restart nmbd.service
 
 # Copy from backup
+rm -Rv ~/Artwork/*
+rm -Rv ~/Cinema/*
 mkdir -p ~/Artwork
 mkdir -p ~/Cinema
 smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Artwork\;lcd /home/jelle/Artwork/;mget *'
