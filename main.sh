@@ -306,12 +306,12 @@ fi
 
 # Add additional files to the sources.xml
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "SuperRepo" "http://srp.nu/"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Extras" "smb://192.168.1.101/Extras/"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Movies" "smb://192.168.1.101/Movies"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Series" "smb://192.168.1.101/Series"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Music" "smb://192.168.1.101/Music"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Pictures" "smb://192.168.1.101/Pictures"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Phones" "smb://192.168.1.101/Phones"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Extras" "smb://$NAS_IP/Extras/"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Movies" "smb://$NAS_IP/Movies"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Series" "smb://$NAS_IP/Series"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Music" "smb://$NAS_IP/Music"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Pictures" "smb://$NAS_IP/Pictures"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Phones" "smb://$NAS_IP/Phones"
 #add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/" # Replaced with direct repo install
 #add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "XbmcBrasil" "http://files.xbmcbrasil.net/Repository/" # Replaced with direct repo install
 

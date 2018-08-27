@@ -11,35 +11,35 @@
 	</cache>
 	<pathsubstitution>
 		<substitute>
-			<from>SMB://{NAS_HOSTNAME}/Movies/</from>
+			<from>smb://{NAS_HOSTNAME}/Movies/</from>
 			<to>/mnt/movies/</to>
 		</substitute>
 		<substitute>
-			<from>SMB://{NAS_IP}/Movies/</from>
+			<from>smb://{NAS_IP}/Movies/</from>
 			<to>/mnt/movies/</to>
 		</substitute>
 		<substitute>
-			<from>SMB://{NAS_HOSTNAME}/Series/</from>
+			<from>smb://{NAS_HOSTNAME}/Series/</from>
 			<to>/mnt/series/</to>
 		</substitute>
 		<substitute>
-			<from>SMB://{NAS_IP}/Series/</from>
+			<from>smb://{NAS_IP}/Series/</from>
 			<to>/mnt/series/</to>
 		</substitute>
 		<substitute>
-			<from>SMB://{NAS_HOSTNAME}/Music/</from>
+			<from>smb://{NAS_HOSTNAME}/Music/</from>
 			<to>/mnt/music/</to>
 		</substitute>
 		<substitute>
-			<from>SMB://{NAS_IP}/Music/</from>
+			<from>smb://{NAS_IP}/Music/</from>
 			<to>/mnt/music/</to>
 		</substitute>
 		<substitute>
-			<from>SMB://{NAS_HOSTNAME}/Pictures/</from>
+			<from>smb://{NAS_HOSTNAME}/Pictures/</from>
 			<to>/mnt/pictures/</to>
 		</substitute>
 		<substitute>
-			<from>SMB://{NAS_IP}/Pictures/</from>
+			<from>smb://{NAS_IP}/Pictures/</from>
 			<to>/mnt/pictures/</to>
 		</substitute>
 	</pathsubstitution>
