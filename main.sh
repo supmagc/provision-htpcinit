@@ -188,7 +188,9 @@ apt-get install -y openssh-server samba nfs-common \
   retroarch
 
 # Install kodi music visualisations
-apt-get install -y kodi-eventclients-kodi-send \
+apt-get install -y \
+  kodi-eventclients-common \
+  kodi-eventclients-kodi-send \
   kodi-visualization-goom \
   kodi-visualization-projectm \
   kodi-visualization-shadertoy \
