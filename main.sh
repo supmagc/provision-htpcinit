@@ -187,6 +187,15 @@ apt-get install -y openssh-server samba nfs-common \
   steam \
   retroarch
 
+# Install kodi music visualisations
+apt-get install -y \
+  kodi-visualization-goom \
+  kodi-visualization-projectm \
+  kodi-visualization-shadertoy \	
+  kodi-visualization-spectrum \
+  kodi-visualization-waveform \	
+  xbmc-visualization-fishbmc
+
 # Remove unwanted packages
 apt-get remove -y os-prober
 
