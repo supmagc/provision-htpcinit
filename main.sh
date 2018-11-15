@@ -188,20 +188,11 @@ apt-get install -y openssh-server samba nfs-common \
   retroarch
 
 # Install kodi music visualisations
-apt-get install -y kodi-screensavers-rsxs \
+apt-get install -y kodi-eventclients-kodi-send \
   kodi-visualization-goom \
   kodi-visualization-projectm \
   kodi-visualization-shadertoy \
-  kodi-visualization-spectrum \
-  kodi-visualization-waveform \
-  kodi-audiodecoder-modplug \
-  kodi-audiodecoder-nosefart \
-  kodi-audiodecoder-sidplay \
-  kodi-audiodecoder-snesapu \
-  kodi-audiodecoder-stsound \
-  kodi-audiodecoder-timidity \
-  kodi-audiodecoder-vgmstream
-  
+  kodi-visualization-spectrum  
 
 # Remove unwanted packages
 apt-get remove -y os-prober
