@@ -194,7 +194,14 @@ apt-get install -y \
   kodi-visualization-shadertoy \	
   kodi-visualization-spectrum \
   kodi-visualization-waveform \	
-  xbmc-visualization-fishbmc
+  kodi-audiodecoder-modplug \
+  kodi-audiodecoder-nosefart \	
+  kodi-audiodecoder-sidplay \
+  kodi-audiodecoder-snesapu \	
+  kodi-audiodecoder-stsound \	
+  kodi-audiodecoder-timidity \	
+  kodi-audiodecoder-vgmstream	\
+  kodi-screensavers-rsxs
 
 # Remove unwanted packages
 apt-get remove -y os-prober
