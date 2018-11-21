@@ -345,12 +345,16 @@ echo -e "$PASSWORD\n$PASSWORD" | passwd $USERNAME
 systemctl restart nmbd.service
 
 # Copy from backup
-rm -Rv ~/Artwork/*
-rm -Rv ~/Cinema/*
-mkdir -p ~/Artwork
-mkdir -p ~/Cinema
+# rm -Rv /home/$USERNAME/Artwork/*
+# rm -Rv /home/$USERNAME/Cinema/*
+mkdir -p /home/$USERNAME/Artwork
+mkdir -p /home/$USERNAME/Cinema
 smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Artwork\;lcd /home/jelle/Artwork/;mget *'
 smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Cinema\;lcd /home/jelle/Cinema/;mget *'
+chown -R $USERNAME /home/$USERNAME/Artwork
+chown -R $USERNAME /home/$USERNAME/Cinema
+chmod -R a=,u=rwX,go=rX /home/$USERNAME/Artwork
+chmod -R a=,u=rwX,go=rX /home/$USERNAME/Cinema
 
 # Configure network
 hostname "$HOSTNAME"
