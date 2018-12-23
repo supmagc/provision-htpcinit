@@ -319,6 +319,7 @@ add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Series" "smb://$NAS_IP/S
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Music" "smb://$NAS_IP/Music"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Pictures" "smb://$NAS_IP/Pictures"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Phones" "smb://$NAS_IP/Phones"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Skinbackup" "$KODI_USERDATA/addon_data/script.skin.helper.skinbackup"
 #add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/" # Replaced with direct repo install
 #add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "XbmcBrasil" "http://files.xbmcbrasil.net/Repository/" # Replaced with direct repo install
 
