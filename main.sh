@@ -338,10 +338,13 @@ chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 
 # Install plymouth theme
 # apt-get install -y "./install/plymouth-theme-kodi-logo.deb"
+PWD=$(pwd)
+cd /tmp
 git clone https://github.com/solbero/plymouth-theme-kodi-animated-logo.git
 cd plymouth-theme-kodi-animated-logo
 ./build.sh
 dpkg -i plymouth-theme-kodi-animated-logo.deb
+cd "$PWD"
 
 # Install samba config and match password
 copy_and_parse_file "templates/smb.conf" "/etc/samba/smb.conf"
