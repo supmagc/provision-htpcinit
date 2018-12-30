@@ -6,37 +6,57 @@ source $PATH_BASE/common/functions
 
 PID=$(get_pid_from_file "$PATH_STEAM_PID")
 
-# Start steam of resume is already running
-function steam_start {
-  local VALID=$(is_pid_valid_for_name "$PID" "steam")
-  if [[ "$VALID" = "false" ]]; then
-	echo "No current steam process found, starting anew"
-	steam -bigpicture &
-    PID=$!
-	echo "$PID">"$PATH_STEAM_PID"
-  else
-    echo "Existing steam process found, resuming"
-    steam steam://open/bigpicture &
-  fi
-  
+function steam_wait {
   WAIT=0
-  while [[ "$(steam_has_open_window)" = "false" && $WAIT -lt 60 ]]; do
-	echo "Waiting for steam to open up"
-	sleep 1s
-	WAIT=$(($WAIT+1))
+  while [[ ! steam_window_is_open 1 && $WAIT -lt 60 ]]; do
+	  echo "Waiting for steam to open up"
+	  sleep 1s
+	  WAIT=$(($WAIT+1))
   done
+  
+  if [[ ! steam_window_is_open 1 ]]; then
+    echo "Steam still not found, closing"
+    steam_close
+  fi
 }
 
-# See if an open steam window exists
-function steam_has_open_window {
+function steam_start {
+  echo "Starting steam"
+  steam -bigpicture &
+  PID=$!
+  echo "$PID">"$PATH_STEAM_PID"
+}
+
+function steam_resume {
+  echo "Resuming steam"
+  steam steam://open/bigpicture &
+
+  steam_wait  
+}
+
+function steam_close {
+  killall -s 9 -q steam.sh
+  killall -s 9 -q steam
+  killall -s 9 -q steamwebhelper
+}
+
+function steam_is_running {
+  is_pid_valid_for_name "$PID" "steam"
+}
+
+function steam_window_is_open {
+  local STRICT=$1
   local WINDOW_NAME=$(xdotool getactivewindow getwindowname)
-  local EC=$?
-  if [ $EC -ne 0 ]; then
-    echo "false"
-  elif [[ "$WINDOW_NAME" = "Steam" || "$WINDOW_NAME" = "[Streaming]" ]]; then
-    echo "true"
+  if [ $? -ne 0 ]; then
+    return 1
+  elif [[ ! $STRICT ]]; then
+    return 0
   else
-    echo "false"
+    if [[ "$WINDOW_NAME" = "Steam" || "$WINDOW_NAME" = "[Streaming]" ]] ]]; then
+      return 0
+    else
+      return 1
+    fi
   fi
 }
 
@@ -54,65 +74,39 @@ function steam_is_active_fullscreen {
   fi
 }
 
-# Detect when steam closed
-function steam_is_closed {
-  local VALID=$(is_pid_valid_for_name "$PID" "steam")
-  if [[ "$VALID" = "true" ]]; then
-    echo "false"
-  else
-    echo "true"
-  fi
-}
-
-# Detect when steam minimized
-function steam_is_minimized {
-  if [[ "$(no_active_window)" = "true" && -n "$(wmctrl -l | grep Steam)" ]]; then
-    echo "true"
-  else
-    echo "false"
-  fi
-}
-
-# Force close steam and all subprocesses
-function steam_close {
-  killall -s 9 -q steam.sh
-  killall -s 9 -q steam
-  killall -s 9 -q steamwebhelper
-}
-
 case "$1" in
 
   open_and_wait) 
-	$PATH_KODI_CONTROL close
+	  $PATH_KODI_CONTROL close
     echo "Opening Steam"
-	steam_start
-		
-	while [[ "$(steam_is_closed)" = "false" && "$(steam_is_minimized)" = "false" ]]; do
-	  echo "Steam is running, and the script is waiting"
-	
-	  if [[ "$(no_active_window)" = "true" ]]; then
-	    echo "No active window found"
-	    sleep 5s
-	    if [[ "$(no_active_window)" = "true" ]]; then
-	    echo "Still no active window after 5sec: (re)activating steam"
-		  steam_start
-  	    fi
-	  fi
-	  
-	  if [[ "$(steam_has_open_window)" = "true" && "$(steam_is_active_fullscreen)" = "false" ]]; then
-	    echo "Steam is open and active, but not fullscreen: maximizing screen"
-	    steam_start
-	  fi
-	  sleep 1s
-	done
-	
-	echo "Steam closed or minimized"
-	$PATH_KODI_CONTROL open
+    if [[ steam_is_running ]]; then
+  	  steam_resume
+    else
+      steam_start
+    fi
+
+    while [[ steam_is_running ]]; do
+      echo "Steam is running, and the script is waiting"
+      sleep 5s
+
+      if [[ !steam_window_is_open 0 ]]; then
+        echo "No active window, wait for 30 seconds"
+        sleep 30s
+        if [[ steam_is_running -and !steam_window_is_open 0 ]]; then
+          echo "Steam still active, but no window active, resume Steam"
+          steam_resume
+        fi
+      fi
+    done
+    
+    echo "Steam closed"
+    steam_close
+    $PATH_KODI_CONTROL open
     ;;
 
   close)
     echo "Closing Steam"
-	steam_close
+	  steam_close
     ;;
 
 esac
