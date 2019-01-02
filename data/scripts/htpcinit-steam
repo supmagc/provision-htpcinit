@@ -73,9 +73,9 @@ function steam_is_active_fullscreen {
            sed -e 's/ /x/')
   SCREEN=$(xdpyinfo | grep -m1 dimensions | awk '{print $2}')
   if [[ "$WINDOW" = "$SCREEN" ]]; then
-    echo "true"
+    return 0
   else
-    echo "false"
+    return 1
   fi
 }
 
