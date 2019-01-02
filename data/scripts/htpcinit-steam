@@ -9,9 +9,9 @@ PID=$(get_pid_from_file "$PATH_STEAM_PID")
 function steam_wait {
   WAIT=0
   while ! steam_window_is_open 1 && [ $WAIT -lt 60 ]; do
-          echo "Waiting for steam to open up"
-          sleep 1s
-          WAIT=$(($WAIT+1))
+    echo "Waiting for steam to open up"
+    sleep 1s
+    WAIT=$(($WAIT+1))
   done
 
   if ! steam_window_is_open 1; then
@@ -48,13 +48,17 @@ function steam_window_is_open {
   local STRICT=$1
   local WINDOW_NAME=$(xdotool getactivewindow getwindowname)
   if [ $? -ne 0 ]; then
+    echo "No active window found"
     return 1
   elif [ $STRICT -eq 0 ]; then
+    echo "Active window found, no strict check required"
     return 0
   else
     if [ "$WINDOW_NAME" = "Steam" ] || [ "$WINDOW_NAME" = "[Streaming]" ]; then
+      echo "Active window found belonging to Steam"
       return 0
     else
+      echo "Active window found, not belonging to Steam"
       return 1
     fi
   fi
@@ -77,36 +81,36 @@ function steam_is_active_fullscreen {
 case "$1" in
 
   open_and_wait)
-          $PATH_KODI_CONTROL close
+    $PATH_KODI_CONTROL close
     echo "Opening Steam"
     if steam_is_running; then
-          steam_resume
+      steam_resume
     else
       steam_start
     fi
 
     while steam_is_running; do                                                                            
-      echo "Steam is running, and the script is waiting"                                                      
-      sleep 5s                                                                                                
-                                                                                                              
+      echo "Steam is running, and the script is waiting"
+      sleep 5s
+
       if ! steam_window_is_open 0; then                                                                
-        echo "No active window, wait for 30 seconds"                                                          
-        sleep 30s                                                                                             
-        if steam_is_running && ! steam_window_is_open 0; then                                      
-          echo "Steam still active, but no window active, resume Steam"                                       
-          steam_resume                                                                                        
-        fi                                                                                                    
-      fi                                                                                                      
-    done                                                                                                      
-                                                                                                              
-    echo "Steam closed"                                                                                       
-    steam_close                                                                                               
-    $PATH_KODI_CONTROL open                                                                                   
-    ;;                                                                                                        
-                                                                                                              
-  close)                                                                                                      
-    echo "Closing Steam"                                                                                      
-          steam_close                                                                                         
-    ;;                                                                                                        
-                                                                                                              
-esac                                                                                                          
+        echo "No active window, wait for 30 seconds"
+        sleep 30
+        if steam_is_running && ! steam_window_is_open 0; then
+          echo "Steam still active, but no window active, resume Steam"
+          steam_resume
+        fi
+      fi
+    done
+
+    echo "Steam closed"
+    steam_close
+    $PATH_KODI_CONTROL open
+    ;;
+
+  close)
+    echo "Closing Steam"
+    steam_close
+    ;;
+
+esac
