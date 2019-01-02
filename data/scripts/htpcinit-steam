@@ -46,7 +46,8 @@ function steam_is_running {
 
 function steam_window_is_open {
   local STRICT=$1
-  local WINDOW_NAME=$(xdotool getactivewindow getwindowname)
+  local WINDOW_NAME
+  WINDOW_NAME=$(xdotool getactivewindow getwindowname)
   if [ $? -ne 0 ]; then
     echo "No active window found"
     return 1
