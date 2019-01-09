@@ -330,8 +330,7 @@ add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_HOST
 # Add addons
 add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodi-addons/raw/master/repository.supmagc/repository.supmagc-1.2.1.zip"
 add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip"
-add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.3.zip"
-add_kodi_addon "plugin.program.advanced.emulator.launcher" "https://github.com/Wintermute0110/repository.wintermute0110/raw/master/plugin.program.advanced.emulator.launcher/plugin.program.advanced.emulator.launcher-0.9.7.zip"
+add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.4.zip"
 
 # Ensure correct permissions
 chown -R $USERNAME /home/$USERNAME/.kodi
@@ -345,6 +344,8 @@ git clone https://github.com/solbero/plymouth-theme-kodi-animated-logo.git
 cd plymouth-theme-kodi-animated-logo
 ./build.sh
 dpkg -i plymouth-theme-kodi-animated-logo.deb
+cd ../
+rm -r plymouth-theme-kodi-animated-logo
 cd "$PWD"
 
 # Install samba config and match password
