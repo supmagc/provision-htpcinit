@@ -51,17 +51,18 @@ function steam_window_is_open {
   if [ $? -ne 0 ]; then
     echo "No active window found"
     return 1
+  elif [ "$WINDOW_NAME" = "Kodi" ]; then
+    echo "Active window is Kodi"
+    return 2
   elif [ $STRICT -eq 0 ]; then
     echo "Active window found, no strict check required"
     return 0
+  elif [ "$WINDOW_NAME" = "Steam" ] || [ "$WINDOW_NAME" = "[Streaming]" ]; then
+    echo "Active window found belonging to Steam"
+    return 0
   else
-    if [ "$WINDOW_NAME" = "Steam" ] || [ "$WINDOW_NAME" = "[Streaming]" ]; then
-      echo "Active window found belonging to Steam"
-      return 0
-    else
-      echo "Active window found, not belonging to Steam"
-      return 1
-    fi
+    echo "Active window found, not belonging to Steam although strict checking is required"
+    return 1
   fi
 }
 
@@ -94,7 +95,12 @@ case "$1" in
       echo "Steam is running, and the script is waiting"
       sleep 1s
 
-      if ! steam_window_is_open 0; then                                                                
+      steam_window_is_open 0
+      WINDOW_RETURN=$?
+      if [ $WINDOW_RETURN -eq 2 ]; then
+        echo "Active window is Kodi, trying to close and reopen Steam"
+        $PATH_KODI_CONTROL close
+      elif [ $WINDOW_RETURN -eq 1 ]; then
         echo "No active window, wait for 10 seconds"
         sleep 10
         if steam_is_running && ! steam_window_is_open 0; then
