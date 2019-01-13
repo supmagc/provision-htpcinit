@@ -24,7 +24,7 @@ case "$1" in
   open) 
     terminate_if_pid_invalid
     echo "Opening Kodi"
-    kodi-send --port=8080 --action="InhibitIdleShutdown(false)"
+    kodi-send --action="InhibitIdleShutdown(false)"
 	  xdotool search --name Kodi windowactivate
 	  #wmctrl -lp | awk '$3 == Kodi { print $1 }' | xargs -I {} wmctrl -i -r {} -b remove,hidden,above
     ;;
@@ -32,8 +32,8 @@ case "$1" in
   close) 
     terminate_if_pid_invalid
     echo "Closing Kodi"
-    kodi-send --port=8080 --action="PlayerControl(stop)"
-    kodi-send --port=8080 --action="InhibitIdleShutdown(true)"
+    kodi-send --action="PlayerControl(stop)"
+    kodi-send --action="InhibitIdleShutdown(true)"
 	  xdotool search --name Kodi windowminimize
 	  #wmctrl -lp | awk '$3 == Kodi { print $1 }' | xargs -I {} wmctrl -i -r {} -b add,hidden
     ;;
