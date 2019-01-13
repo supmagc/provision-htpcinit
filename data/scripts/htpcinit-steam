@@ -81,7 +81,7 @@ function steam_is_active_fullscreen {
 
 case "$1" in
 
-  open_and_wait)
+  open)
     $PATH_KODI_CONTROL close
     echo "Opening Steam"
     if steam_is_running; then
