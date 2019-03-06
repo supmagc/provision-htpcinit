@@ -331,6 +331,7 @@ add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_HOST
 add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodi-addons/raw/master/repository.supmagc/repository.supmagc-1.2.1.zip"
 add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip"
 add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.4.zip"
+add_kodi_addon "repository.netflix" "https://github.com/kodinerds/repo/raw/master/repository.netflix/repository.netflix-1.0.1.zip"
 
 # Ensure correct permissions
 chown -R $USERNAME /home/$USERNAME/.kodi
