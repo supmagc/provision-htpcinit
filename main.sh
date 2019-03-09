@@ -184,15 +184,12 @@ apt-get install -y openssh-server samba nfs-common \
   pulseaudio pavucontrol \
   wmctrl xdotool \
   kodi libdvd-pkg \
-  steam \
-  retroarch
+  steam
 
-# Install kodi music visualisations
+# Install kodi music visualisations and game addons
 apt-get install -y \
-  kodi-visualization-goom \
-  kodi-visualization-projectm \
-  kodi-visualization-shadertoy \
-  kodi-visualization-spectrum  
+  kodi-visualization-* \
+  kodi-game-*
 
 # Remove unwanted packages
 apt-get remove -y os-prober
