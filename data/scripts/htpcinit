@@ -17,6 +17,11 @@ elif which xsetroot >/dev/null 2>/dev/null; then
 fi
 test -z $BG || $BG -solid "#303030"
 
+# Disable screensaver stuff
+xset s noblank
+xset s off
+xset -dpms
+
 # Set kb support
 setxkbmap
 
