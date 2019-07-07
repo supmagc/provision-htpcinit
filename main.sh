@@ -197,6 +197,9 @@ apt-get remove -y os-prober
 # Remove no longer needed packages
 apt-get autoremove -y
 
+# Install python dependencies
+pip install pycryptodomex
+
 # Copy scripts etc
 mkdir -vp "$INSTALLATION"
 cp -vr data/* "$INSTALLATION"
