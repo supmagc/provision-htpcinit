@@ -197,9 +197,6 @@ apt-get remove -y os-prober
 # Remove no longer needed packages
 apt-get autoremove -y
 
-# Install python dependencies
-pip install pycryptodomex
-
 # Copy scripts etc
 mkdir -vp "$INSTALLATION"
 cp -vr data/* "$INSTALLATION"
@@ -245,7 +242,7 @@ copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules
 
 # Configure graphics
 if [[ "$(lspci -v | grep nvidia)" ]]; then
-  apt-get install -y nvidia-415 vdpauinfo
+  apt-get install -y nvidia-340 vdpauinfo
   nvidia-xconfig --no-use-edid-dpi
   sed -i "/DPI/d" /etc/X11/xorg.conf
   sed -i "/UseEdidDpi/i\
@@ -320,14 +317,15 @@ add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Music" "smb://$NAS_IP/Mu
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Pictures" "smb://$NAS_IP/Pictures"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Phones" "smb://$NAS_IP/Phones"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Skinbackup" "$KODI_USERDATA/addon_data/script.skin.helper.skinbackup"
-#add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/" # Replaced with direct repo install
-#add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "XbmcBrasil" "http://files.xbmcbrasil.net/Repository/" # Replaced with direct repo install
+# add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/"
+# add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "XbmcBrasil" "http://files.xbmcbrasil.net/Repository/"
 
 # Add network credentials
 add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_IP" "$NAS_USERNAME" "$NAS_PASSWORD"
 add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_HOSTNAME" "$NAS_USERNAME" "$NAS_PASSWORD"
 
 # Add addons
+add_kodi_addon "repository.castagnait" "https://github.com/castagnait/repository.castagnait/raw/master/repository.castagnait-1.0.0.zip"
 add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodi-addons/raw/master/repository.supmagc/repository.supmagc-1.2.1.zip"
 add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip"
 add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.4.zip"
