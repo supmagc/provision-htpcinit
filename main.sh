@@ -180,7 +180,7 @@ apt-get dist-upgrade -y
 
 # Install additional software
 apt-get install -y openssh-server samba nfs-common \
-  xmlstarlet aptitude nitrogen \
+  xmlstarlet aptitude nitrogen plymouth-x11 \
   pulseaudio pavucontrol \
   wmctrl xdotool \
   kodi libdvd-pkg \
@@ -231,7 +231,7 @@ copy_and_parse_file "templates/75-htpcinit.conf" "/etc/lightdm/lightdm.conf.d/75
 # Set default wallpaper
 copy_and_parse_file "templates/40-htpcinit-greeter.conf" "/etc/lightdm/lightdm-gtk-greeter.conf.d/40-htpcinit-greeter.conf"
 nitrogen --save --set-auto "$INSTALLATION/assets/$SCREEN_WALLPAPER"
-cp "data/assets/$SCREEN_WALLPAPER" "/usr/share/kodi/media/Splash.png"
+cp "data/assets/$SCREEN_WALLPAPER" "/usr/share/kodi/media/splash.jpg"
 
 # Enable steam controller support
 copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules.d/99-steam-controller-perms.rules"
