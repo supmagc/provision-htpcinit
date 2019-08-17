@@ -15,7 +15,10 @@ elif which esetroot >/dev/null 2>/dev/null; then
 elif which xsetroot >/dev/null 2>/dev/null; then
   BG=xsetroot
 fi
-test -z $BG || $BG -solid "#303030"
+test -z $BG || $BG -solid "#000000"
+
+# Restore wallpaper
+nitrogen --restore
 
 # Disable screensaver stuff
 xset s noblank
@@ -24,9 +27,6 @@ xset -dpms
 
 # Set kb support
 setxkbmap
-
-# Restore wallpaper
-nitrogen --restore
 
 # Make sure openbox is running
 if hash openbox 2>/dev/null; then
