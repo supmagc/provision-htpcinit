@@ -131,6 +131,17 @@ function add_nfs_mount {
   echo "$NAS_IP:/mnt/leftpool/multimedia/$KA_NAME /mnt/$KA_NAME nfs rw,hard,intr 0 0" >> /etc/fstab
 }
 
+function add_or_replace_line_in_file {
+  local ARF_FILE="$1"
+  local ARF_SEARCH="$2"
+  local ARF_ADD="$3"
+  if [[ -z $(grep "^$ARF_SEARCH" "$ARF_FILE") ]]; then
+    echo "$ARF_ADD\n" >> "$ARF_FILE"
+  else
+    sed -i "s/^$ARF_SEARCH(.*)$/$ARF_ADD/" "$ARF_FILE"
+  fi
+}
+
 # Request userdata updates
 echo "Current IP:"
 ip addr
@@ -267,16 +278,12 @@ fi
 
 # Change GRUB config
 sed -i "s/^GRUB_HIDDEN_/#GRUB_HIDDEN_/" /etc/default/grub
-if [[ -z $(grep 'GRUB_TIMEOUT=' /etc/default/grub) ]]; then
-  echo "GRUB_TIMEOUT=$BOOT_TIMEOUT" >> /etc/default/grub
-else
-  sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=$BOOT_TIMEOUT/" /etc/default/grub
-fi
-if [[ -z $(grep 'GRUB_TIMEOUT=' /etc/default/grub) ]]; then
-  echo "GRUB_GFXMODE=$BOOT_TIMEOUT" >> /etc/default/grub
-else
-  sed -i "s/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=$BOOT_TIMEOUT/" /etc/default/grub
-fi
+add_or_replace_line_in_file "/etc/default/grub" "GRUB_TIMEOUT=" "GRUB_TIMEOUT=$BOOT_TIMEOUT"
+add_or_replace_line_in_file "/etc/default/grub" "GRUB_GFXMODE=" "GRUB_GFXMODE=1920x1080x32"
+add_or_replace_line_in_file "/etc/default/grub" "GRUB_GFXPAYLOAD_LINUX=" "GRUB_GFXPAYLOAD_LINUX=keep"
+add_or_replace_line_in_file "/etc/default/grub" "GRUB_VIDEO_BACKEND=" "GRUB_VIDEO_BACKEND=vbe"
+copy_and_parse_file "templates/splash" "/etc/initramfs-tools/conf.d/splash"
+update-initramfs -u
 update-grub2
 
 # Configure dvd support (and cdrom lock)
