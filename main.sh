@@ -345,7 +345,7 @@ chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
 # apt-get install -y "./install/plymouth-theme-kodi-logo.deb"
 PWD=$(pwd)
 cd /tmp
-git clone https://github.com/solbero/plymouth-theme-kodi-animated-logo.git
+git clone https://github.com/supmagc/plymouth-theme-kodi-animated-logo.git
 cd plymouth-theme-kodi-animated-logo
 ./build.sh
 dpkg -i plymouth-theme-kodi-animated-logo.deb
