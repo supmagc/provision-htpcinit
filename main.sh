@@ -138,7 +138,7 @@ function add_or_replace_line_in_file {
   if [[ -z $(grep "^$ARF_SEARCH" "$ARF_FILE") ]]; then
     echo "$ARF_ADD\n" >> "$ARF_FILE"
   else
-    sed -i "s/^$ARF_SEARCH(.*)$/$ARF_ADD/" "$ARF_FILE"
+    sed -i "s/^$ARF_SEARCH.*$/$ARF_ADD/" "$ARF_FILE"
   fi
 }
 
