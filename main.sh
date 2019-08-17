@@ -136,7 +136,7 @@ function add_or_replace_line_in_file {
   local ARF_SEARCH="$2"
   local ARF_ADD="$3"
   if [[ -z $(grep "^$ARF_SEARCH" "$ARF_FILE") ]]; then
-    echo "$ARF_ADD\n" >> "$ARF_FILE"
+    echo "$ARF_ADD" >> "$ARF_FILE"
   else
     sed -i "s/^$ARF_SEARCH.*$/$ARF_ADD/" "$ARF_FILE"
   fi
@@ -253,7 +253,7 @@ copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules
 
 # Configure graphics
 if [[ "$(lspci -v | grep nvidia)" ]]; then
-  apt-get install -y nvidia-340 vdpauinfo
+  apt-get install -y nvidia-driver-390 vdpauinfo
   nvidia-xconfig --no-use-edid-dpi
   sed -i "/DPI/d" /etc/X11/xorg.conf
   sed -i "/UseEdidDpi/i\
