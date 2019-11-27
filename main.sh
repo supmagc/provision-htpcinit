@@ -198,7 +198,7 @@ apt-get upgrade -y
 apt-get dist-upgrade -y
 
 # Install additional software
-apt-get install -y openssh-server samba nfs-common \
+apt-get install -y openssh-server samba smbclient nfs-common \
   xmlstarlet aptitude nitrogen plymouth-x11 \
   pulseaudio pavucontrol \
   wmctrl xdotool \
@@ -289,14 +289,14 @@ if [[ -z $(which google-chrome) ]]; then
 fi
 
 # Change GRUB config
-sed -i "s/^GRUB_HIDDEN_/#GRUB_HIDDEN_/" /etc/default/grub
-add_or_replace_line_in_file "/etc/default/grub" "GRUB_TIMEOUT=" "GRUB_TIMEOUT=$BOOT_TIMEOUT"
-add_or_replace_line_in_file "/etc/default/grub" "GRUB_GFXMODE=" "GRUB_GFXMODE=${SCREEN_RESOLUTION}x32"
-add_or_replace_line_in_file "/etc/default/grub" "GRUB_GFXPAYLOAD_LINUX=" "GRUB_GFXPAYLOAD_LINUX=keep"
-add_or_replace_line_in_file "/etc/default/grub" "GRUB_VIDEO_BACKEND=" "GRUB_VIDEO_BACKEND=vbe"
-copy_and_parse_file "templates/splash" "/etc/initramfs-tools/conf.d/splash"
-update-initramfs -u
-update-grub2
+#sed -i "s/^GRUB_HIDDEN_/#GRUB_HIDDEN_/" /etc/default/grub
+#add_or_replace_line_in_file "/etc/default/grub" "GRUB_TIMEOUT=" "GRUB_TIMEOUT=$BOOT_TIMEOUT"
+#add_or_replace_line_in_file "/etc/default/grub" "GRUB_GFXMODE=" "GRUB_GFXMODE=${SCREEN_RESOLUTION}x32"
+#add_or_replace_line_in_file "/etc/default/grub" "GRUB_GFXPAYLOAD_LINUX=" "GRUB_GFXPAYLOAD_LINUX=keep"
+#add_or_replace_line_in_file "/etc/default/grub" "GRUB_VIDEO_BACKEND=" "GRUB_VIDEO_BACKEND=vbe"
+#copy_and_parse_file "templates/splash" "/etc/initramfs-tools/conf.d/splash"
+#update-initramfs -u
+#update-grub2
 
 # Configure dvd/usb support (and cdrom lock)
 dpkg-reconfigure libdvd-pkg
