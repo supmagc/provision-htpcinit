@@ -202,13 +202,16 @@ apt-get install -y openssh-server samba nfs-common \
   xmlstarlet aptitude nitrogen plymouth-x11 \
   pulseaudio pavucontrol \
   wmctrl xdotool \
-  kodi libdvd-pkg \
-  steam
 
-# Install kodi music visualisations and game addons
+# Install kodi stuff
 apt-get install -y \
+  kodi libdvd-pkg \
   kodi-visualization-* \
   kodi-game-*
+
+# Install game stuff
+apt-get install -y \
+  steam
 
 # Remove unwanted packages
 apt-get remove -y os-prober
