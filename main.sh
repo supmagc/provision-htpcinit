@@ -142,6 +142,12 @@ function add_or_replace_line_in_file {
   fi
 }
 
+function set_rights {
+    local SR_PATH="$1"
+    chown -vR $USERNAME "$SR_PATH"
+    chmod -vR a=,u=rwX,go=rX "$SR_PATH"
+}
+
 # Request userdata updates
 echo "Current IP:"
 ip addr
@@ -170,6 +176,8 @@ ls -al data/assets/wallpaper*
 request_variable "SCREEN_WALLPAPER" "screen wallpaper"
 request_variable "BOOT_TIMEOUT" "boot timeout"
 
+mkdir -p ~/.config
+if [[ ! -f ~/.config/htpcinit.user.conf ]]; then touch ~/.config/htpcinit.user.conf ; fi
 echo "#User specified overrides for HtpcInit configuration" > ~/.config/htpcinit.user.conf
 for i in ${!DEFAULT_*}; do
   echo "$i=\"${!i}\"" >> ~/.config/htpcinit.user.conf
@@ -217,8 +225,7 @@ chmod -R a+x "$INSTALLATION/scripts"
 # Create and configure ssl
 mkdir -vp /home/$USERNAME/.ssh
 echo "$SSH_KEY" > /home/$USERNAME/.ssh/authorized_keys
-chown -vR $USERNAME /home/$USERNAME/.ssh
-chmod -vR u=rwX,go=rX /home/$USERNAME/.ssh
+set_rights /home/$USERNAME/.ssh
 
 # Force locale and keymap settings
 locale-gen "$LOCALE_LANG"
@@ -339,8 +346,7 @@ add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Reposit
 add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.4.zip"
 
 # Ensure correct permissions
-chown -R $USERNAME /home/$USERNAME/.kodi
-chmod -R a=,u=rwX,go=rX /home/$USERNAME/.kodi
+set_rights /home/$USERNAME/.ssh
 
 # Install plymouth theme
 # apt-get install -y "./install/plymouth-theme-kodi-logo.deb"
@@ -367,10 +373,8 @@ mkdir -p /home/$USERNAME/Artwork
 mkdir -p /home/$USERNAME/Cinema
 smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Artwork\;lcd /home/jelle/Artwork/;mget *'
 smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Cinema\;lcd /home/jelle/Cinema/;mget *'
-chown -R $USERNAME /home/$USERNAME/Artwork
-chown -R $USERNAME /home/$USERNAME/Cinema
-chmod -R a=,u=rwX,go=rX /home/$USERNAME/Artwork
-chmod -R a=,u=rwX,go=rX /home/$USERNAME/Cinema
+set_right /home/$USERNAME/Artwork
+set_rights /home/$USERNAME/Cinema
 
 # Configure network
 hostname "$HOSTNAME"
