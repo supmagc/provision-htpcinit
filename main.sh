@@ -209,10 +209,6 @@ apt-get install -y \
   kodi-visualization-* \
   kodi-game-*
 
-# Install game stuff
-apt-get install -y \
-  steam
-
 # Remove unwanted packages
 apt-get remove -y os-prober
 
@@ -253,6 +249,12 @@ copy_and_parse_file "templates/75-htpcinit.conf" "/etc/lightdm/lightdm.conf.d/75
 copy_and_parse_file "templates/40-htpcinit-greeter.conf" "/etc/lightdm/lightdm-gtk-greeter.conf.d/40-htpcinit-greeter.conf"
 nitrogen --save --set-auto "$INSTALLATION/assets/$SCREEN_WALLPAPER"
 cp "data/assets/$SCREEN_WALLPAPER" "/usr/share/kodi/media/splash.jpg"
+
+# Install steam latest
+if [[ -z $(which steam) ]]; then
+  wget -O /var/tmp/steam_latest.deb https://steamcdn-a.akamaihd.net/client/installer/steam.deb
+  apt-get install -y /var/tmp/steam_latest.deb
+fi
 
 # Enable steam controller support
 copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules.d/99-steam-controller-perms.rules"
