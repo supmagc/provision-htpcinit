@@ -42,12 +42,12 @@ function request_variable {
 function copy_and_parse_file {
   local FILE_SOURCE_PATH="$1"
   local FILE_TARGET_PATH="$2"
+  mkdir -p $(dirname "$FILE_TARGET_PATH")
   if [[ -z "$FILE_TARGET_PATH" ]]; then
     FILE_TARGET_PATH="$FILE_SOURCE_PATH"
   else
     cp -v "$FILE_SOURCE_PATH" "$FILE_TARGET_PATH"
   fi
-  mkdir -p $(dirname "$FILE_TARGET_PATH")
   for i in ${!DEFAULT_*}; do
     local VAR_NAME=${i:8}
 	local VAR_VALUE="${!VAR_NAME}"
