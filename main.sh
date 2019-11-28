@@ -199,7 +199,7 @@ apt-get upgrade -y
 
 # Install additional software
 apt-get install -y openssh-server \
-  lightdm nitrogen plymouth-x11 \
+  nitrogen plymouth-x11 \
   samba smbclient \
   nfs-common \
   xmlstarlet aptitude \
