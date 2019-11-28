@@ -305,8 +305,8 @@ fi
 # Configure dvd/usb support (and cdrom lock)
 dpkg-reconfigure libdvd-pkg
 copy_and_parse_file "templates/50-cdromlock.conf" "/etc/sysctl.d/50-cdromlock.conf"
-copy_and_parse_file "templates/60-cdrom_id.rules" "/etc/udev/rules.d/60-cdrom_id.rules"
-copy_and_parse_file "templates/61-usbmount-by-label.rules" "/etc/udev/rules.d/61-usbmount-by-label.rules"
+#copy_and_parse_file "templates/60-cdrom_id.rules" "/etc/udev/rules.d/60-cdrom_id.rules"
+#copy_and_parse_file "templates/61-usbmount-by-label.rules" "/etc/udev/rules.d/61-usbmount-by-label.rules"
 sysctl -p
 udevadm control -p
 udevadm trigger
