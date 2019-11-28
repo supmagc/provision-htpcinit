@@ -198,10 +198,13 @@ apt-get upgrade -y
 #apt-get dist-upgrade -y
 
 # Install additional software
-apt-get install -y openssh-server samba smbclient nfs-common \
-  xmlstarlet aptitude nitrogen plymouth-x11 \
+apt-get install -y openssh-server \
+  lightdm nitrogen plymouth-x11 \
+  samba smbclient \
+  nfs-common \
+  xmlstarlet aptitude \
   pulseaudio pavucontrol \
-  wmctrl xdotool \
+  wmctrl xdotool
 
 # Install kodi stuff
 apt-get install -y \
@@ -242,8 +245,9 @@ for f in $(ls /usr/share/xsessions | grep -e ".*\.desktop$"); do
 done
 copy_and_parse_file "templates/htpc.desktop" "/usr/share/xsessions/htpc.desktop"
 
-# Enable autologon
+# Enable autologon for lightdm and sddm
 copy_and_parse_file "templates/75-htpcinit.conf" "/etc/lightdm/lightdm.conf.d/75-htpcinit.conf"
+copy_and_parse_file "templates/75-htpcinit.conf" "/etc/sddm.conf.d/75-htpcinit.conf"
 
 # Set default wallpaper
 copy_and_parse_file "templates/40-htpcinit-greeter.conf" "/etc/lightdm/lightdm-gtk-greeter.conf.d/40-htpcinit-greeter.conf"
