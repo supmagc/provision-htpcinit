@@ -195,7 +195,7 @@ add-apt-repository ppa:libretro/testing -y
 # Update apt
 apt-get update -y
 apt-get upgrade -y
-apt-get dist-upgrade -y
+#apt-get dist-upgrade -y
 
 # Install additional software
 apt-get install -y openssh-server samba smbclient nfs-common \
