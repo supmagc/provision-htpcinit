@@ -213,7 +213,7 @@ apt-get install -y \
   kodi-game-*
 
 # Remove unwanted packages
-apt-get remove -y os-prober
+#apt-get remove -y os-prober
 
 # Remove no longer needed packages
 apt-get autoremove -y
