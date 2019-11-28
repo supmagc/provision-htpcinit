@@ -382,7 +382,7 @@ mkdir -p /home/$USERNAME/Artwork
 mkdir -p /home/$USERNAME/Cinema
 smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Artwork\;lcd /home/jelle/Artwork/;mget *'
 smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Cinema\;lcd /home/jelle/Cinema/;mget *'
-set_right /home/$USERNAME/Artwork
+set_rights /home/$USERNAME/Artwork
 set_rights /home/$USERNAME/Cinema
 
 # Configure network
