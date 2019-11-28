@@ -359,15 +359,15 @@ set_rights /home/$USERNAME/.ssh
 
 # Install plymouth theme
 # apt-get install -y "./install/plymouth-theme-kodi-logo.deb"
-PWD=$(pwd)
-cd /tmp
-git clone https://github.com/supmagc/plymouth-theme-kodi-animated-logo.git
-cd plymouth-theme-kodi-animated-logo
-./build.sh
-dpkg -i plymouth-theme-kodi-animated-logo.deb
-cd ../
-rm -r plymouth-theme-kodi-animated-logo
-cd "$PWD"
+#PWD=$(pwd)
+#cd /tmp
+#git clone https://github.com/supmagc/plymouth-theme-kodi-animated-logo.git
+#cd plymouth-theme-kodi-animated-logo
+#./build.sh
+#dpkg -i plymouth-theme-kodi-animated-logo.deb
+#cd ../
+#rm -r plymouth-theme-kodi-animated-logo
+#cd "$PWD"
 
 # Install samba config and match password
 copy_and_parse_file "templates/smb.conf" "/etc/samba/smb.conf"
