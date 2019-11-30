@@ -324,6 +324,8 @@ KODI_USERDATA=/home/$USERNAME/.kodi/userdata
 KODI_ADDONS=/home/$USERNAME/.kodi/addons
 mkdir -p $KODI_USERDATA
 mkdir -p $KODI_ADDONS
+set_rights $KODI_USERDATA
+set_rights $KODI_ADDONS
 copy_and_parse_file "templates/advancedsettings.xml" "$KODI_USERDATA/advancedsettings.xml"
 if [[ ! -f "$KODI_USERDATA/sources.xml" ]]; then
   copy_and_parse_file "templates/sources.xml" "$KODI_USERDATA/sources.xml"
