@@ -245,9 +245,12 @@ for f in $(ls /usr/share/xsessions | grep -e ".*\.desktop$"); do
 done
 copy_and_parse_file "templates/htpc.desktop" "/usr/share/xsessions/htpc.desktop"
 
-# Enable autologon for lightdm and sddm
+# Enable autologon for lightdm and sddm and if available, remove old sddm config
 copy_and_parse_file "templates/75-htpcinit.conf" "/etc/lightdm/lightdm.conf.d/75-htpcinit.conf"
 copy_and_parse_file "templates/75-htpcinit.conf" "/etc/sddm.conf.d/75-htpcinit.conf"
+if [[ -f /etc/sddm.conf ]]; then
+  rm /etc/sddm.conf
+fi
 
 # Set default wallpaper
 copy_and_parse_file "templates/40-htpcinit-greeter.conf" "/etc/lightdm/lightdm-gtk-greeter.conf.d/40-htpcinit-greeter.conf"
@@ -293,14 +296,14 @@ if [[ -z $(which google-chrome) ]]; then
 fi
 
 # Change GRUB config
-#sed -i "s/^GRUB_HIDDEN_/#GRUB_HIDDEN_/" /etc/default/grub
-#add_or_replace_line_in_file "/etc/default/grub" "GRUB_TIMEOUT=" "GRUB_TIMEOUT=$BOOT_TIMEOUT"
-#add_or_replace_line_in_file "/etc/default/grub" "GRUB_GFXMODE=" "GRUB_GFXMODE=${SCREEN_RESOLUTION}x32"
-#add_or_replace_line_in_file "/etc/default/grub" "GRUB_GFXPAYLOAD_LINUX=" "GRUB_GFXPAYLOAD_LINUX=keep"
+sed -i "s/^GRUB_HIDDEN_/#GRUB_HIDDEN_/" /etc/default/grub
+add_or_replace_line_in_file "/etc/default/grub" "GRUB_TIMEOUT=" "GRUB_TIMEOUT=$BOOT_TIMEOUT"
+add_or_replace_line_in_file "/etc/default/grub" "GRUB_GFXMODE=" "GRUB_GFXMODE=${SCREEN_RESOLUTION}x32"
+add_or_replace_line_in_file "/etc/default/grub" "GRUB_GFXPAYLOAD_LINUX=" "GRUB_GFXPAYLOAD_LINUX=keep"
 #add_or_replace_line_in_file "/etc/default/grub" "GRUB_VIDEO_BACKEND=" "GRUB_VIDEO_BACKEND=vbe"
 #copy_and_parse_file "templates/splash" "/etc/initramfs-tools/conf.d/splash"
-#update-initramfs -u
-#update-grub2
+update-initramfs -u
+update-grub2
 
 # Configure dvd/usb support (and cdrom lock)
 dpkg-reconfigure libdvd-pkg
