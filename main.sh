@@ -311,6 +311,7 @@ dpkg-reconfigure libdvd-pkg
 copy_and_parse_file "templates/50-cdromlock.conf" "/etc/sysctl.d/50-cdromlock.conf"
 copy_and_parse_file "templates/82-cdrom.rules" "/etc/udev/rules.d/82-cdrom.rules"
 copy_and_parse_file "templates/99-dvdlock" "/etc/pm/sleep.d/99-dvdlock"
+chmod a+x "/etc/pm/sleep.d/99-dvdlock"
 systemctl stop udisks2.service
 systemctl mask udisks2.service
 sysctl -p
