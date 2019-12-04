@@ -350,6 +350,7 @@ add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Music" "smb://$NAS_IP/Mu
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Pictures" "smb://$NAS_IP/Pictures"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Phones" "smb://$NAS_IP/Phones"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Skinbackup" "$KODI_USERDATA/addon_data/script.skin.helper.skinbackup"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Netflix" "$KODI_USERDATA/addon_data/plugin.video.netflix"
 # add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/"
 # add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "XbmcBrasil" "http://files.xbmcbrasil.net/Repository/"
 
