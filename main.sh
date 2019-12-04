@@ -59,23 +59,24 @@ function copy_and_parse_file {
 
 function add_files_to_kodi_sources {
   local KS_FILE="$1"
-  local KS_NAME="$2"
-  local KS_PATH="$3"
-  if [[ -z "$(xmlstarlet sel -t -v "/sources/files/source[name='$KS_NAME']" "$KS_FILE")" ]]; then
-    if [[ -z "$(xmlstarlet sel -t -v "/sources/files/source" "$KS_FILE")" ]]; then
+  local KS_TYPE="$2"
+  local KS_NAME="$3"
+  local KS_PATH="$4"
+  if [[ -z "$(xmlstarlet sel -t -v "/sources/$KS_TYPE/source[name='$KS_NAME']" "$KS_FILE")" ]]; then
+    if [[ -z "$(xmlstarlet sel -t -v "/sources/$KS_TYPE/source" "$KS_FILE")" ]]; then
       xmlstarlet ed -P -L \
-        -s "/sources/files" -t elem -n source -v "" \
+        -s "/sources/$KS_TYPE" -t elem -n source -v "" \
         "$KS_FILE"
     else
       xmlstarlet ed -P -L \
-        -i "/sources/files/source[1]" -t elem -n source -v "" \
+        -i "/sources/$KS_TYPE/source[1]" -t elem -n source -v "" \
         "$KS_FILE"
     fi
 	xmlstarlet ed -P -L \
-      -s "/sources/files/source[1]" -t elem -n name -v "$KS_NAME" \
-      -s "/sources/files/source[1]" -t elem -n path -v "$KS_PATH" \
-      -s "/sources/files/source[1]/path" -t attr -n pathversion -v "1" \
-      -s "/sources/files/source[1]" -t elem -n allowsharing -v "true" \
+      -s "/sources/$KS_TYPE/source[1]" -t elem -n name -v "$KS_NAME" \
+      -s "/sources/$KS_TYPE/source[1]" -t elem -n path -v "$KS_PATH" \
+      -s "/sources/$KS_TYPE/source[1]/path" -t attr -n pathversion -v "1" \
+      -s "/sources/$KS_TYPE/source[1]" -t elem -n allowsharing -v "true" \
       "$KS_FILE"
   fi
 }
@@ -342,15 +343,18 @@ if [[ ! -f "$KODI_USERDATA/passwords.xml" ]]; then
 fi
 
 # Add additional files to the sources.xml
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Tv Addons" "http://fusion.tvaddons.co"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Extras" "smb://$NAS_IP/Extras/"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Movies" "smb://$NAS_IP/Movies"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Series" "smb://$NAS_IP/Series"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Music" "smb://$NAS_IP/Music"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Pictures" "smb://$NAS_IP/Pictures"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Phones" "smb://$NAS_IP/Phones"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Skinbackup" "$KODI_USERDATA/addon_data/script.skin.helper.skinbackup"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Netflix" "$KODI_USERDATA/addon_data/plugin.video.netflix"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Tv Addons" "http://fusion.tvaddons.co"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Extras" "smb://$NAS_IP/Extras/"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Movies" "smb://$NAS_IP/Movies"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Series" "smb://$NAS_IP/Series"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Music" "smb://$NAS_IP/Music"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Pictures" "smb://$NAS_IP/Pictures"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Phones" "smb://$NAS_IP/Phones"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Skinbackup" "$KODI_USERDATA/addon_data/script.skin.helper.skinbackup"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "video" "Netflix Movies" "$KODI_USERDATA/addon_data/plugin.video.netflix/movies"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "video" "Netflix Show" "$KODI_USERDATA/addon_data/plugin.video.netflix/shows"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "pictures" "Phones" "smb://$NAS_IP/Pictures"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "pictures" "Pictures" "smb://$NAS_IP/Phones"
 # add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/"
 # add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "XbmcBrasil" "http://files.xbmcbrasil.net/Repository/"
 
