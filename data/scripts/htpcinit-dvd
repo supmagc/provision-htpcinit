@@ -1,0 +1,19 @@
+#!/bin/bash
+DVDLOCK=~/kodi-dvdlock
+if [ "$1" == "LOCK" ] && [ -n "$2" ];
+then
+  touch $DVDLOCK
+  sleep $2
+  rm $DVDLOCK
+fi
+if [ "$1" != "PLAY" ];
+then
+  exit
+fi
+if [ -f $DVDLOCK ];
+then
+  exit
+else
+  sleep $2
+  kodi-send -a playdvd
+fi

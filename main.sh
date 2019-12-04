@@ -209,6 +209,7 @@ apt-get install -y openssh-server \
 # Install kodi stuff
 apt-get install -y \
   kodi libdvd-pkg \
+  kodi-eventclients-kodi-send \
   kodi-visualization-* \
   kodi-game-*
 
@@ -308,12 +309,12 @@ update-grub2
 # Configure dvd/usb support (and cdrom lock)
 dpkg-reconfigure libdvd-pkg
 copy_and_parse_file "templates/50-cdromlock.conf" "/etc/sysctl.d/50-cdromlock.conf"
-copy_and_parse_file "templates/60-cdrom_id.rules" "/etc/udev/rules.d/60-cdrom_id.rules"
-#copy_and_parse_file "templates/61-usbmount-by-label.rules" "/etc/udev/rules.d/61-usbmount-by-label.rules"
+copy_and_parse_file "templates/82-cdrom.rules" "/etc/udev/rules.d/82-cdrom.rules"
+copy_and_parse_file "templates/99-dvdlock" "/etc/pm/sleep.d/99-dvdlock"
 systemctl stop udisks2.service
 systemctl mask udisks2.service
 sysctl -p
-udevadm control -p
+udevadm control -R
 udevadm trigger
 
 # Mount NFS drives
