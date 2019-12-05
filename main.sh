@@ -352,7 +352,7 @@ add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Pictures" "smb:/
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Phones" "smb://$NAS_IP/Phones"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Skinbackup" "$KODI_USERDATA/addon_data/script.skin.helper.skinbackup"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "video" "Netflix Movies" "$KODI_USERDATA/addon_data/plugin.video.netflix/movies"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "video" "Netflix Show" "$KODI_USERDATA/addon_data/plugin.video.netflix/shows"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "video" "Netflix Shows" "$KODI_USERDATA/addon_data/plugin.video.netflix/shows"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "pictures" "Phones" "smb://$NAS_IP/Pictures"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "pictures" "Pictures" "smb://$NAS_IP/Phones"
 # add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/"
@@ -367,6 +367,7 @@ add_kodi_addon "repository.castagnait" "https://github.com/castagnait/repository
 add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodi-addons/raw/master/repository.supmagc/repository.supmagc-1.2.1.zip"
 add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip"
 add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.6.zip"
+add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addons/repository.marcelveldt/raw/master/repository.marcelveldt/repository.marcelveldt-1.0.1.zip"
 
 # Ensure correct permissions
 set_rights /home/$USERNAME/.ssh
