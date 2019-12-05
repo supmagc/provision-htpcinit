@@ -1,1 +1,1 @@
-SUBSYSTEM=="block", KERNEL=="sr0", SYMLINK+="cdrom cdrw dvd dvdrw" RUN+="{INSTALLATION}/scripts/htpcinit-dvd PLAY 3"
+SUBSYSTEM=="block", KERNEL=="sr0", SYMLINK+="cdrom cdrw dvd dvdrw", RUN+="{INSTALLATION}/scripts/htpcinit-dvd PLAY 3"
