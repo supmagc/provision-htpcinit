@@ -200,6 +200,7 @@ apt-get upgrade -y
 
 # Install additional software
 apt-get install -y openssh-server \
+  default-jre libmediainfo \
   nitrogen plymouth-x11 \
   samba smbclient \
   nfs-common \
@@ -267,6 +268,18 @@ fi
 
 # Enable steam controller support
 copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules.d/99-steam-controller-perms.rules"
+
+# Install tinymediamanager
+mkdir -vp "/home/$USERNAME/tinyMediaManager"
+mkdir -vp "/home/$USERNAME/.tmm/data"
+wget -O /var/tmp/tmm.tar.gz https://release.tinymediamanager.org/v3/dist/tmm_3.0.5_linux.tar.gz
+tar xzvf /var/tmp/tmm.tar.gz -C /home/$USERNAME/tinyMediaManager
+echo "-Dtmm.contentfolder=/home/$USERNAME/.tmm" > "/home/$USERNAME/tinyMediaManager/extra.txt"
+copy_and_parse_file "templates/tmm.json" "/home/$USERNAME/.tmm/data/tmm.json"
+copy_and_parse_file "templates/movies.json" "/home/$USERNAME/.tmm/data/movies.json"
+copy_and_parse_file "templates/tvShows.json" "/home/$USERNAME/.tmm/data/tvShows.json"
+set_rights "/home/$USERNAME/tinyMediaManager"
+set_rights "/home/$USERNAME/.tmm"
 
 # Install lirc from source
 
