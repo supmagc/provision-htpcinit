@@ -1,5 +1,5 @@
 #!/bin/bash
 
-$PWD/tinyMediaManagerUpdater.sh
+$HOME/tinyMediaManage/tinyMediaManagerUpdater.sh
 
-$PWD/tinyMediaManagerCMD.sh -update -scrapeNew
+$HOME/tinyMediaManage/tinyMediaManagerCMD.sh -update -scrapeNew

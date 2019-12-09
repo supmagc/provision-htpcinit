@@ -73,5 +73,5 @@
   "skipFolder" : [ ],
   "badWord" : [ ],
   "capitalWordsInTitles" : false,
-  "tvShowDataSource" : [ "{KODI_USERDATA}/addon_data/plugin.video.netflix/shows" ]
+  "tvShowDataSource" : [ "/home/{USERNAME}/.kodi/userdata/addon_data/plugin.video.netflix/shows" ]
 }
