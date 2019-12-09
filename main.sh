@@ -278,6 +278,7 @@ echo "-Dtmm.contentfolder=/home/$USERNAME/.tmm" > "/home/$USERNAME/tinyMediaMana
 copy_and_parse_file "templates/tmm.json" "/home/$USERNAME/.tmm/data/tmm.json"
 copy_and_parse_file "templates/movies.json" "/home/$USERNAME/.tmm/data/movies.json"
 copy_and_parse_file "templates/tvShows.json" "/home/$USERNAME/.tmm/data/tvShows.json"
+chmod a+x "/home/$USERNAME/tinyMediaManager/*.sh"
 set_rights "/home/$USERNAME/tinyMediaManager"
 set_rights "/home/$USERNAME/.tmm"
 
