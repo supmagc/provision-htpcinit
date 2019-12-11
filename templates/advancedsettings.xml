@@ -42,5 +42,9 @@
 			<from>smb://{NAS_IP}/Pictures/</from>
 			<to>/mnt/pictures/</to>
 		</substitute>
+		<substitute>
+			<from>smb://{NAS_IP}/Games/</from>
+			<to>/mnt/games/</to>
+		</substitute>
 	</pathsubstitution>
 </advancedsettings>

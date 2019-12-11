@@ -200,7 +200,7 @@ apt-get upgrade -y
 
 # Install additional software
 apt-get install -y openssh-server \
-  default-jre libmediainfo \
+  default-jre \
   nitrogen plymouth-x11 \
   samba smbclient \
   nfs-common \
@@ -278,7 +278,9 @@ echo "-Dtmm.contentfolder=/home/$USERNAME/.tmm" > "/home/$USERNAME/tinyMediaMana
 copy_and_parse_file "templates/tmm.json" "/home/$USERNAME/.tmm/data/tmm.json"
 copy_and_parse_file "templates/movies.json" "/home/$USERNAME/.tmm/data/movies.json"
 copy_and_parse_file "templates/tvShows.json" "/home/$USERNAME/.tmm/data/tvShows.json"
-chmod a+x "/home/$USERNAME/tinyMediaManager/*.sh"
+chmod a+x "/home/$USERNAME/tinyMediaManager/tinyMediaManager.sh"
+chmod a+x "/home/$USERNAME/tinyMediaManager/tinyMediaManagerUpdater.sh"
+chmod a+x "/home/$USERNAME/tinyMediaManager/tinyMediaManagerCMD.sh"
 set_rights "/home/$USERNAME/tinyMediaManager"
 set_rights "/home/$USERNAME/.tmm"
 
@@ -339,6 +341,7 @@ add_nfs_mount "series"
 add_nfs_mount "music"
 add_nfs_mount "pictures"
 add_nfs_mount "phones"
+add_nfs_mount "games"
 mount -a
 
 # Basic configuration for kodi
@@ -364,6 +367,7 @@ add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Series" "smb://$
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Music" "smb://$NAS_IP/Music"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Pictures" "smb://$NAS_IP/Pictures"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Phones" "smb://$NAS_IP/Phones"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Games" "smb://$NAS_IP/Games"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Skinbackup" "$KODI_USERDATA/addon_data/script.skin.helper.skinbackup"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "video" "Netflix Movies" "$KODI_USERDATA/addon_data/plugin.video.netflix/movies"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "video" "Netflix Shows" "$KODI_USERDATA/addon_data/plugin.video.netflix/shows"
