@@ -341,7 +341,6 @@ add_nfs_mount "series"
 add_nfs_mount "music"
 add_nfs_mount "pictures"
 add_nfs_mount "phones"
-add_nfs_mount "games"
 mount -a
 
 # Basic configuration for kodi
@@ -367,7 +366,6 @@ add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Series" "smb://$
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Music" "smb://$NAS_IP/Music"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Pictures" "smb://$NAS_IP/Pictures"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Phones" "smb://$NAS_IP/Phones"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Games" "smb://$NAS_IP/Games"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Skinbackup" "$KODI_USERDATA/addon_data/script.skin.helper.skinbackup"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "video" "Netflix Movies" "$KODI_USERDATA/addon_data/plugin.video.netflix/movies"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "video" "Netflix Shows" "$KODI_USERDATA/addon_data/plugin.video.netflix/shows"
