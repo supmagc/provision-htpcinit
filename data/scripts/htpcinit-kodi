@@ -38,6 +38,12 @@ case "$1" in
 	  #wmctrl -lp | awk '$3 == Kodi { print $1 }' | xargs -I {} wmctrl -i -r {} -b add,hidden
     ;;
     
+  restart) 
+    terminate_if_pid_invalid
+    echo "Restarting Kodi"
+    kodi-send --action="RestartApp"
+    ;;
+    
   terminate) 
     echo "Terminating Kodi"
     terminate
