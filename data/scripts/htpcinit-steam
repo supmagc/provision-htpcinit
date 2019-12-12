@@ -91,25 +91,29 @@ case "$1" in
       steam_start
     fi
 
+    NO_WINDOW_WAIT=10
     while steam_is_running; do
       echo "Steam is running, and the script is waiting"
 
       steam_window_is_open 0
       WINDOW_RETURN=$?
-      if [ $WINDOW_RETURN -eq 2 ]; then
-        echo "Active window is Kodi, trying to close and reopen Steam"
-        $PATH_KODI_CONTROL close
-        steam_resume
-      elif [ $WINDOW_RETURN -eq 1 ]; then
-        echo "No active window, wait for 10 seconds"
-        sleep 10
-        if steam_is_running && ! steam_window_is_open 0; then
+      if [ $WINDOW_RETURN -eq 1 ]; then
+        NO_WINDOW_WAIT=$(($NO_WINDOW_WAIT-1))
+        echo "No active window, wait for $NO_WINDOW_WAIT seconds"
+        if [ $NO_WINDOW_WAIT -eq 0 ]; then
           echo "Steam still active, but no window active, resume Steam"
+          steam_resume
+        fi
+      else
+        NO_WINDOW_WAIT=10
+        if [ $WINDOW_RETURN -eq 2 ]; then
+          echo "Active window is Kodi, trying to close and reopen Steam"
+          $PATH_KODI_CONTROL close
           steam_resume
         fi
       fi
 
-      sleep 2s
+      sleep 1s
     done
 
     echo "Steam closed"
