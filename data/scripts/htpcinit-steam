@@ -93,7 +93,6 @@ case "$1" in
 
     while steam_is_running; do
       echo "Steam is running, and the script is waiting"
-      sleep 1s
 
       steam_window_is_open 0
       WINDOW_RETURN=$?
@@ -109,6 +108,8 @@ case "$1" in
           steam_resume
         fi
       fi
+
+      sleep 2s
     done
 
     echo "Steam closed"
