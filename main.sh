@@ -215,6 +215,10 @@ apt-get install -y \
   kodi-visualization-* \
   kodi-game-*
 
+# Install Steam stuff
+apt-get install -y \
+  steam
+
 # Remove unwanted packages
 #apt-get remove -y os-prober
 
@@ -226,6 +230,7 @@ mkdir -vp "$INSTALLATION"
 cp -vr data/* "$INSTALLATION"
 chmod -R a+rX "$INSTALLATION"
 chmod -R a+x "$INSTALLATION/scripts"
+add_or_replace_line_in_file "/home/$USERNAME/.profile" "PATH=\"$INSTALLATION/scripts:"'$PATH' "PATH=\"$INSTALLATION/scripts:"'$PATH'
 
 # Create and configure ssl
 mkdir -vp /home/$USERNAME/.ssh
@@ -260,12 +265,6 @@ copy_and_parse_file "templates/40-htpcinit-greeter.conf" "/etc/lightdm/lightdm-g
 nitrogen --save --set-auto "$INSTALLATION/assets/$SCREEN_WALLPAPER"
 cp "data/assets/$SCREEN_WALLPAPER" "/usr/share/kodi/media/splash.jpg"
 
-# Install steam latest
-if [[ -z $(which steam) ]]; then
-  wget -O /var/tmp/steam_latest.deb https://steamcdn-a.akamaihd.net/client/installer/steam.deb
-  apt-get install -y /var/tmp/steam_latest.deb
-fi
-
 # Enable steam controller support
 copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules.d/99-steam-controller-perms.rules"
 
@@ -290,7 +289,7 @@ set_rights "/home/$USERNAME/.tmm"
 
 # Configure graphics
 if [[ "$(lspci -v | grep nvidia)" ]]; then
-  apt-get install -y nvidia-driver-390 vdpauinfo
+  apt-get install -y nvidia-driver-440 vdpauinfo
   nvidia-xconfig --no-use-edid-dpi
   sed -i "/DPI/d" /etc/X11/xorg.conf
   sed -i "/UseEdidDpi/i\
@@ -298,14 +297,14 @@ if [[ "$(lspci -v | grep nvidia)" ]]; then
 fi
 
 # Configure Steam on virtualbox
-if [[ -z "$(lspci -v | grep nvidia)" ]]; then
-  STARTDIR=$(pwd)
-  cd /home/$USERNAME/.steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu
-  if [[ -f "libstdc++.so.6" ]]; then mv libstdc++.so.6 libstdc++.so.6.bak; fi
-  cd /home/$USERNAME/.steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu
-  if [[ -f "libstdc++.so.6" ]]; then mv libstdc++.so.6 libstdc++.so.6.bak; fi
-  cd "$STARTDIR"
-fi
+#if [[ -z "$(lspci -v | grep nvidia)" ]]; then
+#  STARTDIR=$(pwd)
+#  cd /home/$USERNAME/.steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu
+#  if [[ -f "libstdc++.so.6" ]]; then mv libstdc++.so.6 libstdc++.so.6.bak; fi
+#  cd /home/$USERNAME/.steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu
+#  if [[ -f "libstdc++.so.6" ]]; then mv libstdc++.so.6 libstdc++.so.6.bak; fi
+#  cd "$STARTDIR"
+#fi
 
 # Download and install chrome
 if [[ -z $(which google-chrome) ]]; then
