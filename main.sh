@@ -230,7 +230,7 @@ mkdir -vp "$INSTALLATION"
 cp -vr data/* "$INSTALLATION"
 chmod -R a+rX "$INSTALLATION"
 chmod -R a+x "$INSTALLATION/scripts"
-add_or_replace_line_in_file "/home/$USERNAME/.profile" "PATH=\"$INSTALLATION/scripts:"'$PATH' "PATH=\"$INSTALLATION/scripts:"'$PATH'
+add_or_replace_line_in_file "/home/$USERNAME/.profile" "PATH=\"$INSTALLATION/scripts:"'$PATH"' "PATH=\"$INSTALLATION/scripts:"'$PATH"'
 
 # Create and configure ssl
 mkdir -vp /home/$USERNAME/.ssh
