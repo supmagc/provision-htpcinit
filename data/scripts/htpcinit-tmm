@@ -1,5 +1,21 @@
 #!/bin/bash
 
-$HOME/tinyMediaManager/tinyMediaManagerUpdater.sh
+USERNAME=$2
 
-$HOME/tinyMediaManager/tinyMediaManagerCMD.sh -update -scrapeNew
+case "$1" in
+
+  run) 
+    $HOME/tinyMediaManager/tinyMediaManagerUpdater.sh
+    $HOME/tinyMediaManager/tinyMediaManagerCMD.sh -scrapeNew -update
+    ;;
+
+  start)
+    while [ ! -z $USERNAME ]
+    do
+      touch  /tmp/lastwatch-tmm
+      sleep 1m
+      find /home/$USERNAME/.kodi/userdata/addon_data/plugin.video.netflix/movies /home/$USERNAME/.kodi/userdata/addon_data/plugin.video.netflix/shows -cnewer /tmp/lastwatch-tmm -exec htpcinit-tmm run {} \;
+    done
+    ;;
+
+esac
