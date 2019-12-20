@@ -2,15 +2,21 @@
 
 USERNAME=$2
 
+if [ -z $USERNAME ]; then
+  exit 1
+fi
+
 case "$1" in
 
   run) 
-    $HOME/tinyMediaManager/tinyMediaManagerUpdater.sh
-    $HOME/tinyMediaManager/tinyMediaManagerCMD.sh -scrapeNew -update
+    /home/$USERNAME/tinyMediaManager/tinyMediaManagerUpdater.sh
+    /home/$USERNAME/tinyMediaManager/tinyMediaManagerCMD.sh -scrapeNew -update
     ;;
 
   start)
-    while [ ! -z $USERNAME ]
+    sleep 1m
+    htpcinit-tmm run $USERNAME
+    while true
     do
       touch  /tmp/lastwatch-tmm
       sleep 1m
