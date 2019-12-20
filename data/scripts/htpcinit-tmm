@@ -3,6 +3,7 @@
 USERNAME=$2
 
 if [ -z $USERNAME ]; then
+  echo "No username was given as argument"
   exit 1
 fi
 
