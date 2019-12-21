@@ -10,7 +10,6 @@ fi
 case "$1" in
 
   run) 
-    /home/$USERNAME/tinyMediaManager/tinyMediaManagerUpdater.sh
     /home/$USERNAME/tinyMediaManager/tinyMediaManagerCMD.sh -scrapeNew -update
     ;;
 
