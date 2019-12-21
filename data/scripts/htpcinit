@@ -45,9 +45,6 @@ fi
 # Start kopdi
 kodi-standalone &
 
-# Start metadata scanner
-htpcinit-tmm start $USER &
-
 # Remember PID
 PID=$!
 echo "$PID">"$PATH_KODI_PID"

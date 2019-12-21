@@ -200,7 +200,6 @@ apt-get upgrade -y
 
 # Install additional software
 apt-get install -y openssh-server \
-  default-jre mediainfo \
   nitrogen plymouth-x11 \
   samba smbclient \
   nfs-common \
@@ -267,19 +266,6 @@ cp "data/assets/$SCREEN_WALLPAPER" "/usr/share/kodi/media/splash.jpg"
 
 # Enable steam controller support
 copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules.d/99-steam-controller-perms.rules"
-
-# Install tinymediamanager
-mkdir -vp "/home/$USERNAME/tinyMediaManager"
-mkdir -vp "/home/$USERNAME/tinyMediaManager/data"
-wget -O /var/tmp/tmm.tar.gz https://release.tinymediamanager.org/v3/dist/tmm_3.0.5_linux.tar.gz
-tar xzvf /var/tmp/tmm.tar.gz -C /home/$USERNAME/tinyMediaManager
-copy_and_parse_file "templates/tmm.json" "/home/$USERNAME/tinyMediaManager/data/tmm.json"
-copy_and_parse_file "templates/movies.json" "/home/$USERNAME/tinyMediaManager/data/movies.json"
-copy_and_parse_file "templates/tvShows.json" "/home/$USERNAME/tinyMediaManager/data/tvShows.json"
-set_rights "/home/$USERNAME/tinyMediaManager"
-chmod a+x "/home/$USERNAME/tinyMediaManager/tinyMediaManager.sh"
-chmod a+x "/home/$USERNAME/tinyMediaManager/tinyMediaManagerUpdater.sh"
-chmod a+x "/home/$USERNAME/tinyMediaManager/tinyMediaManagerCMD.sh"
 
 # Install lirc from source
 
