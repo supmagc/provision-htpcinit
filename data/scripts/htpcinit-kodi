@@ -25,8 +25,7 @@ case "$1" in
     terminate_if_pid_invalid
     echo "Opening Kodi"
     kodi-send --action="InhibitIdleShutdown(false)"
-	  xdotool search --name Kodi windowactivate
-	  #wmctrl -lp | awk '$3 == Kodi { print $1 }' | xargs -I {} wmctrl -i -r {} -b remove,hidden,above
+    xdotool search --name Kodi windowactivate
     ;;
     
   close) 
@@ -34,13 +33,21 @@ case "$1" in
     echo "Closing Kodi"
     kodi-send --action="PlayerControl(stop)"
     kodi-send --action="InhibitIdleShutdown(true)"
-	  xdotool search --name Kodi windowminimize
-	  #wmctrl -lp | awk '$3 == Kodi { print $1 }' | xargs -I {} wmctrl -i -r {} -b add,hidden
+    xdotool search --name Kodi windowminimize
     ;;
     
   restart) 
     terminate_if_pid_invalid
     echo "Restarting Kodi"
+    kodi-send --action="RestartApp"
+    ;;
+    
+  backup) 
+    echo "Backing up Kodi settings"
+    ;;
+    
+  restore) 
+    echo "Restoring and restarting Kodi"
     kodi-send --action="RestartApp"
     ;;
     

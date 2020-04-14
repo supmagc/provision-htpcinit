@@ -395,7 +395,7 @@ echo -e "$PASSWORD\n$PASSWORD" | passwd $USERNAME
 systemctl restart nmbd.service
 
 # Install nginx config
-copy_and_parse_file "templates/nginx.conf" "/etc/nginx/htpcinit.conf"
+copy_and_parse_file "templates/nginx.conf" "/etc/nginx/conf.d/htpcinit.conf"
 systemctl restart nginx.service
 
 # Copy from backup
