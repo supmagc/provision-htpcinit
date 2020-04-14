@@ -205,7 +205,8 @@ apt-get install -y openssh-server \
   nfs-common \
   xmlstarlet aptitude \
   pulseaudio pavucontrol \
-  wmctrl xdotool
+  wmctrl xdotool \
+  nginx
 
 # Install kodi stuff
 apt-get install -y \
@@ -392,6 +393,10 @@ copy_and_parse_file "templates/smb.conf" "/etc/samba/smb.conf"
 echo -e "$PASSWORD\n$PASSWORD" | smbpasswd -s -a $USERNAME
 echo -e "$PASSWORD\n$PASSWORD" | passwd $USERNAME
 systemctl restart nmbd.service
+
+# Install nginx config
+copy_and_parse_file "templates/nginx.conf" "/etc/nginx/htpcinit.conf"
+systemctl restart nginx.service
 
 # Copy from backup
 # rm -Rv /home/$USERNAME/Artwork/*
