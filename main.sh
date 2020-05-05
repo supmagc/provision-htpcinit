@@ -177,11 +177,11 @@ ls -al data/assets/wallpaper*
 request_variable "SCREEN_WALLPAPER" "screen wallpaper"
 request_variable "BOOT_TIMEOUT" "boot timeout"
 
-mkdir -p ~/.config
-if [[ ! -f ~/.config/htpcinit.user.conf ]]; then touch ~/.config/htpcinit.user.conf ; fi
-echo "#User specified overrides for HtpcInit configuration" > ~/.config/htpcinit.user.conf
+mkdir -p /root/.config
+if [[ ! -f /root/.config/htpcinit.user.conf ]]; then touch /root/.config/htpcinit.user.conf ; fi
+echo "#User specified overrides for HtpcInit configuration" > /root/.config/htpcinit.user.conf
 for i in ${!DEFAULT_*}; do
-  echo "$i=\"${!i}\"" >> ~/.config/htpcinit.user.conf
+  echo "$i=\"${!i}\"" >> /root/.config/htpcinit.user.conf
 done
 
 # Add ppa's

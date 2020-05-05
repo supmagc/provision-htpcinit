@@ -7,3 +7,5 @@ PATH_KODI_PID="$HOME/.htpcinit-kodi.pid"
 
 PATH_STEAM_CONTROL="$PATH_BASE/scripts/htpcinit-steam"
 PATH_STEAM_PID="$HOME/.htpcinit-steam.pid"
+
+PATH_USER_CONFIG="~/.config/htpcinit.user.conf"
