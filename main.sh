@@ -187,7 +187,8 @@ done
 mkdir -p /home/$USERNAME/.config
 if [[ ! -f /home/$USERNAME/.config/htpcinit.user.conf ]]; then touch /home/$USERNAME/.config/htpcinit.user.conf ; fi
 echo "#User specified exported variables for HtpcInit configuration" > /home/$USERNAME/.config/htpcinit.user.conf
-for i in "NET_IP NET_DNS NET_GATE NAS_IP NAS_HOSTNAME NAS_USERNAME NAS_PASSWORD HOSTNAME DOMAIN WORKGROUP"; do
+FIELDS=(NET_IP NET_DNS NET_GATE NAS_IP NAS_HOSTNAME NAS_USERNAME NAS_PASSWORD HOSTNAME DOMAIN WORKGROUP)
+for i in ${FIELDS[@]}; do
   n="DEFAULT_$i"
   echo "$i=\"${!n}\"" >> /home/$USERNAME/.config/htpcinit.user.conf
 done
