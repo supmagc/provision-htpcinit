@@ -48,23 +48,25 @@ case "$1" in
     smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Kodi\;rmdir addons;mkdir addons'
     smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Kodi\;rmdir cdm;mkdir cdm'
     smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Kodi\;rmdir userdata;mkdir userdata'
-    smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Kodi\addons\;lcd ~/.kodi/addons/;mput *'
-    smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Kodi\cdm\;lcd ~/.kodi/cdm/;mput *'
-    smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Kodi\userdata\;lcd ~/.kodi/userdata/;mput *'
+    smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c="prompt off;recurse on;cd HtpcInit\Kodi\addons\;lcd $HOME/.kodi/addons/;mput *"
+    smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c="prompt off;recurse on;cd HtpcInit\Kodi\cdm\;lcd $HOME/.kodi/cdm/;mput *"
+    smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c="prompt off;recurse on;cd HtpcInit\Kodi\userdata\;lcd $HOME/.kodi/userdata/;mput *"
     ;;
     
   restore) 
     echo "Restoring and restarting Kodi"
-    kodi-send --action="PlayerControl(stop)"
-    kodi-send --action="InhibitIdleShutdown(true)"
-    kodi-send --action="Minimize"
+    terminate
     rmdir -R /home/$USERNAME/.kodi/addons
     rmdir -R /home/$USERNAME/.kodi/cdm
     rmdir -R /home/$USERNAME/.kodi/userdata
-    smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Kodi\addons\;lcd ~/.kodi/addons/;mget *'
-    smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Kodi\cdm\;lcd ~/.kodi/cdm/;mget *'
-    smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c='prompt off;recurse on;cd HtpcInit\Kodi\userdata\;lcd ~/.kodi/userdata/;mget *'
-    kodi-send --action="RestartApp"
+    mkdir -p /home/$USERNAME/.kodi/addons
+    mkdir -p /home/$USERNAME/.kodi/cdm
+    mkdir -p /home/$USERNAME/.kodi/userdata
+    smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c="prompt off;recurse on;cd HtpcInit\Kodi\addons\;lcd $HOME/.kodi/addons/;mget *"
+    smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c="prompt off;recurse on;cd HtpcInit\Kodi\cdm\;lcd $HOME/.kodi/cdm/;mget *"
+    smbclient //$NAS_IP/Backup $NAS_PASSWORD -U=$NAS_USERNAME -c="prompt off;recurse on;cd HtpcInit\Kodi\userdata\;lcd $HOME/.kodi/userdata/;mget *"
+    echo "Rebooting"
+    sudo reboot
     ;;
     
   terminate) 
