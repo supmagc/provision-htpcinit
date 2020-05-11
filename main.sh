@@ -216,7 +216,7 @@ apt-get install -y openssh-server \
   xmlstarlet aptitude \
   pulseaudio pavucontrol \
   wmctrl xdotool \
-  nginx
+  nginx resolvconf
 
 # Install kodi stuff
 apt-get install -y \
@@ -403,6 +403,19 @@ copy_and_parse_file "templates/smb.conf" "/etc/samba/smb.conf"
 echo -e "$PASSWORD\n$PASSWORD" | smbpasswd -s -a $USERNAME
 echo -e "$PASSWORD\n$PASSWORD" | passwd $USERNAME
 systemctl restart nmbd.service
+
+# Install wsd
+PWD=$(pwd)
+cd /tmp
+wget https://github.com/christgau/wsdd/archive/master.zip
+unzip master.zip
+mv wsdd-master/src/wsdd.py wsdd-master/src/wsdd
+cp wsdd-master/src/wsdd /usr/bin
+cp wsdd-master/etc/systemd/wsdd.service /etc/systemd/system
+systemctl daemon-reload
+systemctl enable wsdd
+systemctl start wsdd
+cd "$PWD"
 
 # Install nginx config
 copy_and_parse_file "templates/nginx.conf" "/etc/nginx/conf.d/htpcinit.conf"
