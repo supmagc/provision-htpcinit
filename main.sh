@@ -412,6 +412,7 @@ unzip master.zip
 mv wsdd-master/src/wsdd.py wsdd-master/src/wsdd
 cp wsdd-master/src/wsdd /usr/bin
 cp wsdd-master/etc/systemd/wsdd.service /etc/systemd/system
+sed -i "s/Group=nobody/Group=nogroup/" /etc/systemd/system/wsdd.service
 systemctl daemon-reload
 systemctl enable wsdd
 systemctl start wsdd
