@@ -202,6 +202,7 @@ add-apt-repository multiverse -y
 add-apt-repository ppa:team-xbmc/ppa -y
 add-apt-repository ppa:graphics-drivers/ppa -y
 add-apt-repository ppa:libretro/testing -y
+add-apt-repository 'deb https://pkg.ltec.ch/public/ eoan main'
 
 # Update apt
 apt-get update -y
@@ -216,7 +217,7 @@ apt-get install -y openssh-server \
   xmlstarlet aptitude \
   pulseaudio pavucontrol \
   wmctrl xdotool \
-  nginx resolvconf
+  nginx resolvconf wsdd
 
 # Install kodi stuff
 apt-get install -y \
@@ -405,18 +406,18 @@ echo -e "$PASSWORD\n$PASSWORD" | passwd $USERNAME
 systemctl restart nmbd.service
 
 # Install wsd
-PWD=$(pwd)
-cd /tmp
-wget https://github.com/christgau/wsdd/archive/master.zip
-unzip master.zip
-mv wsdd-master/src/wsdd.py wsdd-master/src/wsdd
-cp wsdd-master/src/wsdd /usr/bin
-cp wsdd-master/etc/systemd/wsdd.service /etc/systemd/system
-sed -i "s/Group=nobody/Group=nogroup/" /etc/systemd/system/wsdd.service
-systemctl daemon-reload
-systemctl enable wsdd
-systemctl start wsdd
-cd "$PWD"
+# PWD=$(pwd)
+# cd /tmp
+# wget https://github.com/christgau/wsdd/archive/master.zip
+# unzip master.zip
+# mv wsdd-master/src/wsdd.py wsdd-master/src/wsdd
+# cp wsdd-master/src/wsdd /usr/bin
+# cp wsdd-master/etc/systemd/wsdd.service /etc/systemd/system
+# sed -i "s/Group=nobody/Group=nogroup/" /etc/systemd/system/wsdd.service
+# systemctl daemon-reload
+# systemctl enable wsdd
+# systemctl start wsdd
+# cd "$PWD"
 
 # Install nginx config
 copy_and_parse_file "templates/nginx.conf" "/etc/nginx/conf.d/htpcinit.conf"
