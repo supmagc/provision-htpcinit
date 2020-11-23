@@ -203,6 +203,10 @@ add-apt-repository ppa:team-xbmc/ppa -y
 add-apt-repository ppa:graphics-drivers/ppa -y
 add-apt-repository ppa:libretro/testing -y
 
+# Add extra package repository while  waiting for WSDD to be added to Debian
+curl -L https://pkg.ltec.ch/public/conf/ltec-ag.gpg.key | sudo apt-key add -
+add-apt-repository "deb https://pkg.ltec.ch/public/ eoan main" -y
+
 # Update apt
 apt-get update -y
 apt-get upgrade -y
@@ -216,10 +220,11 @@ apt-get install -y openssh-server \
   xmlstarlet aptitude \
   pulseaudio pavucontrol \
   wmctrl xdotool \
-  nginx resolvconf
+  nginx resolvconf \
+  bluez
 
 # Install kodi stuff
-apt-get install -y \
+apt-get install --install-suggests -y \
   kodi libdvd-pkg \
   kodi-eventclients-kodi-send \
   kodi-visualization-* \
