@@ -218,7 +218,7 @@ apt-get install -y openssh-server \
   samba smbclient \
   nfs-common \
   xmlstarlet aptitude \
-  pulseaudio pavucontrol \
+#  pulseaudio pavucontrol \
   wmctrl xdotool \
   nginx resolvconf \
   bluez
@@ -289,7 +289,7 @@ copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules
 
 # Configure graphics
 if [[ "$(lspci -v | grep nvidia)" ]]; then
-  apt-get install -y nvidia-driver-440 vdpauinfo
+  apt-get install -y nvidia-driver-455 vdpauinfo
   nvidia-xconfig --no-use-edid-dpi
   sed -i "/DPI/d" /etc/X11/xorg.conf
   sed -i "/UseEdidDpi/i\
