@@ -218,7 +218,7 @@ apt-get install -y openssh-server \
   samba smbclient \
   nfs-common \
   xmlstarlet aptitude \
-#  pulseaudio pavucontrol \
+  pulseaudio alsa-base alsa-utils pavucontrol \
   wmctrl xdotool \
   nginx resolvconf \
   bluez
@@ -295,6 +295,12 @@ if [[ "$(lspci -v | grep nvidia)" ]]; then
   sed -i "/UseEdidDpi/i\
 \    Option         \"DPI\" \"$SCREEN_DPI x $SCREEN_DPI\"" /etc/X11/xorg.conf
 fi
+
+# Configure sound
+copy_and_parse_file "templates/.asoundrc" "/home/$USERNAME/.asoundrc"
+add_or_replace_line_in_file "/etc/pulse/default.pa" "load-module module-stream-restore" "load-module module-stream-restore restore_device=false"
+add_or_replace_line_in_file "/etc/pulse/default.pa" "set-default-sink" "set-default-sink 0"
+#add_or_replace_line_in_file "/etc/pulse/default.pa" "set-default-source" "set-default-source <>"
 
 # Configure Steam on virtualbox
 #if [[ -z "$(lspci -v | grep nvidia)" ]]; then
