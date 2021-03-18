@@ -228,7 +228,8 @@ apt-get install --install-suggests -y \
   kodi libdvd-pkg \
   kodi-eventclients-kodi-send \
   kodi-visualization-* \
-  kodi-game-*
+  kodi-game-* \
+  kodi-pvr-*
 
 # Install Steam stuff
 apt-get install -y \
@@ -372,8 +373,6 @@ add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Music" "smb://$N
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Pictures" "smb://$NAS_IP/Pictures"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Phones" "smb://$NAS_IP/Phones"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Skinbackup" "$KODI_USERDATA/addon_data/script.skin.helper.skinbackup"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "video" "Netflix Movies" "$KODI_USERDATA/addon_data/plugin.video.netflix/movies"
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "video" "Netflix Shows" "$KODI_USERDATA/addon_data/plugin.video.netflix/shows"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "pictures" "Pictures" "smb://$NAS_IP/Pictures"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "pictures" "Phones" "smb://$NAS_IP/Phones"
 # add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/"
@@ -384,15 +383,14 @@ add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_IP" 
 add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_HOSTNAME" "$NAS_USERNAME" "$NAS_PASSWORD"
 
 # Add addons
-add_kodi_addon "repository.castagnait" "https://github.com/castagnait/repository.castagnait/raw/master/repository.castagnait-1.0.0.zip"
+add_kodi_addon "repository.castagnait" "https://github.com/castagnait/repository.castagnait/raw/matrix/repository.castagnait-1.0.0.zip"
 add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodi-addons/raw/master/repository.supmagc/repository.supmagc-1.2.1.zip"
 add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip"
 add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.6.zip"
-add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addons/repository.marcelveldt/raw/master/repository.marcelveldt/repository.marcelveldt-1.0.1.zip"
+# add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addons/repository.marcelveldt/raw/master/repository.marcelveldt/repository.marcelveldt-1.0.1.zip"
 add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/raw/master/repository.jurialmunkey-1.2.zip"
 add_kodi_addon "repository.zachmorris" "https://github.com/zach-morris/repository.zachmorris/raw/master/repository.zachmorris/repository.zachmorris-1.0.0.zip"
 add_kodi_addon "repository.kodi_libretro_buildbot_game_addons" "https://github.com/zach-morris/kodi_libretro_buildbot_game_addons/raw/master/repository.kodi_libretro_buildbot_game_addons.zip"
-add_kodi_addon "repository.rector.stuff" "https://github.com/rmrector/repository.rector.stuff/raw/master/latest/repository.rector.stuff-latest.zip"
 
 # Ensure correct permissions
 set_rights /home/$USERNAME/.ssh
