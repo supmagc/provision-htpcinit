@@ -201,7 +201,7 @@ add-apt-repository restricted -y
 add-apt-repository multiverse -y
 add-apt-repository ppa:team-xbmc/ppa -y
 add-apt-repository ppa:graphics-drivers/ppa -y
-add-apt-repository ppa:libretro/testing -y
+# add-apt-repository ppa:libretro/testing -y
 
 # Add extra package repository while  waiting for WSDD to be added to Debian
 curl -L https://pkg.ltec.ch/public/conf/ltec-ag.gpg.key | sudo apt-key add -
@@ -228,6 +228,7 @@ apt-get install --install-suggests -y \
   kodi libdvd-pkg \
   kodi-eventclients-kodi-send \
   kodi-visualization-* \
+  kodi-peripheral-* \
   kodi-game-* \
   kodi-pvr-*
 
