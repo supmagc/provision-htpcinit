@@ -230,6 +230,7 @@ apt-get install --install-suggests -y \
   kodi-visualization-* \
   kodi-peripheral-* \
   kodi-game-* \
+  kodi-vfs-* \
   kodi-pvr-*
 
 # Install Steam stuff
