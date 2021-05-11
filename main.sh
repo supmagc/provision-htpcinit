@@ -203,9 +203,10 @@ add-apt-repository ppa:team-xbmc/ppa -y
 add-apt-repository ppa:graphics-drivers/ppa -y
 # add-apt-repository ppa:libretro/testing -y
 
+# Repo no longer compatible
 # Add extra package repository while  waiting for WSDD to be added to Debian
-curl -L https://pkg.ltec.ch/public/conf/ltec-ag.gpg.key | sudo apt-key add -
-add-apt-repository "deb https://pkg.ltec.ch/public/ eoan main" -y
+#curl -L https://pkg.ltec.ch/public/conf/ltec-ag.gpg.key | sudo apt-key add -
+#add-apt-repository "deb https://pkg.ltec.ch/public/ eoan main" -y
 
 # Update apt
 apt-get update -y
@@ -302,8 +303,8 @@ fi
 # Configure sound
 copy_and_parse_file "templates/.asoundrc" "/home/$USERNAME/.asoundrc"
 add_or_replace_line_in_file "/etc/pulse/default.pa" "load-module module-stream-restore" "load-module module-stream-restore restore_device=false"
+add_or_replace_line_in_file "/etc/pulse/default.pa" "load-module module-alsa-sink" "load-module module-alsa-sink device=hw:1,1" # 1,1 is detected from pactl list
 add_or_replace_line_in_file "/etc/pulse/default.pa" "set-default-sink" "set-default-sink 0"
-#add_or_replace_line_in_file "/etc/pulse/default.pa" "set-default-source" "set-default-source <>"
 
 # Configure Steam on virtualbox
 #if [[ -z "$(lspci -v | grep nvidia)" ]]; then
