@@ -385,14 +385,14 @@ add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_IP" 
 add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_HOSTNAME" "$NAS_USERNAME" "$NAS_PASSWORD"
 
 # Add addons
-add_kodi_addon "repository.castagnait" "https://github.com/castagnait/repository.castagnait/raw/matrix/repository.castagnait-1.0.0.zip"
-add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodi-addons/raw/master/repository.supmagc/repository.supmagc-1.2.1.zip"
-add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip"
-add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.6.zip"
-# add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addons/repository.marcelveldt/raw/master/repository.marcelveldt/repository.marcelveldt-1.0.1.zip"
-add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/raw/master/repository.jurialmunkey-1.2.zip"
-add_kodi_addon "repository.zachmorris" "https://github.com/zach-morris/repository.zachmorris/raw/master/repository.zachmorris/repository.zachmorris-1.0.0.zip"
-add_kodi_addon "repository.kodi_libretro_buildbot_game_addons" "https://github.com/zach-morris/kodi_libretro_buildbot_game_addons/raw/master/repository.kodi_libretro_buildbot_game_addons.zip"
+add_kodi_addon "repository.castagnait" "https://github.com/castagnait/repository.castagnait/raw/matrix/repository.castagnait-1.0.0.zip" # Netflix
+add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodi-addons/raw/master/repository.supmagc/repository.supmagc-1.2.1.zip" # My own
+add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip" # Aeon MQ
+add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.6.zip" # Emby
+add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addons/repository.marcelveldt/raw/master/repository.marcelveldt/repository.marcelveldt-1.0.3.zip" # Old school addons
+add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/raw/master/repository.jurialmunkey-2.0.zip" # Arctic
+add_kodi_addon "repository.zachmorris" "https://github.com/zach-morris/repository.zachmorris/raw/master/repository.zachmorris/repository.zachmorris-1.0.0.zip" # Game internet archive
+add_kodi_addon "repository.kodi_libretro_buildbot_game_addons" "https://github.com/zach-morris/kodi_libretro_buildbot_game_addons/raw/master/repository.kodi_libretro_buildbot_game_addons.zip" # Emulators
 
 # Ensure correct permissions
 set_rights /home/$USERNAME/.ssh
