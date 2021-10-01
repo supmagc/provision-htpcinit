@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [[ $(id -u) -ne 0 ]]; then
   echo "HtpcInit main.sh must be run as root"
   exit
@@ -115,12 +117,22 @@ function add_samba_credential_to_kodi_passwords {
 function add_kodi_addon {
   local KR_NAME="$1"
   local KR_URL="$2"
+
+  xmlstarlet sel -t -v "//@version" -n ./addon.xml
+
+  wget -O "/var/tmp/$KR_NAME.zip" "$KR_URL"
+  if [[ -d "/var/tmp/$KR_NAME" ]]; then
+    rm -R "/var/tmp/$KR_NAME"
+  fi
+  unzip "/var/tmp/$KR_NAME.zip" -d "/var/tmp"
+  V_OLD="0.0.0"
+  V_NEW=$(xmlstarlet sel -t -v "//addon/@version" -n "/var/tmp/$KR_NAME/addon.xml")
+
   if [[ ! -d "$KODI_ADDONS/$KR_NAME" ]]; then
-    wget -O "/var/tmp/$KR_NAME.zip" "$KR_URL"
-    if [[ -d "/var/tmp/$KR_NAME" ]]; then
-      rm -R "/var/tmp/$KR_NAME"
-    fi
-    unzip "/var/tmp/$KR_NAME.zip" -d "/var/tmp"
+    V_OLD=$(xmlstarlet sel -t -v "//addon/@version" -n "$KODI_ADDONS/$KR_NAME/addon.xml")
+  fi
+
+  if [[ printf "%s\n%s\n" "$V_OLD" "$V_NEW" | sort --check=quiet -V ]]; then
     mv -v "/var/tmp/$KR_NAME" $KODI_ADDONS
   fi
 }
@@ -377,8 +389,6 @@ add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Phones" "smb://$
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Skinbackup" "$KODI_USERDATA/addon_data/script.skin.helper.skinbackup"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "pictures" "Pictures" "smb://$NAS_IP/Pictures"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "pictures" "Phones" "smb://$NAS_IP/Phones"
-# add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "Kodi Emby" "http://kodi.emby.media/"
-# add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "XbmcBrasil" "http://files.xbmcbrasil.net/Repository/"
 
 # Add network credentials
 add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_IP" "$NAS_USERNAME" "$NAS_PASSWORD"
@@ -393,6 +403,7 @@ add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addon
 add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/raw/master/repository.jurialmunkey-2.0.zip" # Arctic
 add_kodi_addon "repository.zachmorris" "https://github.com/zach-morris/repository.zachmorris/raw/master/repository.zachmorris/repository.zachmorris-1.0.0.zip" # Game internet archive
 add_kodi_addon "repository.kodi_libretro_buildbot_game_addons" "https://github.com/zach-morris/kodi_libretro_buildbot_game_addons/raw/master/repository.kodi_libretro_buildbot_game_addons.zip" # Emulators
+add_kodi_addon "plugin.audio.spotify" "https://github.com/ldsz/plugin.audio.spotify/releases/download/1.2.3/plugin.audio.spotify-1.2.3.zip" # spotify
 
 # Ensure correct permissions
 set_rights /home/$USERNAME/.ssh
