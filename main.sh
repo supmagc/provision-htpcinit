@@ -118,8 +118,6 @@ function add_kodi_addon {
   local KR_NAME="$1"
   local KR_URL="$2"
 
-  xmlstarlet sel -t -v "//@version" -n ./addon.xml
-
   wget -O "/var/tmp/$KR_NAME.zip" "$KR_URL"
   if [[ -d "/var/tmp/$KR_NAME" ]]; then
     rm -R "/var/tmp/$KR_NAME"
@@ -132,9 +130,12 @@ function add_kodi_addon {
     V_OLD=$(xmlstarlet sel -t -v "//addon/@version" -n "$KODI_ADDONS/$KR_NAME/addon.xml")
   fi
 
-  if [[ printf "%s\n%s\n" "$V_OLD" "$V_NEW" | sort --check=quiet -V ]]; then
-    mv -v "/var/tmp/$KR_NAME" $KODI_ADDONS
+  if printf "%s\n%s\n" "$V_OLD" "$V_NEW" | sort --check=quiet -V; then
+    cp -vfr "/var/tmp/$KR_NAME" $KODI_ADDONS
   fi
+
+  rm -fv "/var/tmp/$KR_NAME.zip"
+  rm -fvr "/var/tmp/$KR_NAME"
 }
 
 function add_nfs_mount {
@@ -151,7 +152,7 @@ function add_or_replace_line_in_file {
   if [[ -z $(grep "^$ARF_SEARCH" "$ARF_FILE") ]]; then
     echo "$ARF_ADD" >> "$ARF_FILE"
   else
-    sed -i "s/^$ARF_SEARCH.*$/$ARF_ADD/" "$ARF_FILE"
+    sed -i "s)^$ARF_SEARCH.*$)$ARF_ADD)" "$ARF_FILE"
   fi
 }
 
@@ -292,7 +293,7 @@ fi
 
 # Set default wallpaper
 copy_and_parse_file "templates/40-htpcinit-greeter.conf" "/etc/lightdm/lightdm-gtk-greeter.conf.d/40-htpcinit-greeter.conf"
-nitrogen --save --set-auto "$INSTALLATION/assets/$SCREEN_WALLPAPER"
+sudo -u "$USERNAME" nitrogen --save --set-auto "$INSTALLATION/assets/$SCREEN_WALLPAPER"
 cp "data/assets/$SCREEN_WALLPAPER" "/usr/share/kodi/media/splash.jpg"
 
 # Enable steam controller support
@@ -397,13 +398,13 @@ add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_HOST
 # Add addons
 add_kodi_addon "repository.castagnait" "https://github.com/castagnait/repository.castagnait/raw/matrix/repository.castagnait-1.0.0.zip" # Netflix
 add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodi-addons/raw/master/repository.supmagc/repository.supmagc-1.2.1.zip" # My own
-add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip" # Aeon MQ
+# add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip" # Aeon MQ
 add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.6.zip" # Emby
 add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addons/repository.marcelveldt/raw/master/repository.marcelveldt-1.0.3.zip" # Old school addons
-add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/raw/master/repository.jurialmunkey-2.0.zip" # Arctic
+add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/raw/master/repository.jurialmunkey-2.2.zip" # Arctic
 add_kodi_addon "repository.zachmorris" "https://github.com/zach-morris/repository.zachmorris/raw/master/repository.zachmorris/repository.zachmorris-1.0.0.zip" # Game internet archive
-add_kodi_addon "repository.kodi_libretro_buildbot_game_addons" "https://github.com/zach-morris/kodi_libretro_buildbot_game_addons/raw/master/repository.kodi_libretro_buildbot_game_addons.zip" # Emulators
-add_kodi_addon "plugin.audio.spotify" "https://github.com/ldsz/plugin.audio.spotify/releases/download/1.2.3/plugin.audio.spotify-1.2.3.zip" # spotify
+add_kodi_addon "repository.kodi_libretro_buildbot_game_addons" "https://github.com/zach-morris/kodi_libretro_buildbot_game_addons/raw/main/repository.kodi_libretro_buildbot_game_addons.zip" # Emulators
+add_kodi_addon "plugin.audio.spotify-master" "https://github.com/ldsz/plugin.audio.spotify/releases/download/1.2.3/plugin.audio.spotify-1.2.3.zip" # spotify
 
 # Ensure correct permissions
 set_rights /home/$USERNAME/.ssh
