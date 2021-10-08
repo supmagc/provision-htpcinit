@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt-get install autoconf automake libtool build-essential python3 python3-dev python3-setuptools kmod pkg-config xsltproc linux-headers-$(uname -r)
+sudo apt-get install autoconf automake libtool build-essential python3 python3-dev python3-setuptools kmod pkg-config xsltproc linux-headers-$(uname -r)
 
 git clone https://github.com/supmagc/lirc-mplay.git
 cd lirc-mplay/
@@ -10,3 +10,6 @@ cd lirc-mplay/
 
 make
 sudo make install
+
+cd ../
+rm -R lirc-mplay
