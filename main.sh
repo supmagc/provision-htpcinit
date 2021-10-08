@@ -126,7 +126,7 @@ function add_kodi_addon {
   V_OLD="0.0.0"
   V_NEW=$(xmlstarlet sel -t -v "//addon/@version" -n "/var/tmp/$KR_NAME/addon.xml")
 
-  if [[ ! -d "$KODI_ADDONS/$KR_NAME" ]]; then
+  if [[ -d "$KODI_ADDONS/$KR_NAME" ]]; then
     V_OLD=$(xmlstarlet sel -t -v "//addon/@version" -n "$KODI_ADDONS/$KR_NAME/addon.xml")
   fi
 
@@ -300,8 +300,12 @@ cp "data/assets/$SCREEN_WALLPAPER" "/usr/share/kodi/media/splash.jpg"
 copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules.d/99-steam-controller-perms.rules"
 
 # Install lirc from source
+# This can be done separatly with lirc.sh script
 
 # Install lirc config
+copy_and_parse_file "templates/lirc_options.conf" "/etc/lirc/lirc_options.conf"
+copy_and_parse_file "templates/moncaso_312.lircd.conf" "/etc/lirc/lircd.conf.d/moncaso_312.lircd.conf"
+# Kodi keybindings ?
 
 # Configure graphics
 if [[ "$(lspci -v | grep nvidia)" ]]; then
