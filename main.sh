@@ -305,6 +305,7 @@ copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules
 # Install lirc config
 copy_and_parse_file "templates/lirc_options.conf" "/etc/lirc/lirc_options.conf"
 copy_and_parse_file "templates/moncaso_312.lircd.conf" "/etc/lirc/lircd.conf.d/moncaso_312.lircd.conf"
+systemctl restart lircd
 # Kodi keybindings ?
 
 # Configure graphics
