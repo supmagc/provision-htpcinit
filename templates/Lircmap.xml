@@ -1,0 +1,58 @@
+<lircmap>
+    <remote device="Moncaso_312">
+        <play>KEY_PLAY</play>
+        <pause>KEY_PAUSE</pause>
+        <stop>KEY_STOP</stop>
+        <reverse>KEY_REVERSE</reverse>
+        <forward>KEY_FORWARD</forward>
+        <previous>KEY_PREVIOUS</previous>
+        <next>KEY_NEXT</next>
+
+        <mute>KEY_MUTE</mute>
+        <volume_up>KEY_VOLUMEUP</volume_up>
+        <volume_down>KEY_VOLUMEDOWN</volume_down>
+
+        <record>KEY_RECORD</record>
+        <channel_up>KEY_CHANNELUP</channel_up>
+        <channel_down>KEY_CHANNELDOWN</channel_down>
+
+        <video>KEY_VIDEO</video>
+        <pvr>KEY_PVR</pvr>
+        <photo>KEY_PHOTO</photo>
+        <tv>KEY_TV</tv>
+        <audio>KEY_AUDIO</audio>
+        <sleep>KEY_SLEEP</sleep>
+        <taskswitch>KEY_TASKSWITCH</taskswitch>
+        <zoom>KEY_ZOOM</zoom>
+        <fullscreen>KEY_FULLSCREEN</fullscreen>
+        <eject>KEY_EJECT</eject>
+        <dvd>KEY_DVD</dvd>
+        <open>KEY_OPEN</open>
+        <text>KEY_TEXT</text>
+
+        <ok>KEY_OK</ok>
+        <up>KEY_UP</up>
+        <right>KEY_RIGHT</right>
+        <down>KEY_DOWN</down>
+        <left>KEY_LEFT</left>
+
+        <info>KEY_INFO</info>
+        <exit>KEY_EXIT</exit>
+        <power>KEY_POWER</power>
+        <back>KEY_BACK</back>
+        <media>KEY_MEDIA</media>
+        <props>KEY_PROPS</props>
+        <menu>KEY_MENU</menu>
+
+        <num_0>KEY_0</num_0>
+        <num_1>KEY_1</num_1>
+        <num_2>KEY_2</num_2>
+        <num_3>KEY_3</num_3>
+        <num_4>KEY_4</num_4>
+        <num_5>KEY_5</num_5>
+        <num_6>KEY_6</num_6>
+        <num_7>KEY_7</num_7>
+        <num_8>KEY_8</num_8>
+        <num_9>KEY_9</num_9>
+    </remote>
+</lircmap>

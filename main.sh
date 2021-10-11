@@ -306,7 +306,6 @@ copy_and_parse_file "templates/99-steam-controller-perms.rules" "/etc/udev/rules
 copy_and_parse_file "templates/lirc_options.conf" "/etc/lirc/lirc_options.conf"
 copy_and_parse_file "templates/moncaso_312.lircd.conf" "/etc/lirc/lircd.conf.d/moncaso_312.lircd.conf"
 systemctl restart lircd
-# Kodi keybindings ?
 
 # Configure graphics
 if [[ "$(lspci -v | grep nvidia)" ]]; then
@@ -383,6 +382,10 @@ fi
 if [[ ! -f "$KODI_USERDATA/passwords.xml" ]]; then
   copy_and_parse_file "templates/passwords.xml" "$KODI_USERDATA/passwords.xml"
 fi
+
+# Kodi keybindings ?
+copy_and_parse_file "templates/Lircmap.xml" "$KODI_USERDATA/Lircmap.xml"
+copy_and_parse_file "templates/keymap_moncaso_312.xml" "$KODI_USERDATA/keymaps/keymap_moncaso_312.xml"
 
 # Add additional files to the sources.xml
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Tv Addons" "http://fusion.tvaddons.co"
