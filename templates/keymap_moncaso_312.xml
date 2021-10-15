@@ -168,16 +168,20 @@
   <!-- TV and PVR related -->
   <Teletext>
     <remote>
-      <video>Red</red>
-      <audio>Green</green>
-      <photos>Yellow</yellow>
-      <tv>Blue</blue>
+      <video>Red</video>
+      <audio>Green</audio>
+      <photos>Yellow</photos>
+      <tv>Blue</tv>
       <menu>Back</menu>
       <text>Back</text>
     </remote>
   </Teletext>
   <FullscreenLiveTV>
     <remote>
+      <video>Red</video>
+      <audio>Green</audio>
+      <photos>Yellow</photos>
+      <tv>Blue</tv>
       <left>StepBack</left>
       <right>StepForward</right>
       <up>ChannelUp</up>
@@ -188,6 +192,10 @@
   </FullscreenLiveTV>
   <FullscreenRadio>
     <remote>
+      <video>Red</video>
+      <audio>Green</audio>
+      <photos>Yellow</photos>
+      <tv>Blue</tv>
       <left>StepBack</left>
       <right>StepForward</right>
       <up>ChannelUp</up>
@@ -240,6 +248,16 @@
   </RadioGuide>
 
   <!-- Specific menu's with specific actions -->
+  <VideoPlaylist>
+    <remote>
+      <guide>Back</guide>
+    </remote>
+  </VideoPlaylist>
+  <MusicPlaylist>
+    <remote>
+      <guide>Back</guide>
+    </remote>
+  </MusicPlaylist>
   <Weather>
     <remote>
       <back>PreviousMenu</back>
@@ -362,8 +380,6 @@
   </VideoBookmarks>
   <Videos>
   </Videos>
-  <VideoPlaylist>
-  </VideoPlaylist>
   <TVRecordings>
   </TVRecordings>
   <TVTimers>
@@ -380,8 +396,6 @@
   </FileManager>
   <FileBrowser>
   </FileBrowser>
-  <MusicPlaylist>
-  </MusicPlaylist>
   <MusicPlaylistEditor>
   </MusicPlaylistEditor>
   <Music>
