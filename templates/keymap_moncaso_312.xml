@@ -28,21 +28,22 @@
       <stop>Stop</stop>
       <forward>FastForward</forward>
       <reverse>Rewind</reverse>
+      <next>SkipNext</next>
+      <previous>SkipPrevious</previous>
       <left>Left</left>
       <right>Right</right>
       <up>Up</up>
       <down>Down</down>
       <channel_up>Up</channel_up>
       <channel_down>Down</channel_down>
-      <media>ActivateWindow(Home)</media>
-      <ok>Select</ok>
+      <home>ActivateWindow(Home)</home>
+      <select>Select</select>
       <back>Back</back>
       <menu>ContextMenu</menu>
-      <props>ContextMenu</props>
       <record>Record</record>
       <eject>EjectTray()</eject>
-      <volume_up>VolumeUp</volume_up>
-      <volume_downus>VolumeDown</volume_downus>
+      <volume_up>ChapterOrBigStepForward</volume_up>
+      <volume_downus>ChapterOrBigStepBack</volume_downus>
       <mute>Mute</mute>
       <info>Info</info>
       <exit>Close</exit>
@@ -50,7 +51,7 @@
       <video>ActivateWindow(Videos,Movies)</video>
       <audio>ActivateWindow(Music)</audio>
       <photos>ActivateWindow(Pictures)</photos>
-      <tv>ActivateWindow(TVGuide)</tv>
+      <tv>PlayPvrTV</tv>
       <num_0>Number0</num_0>
       <num_1>Number1</num_1>
       <num_2>Number2</num_2>
@@ -64,51 +65,57 @@
     </remote>
   </global>
 
+  <Home>
+    <remote>
+      <guide>ActivateWindow(TVGuide)</guide>
+    </remote>
+  </Home>
+
   <!-- Media viewing -->
   <FullscreenVideo>
     <remote>
-      <props>ShowVideoMenu</props>
+      <menu>OSD</menu>
+      <guide>ShowVideoMenu</guide>
       <left>StepBack</left>
       <right>StepForward</right>
       <up>ChapterOrBigStepForward</up>
       <down>ChapterOrBigStepBack</down>
-      <back>Back</back>
-      <menu>OSD</menu>
-      <channel_up>SkipNext</channel_up>
-      <channel_down>SkipPrevious</channel_down>
     </remote>
   </FullscreenVideo>
   <FullscreenGame>
     <remote>
+      <menu>OSD</menu>
       <left>StepBack</left>
       <right>StepForward</right>
-      <menu>OSD</menu>
+      <up>ChapterOrBigStepForward</up>
+      <down>ChapterOrBigStepBack</down>
     </remote>
   </FullscreenGame>
   <Visualisation>
     <remote>
+      <menu>OSD</menu>
+      <guide>Playlist</guide>
       <left>StepBack</left>
       <right>StepForward</right>
-      <up>SkipNext</up>
-      <down>SkipPrevious</down>
+      <up>IncreaseRating</up>
+      <down>DecreaseRating</down>
       <channel_up>IncreaseRating</channel_up>
       <channel_down>DecreaseRating</channel_down>
-      <menu>OSD</menu>
-      <props>ActivateWindow(PVROSDChannels)</props>
     </remote>
   </Visualisation>
   <VideoMenu>
     <remote>
       <menu>OSD</menu>
-      <props>ShowVideoMenu</props>
-      <channel_up>SkipNext</channel_up>
-      <channel_down>SkipPrevious</channel_down>
+      <guide>Back</guide>
     </remote>
   </VideoMenu>
   <SlideShow>
     <remote>
+      <menu>OSD</menu>
       <right>NextPicture</right>
       <left>PreviousPicture</left>
+      <up>ZoomIn</up>
+      <down>ZoomOut</down>
     </remote>
   </SlideShow>
 
@@ -116,7 +123,6 @@
   <FullscreenInfo>
     <remote>
       <info>Back</info>
-      <menu>OSD</menu>
     </remote>
   </FullscreenInfo>
   <PlayerControls>
@@ -134,21 +140,30 @@
       <menu>Back</menu>
     </remote>
   </VideoOSD>
+  <PictureInfo>
+    <remote>
+      <info>Back</info>
+      <menu>OSD</menu>
+    </remote>
+  </PictureInfo>
   <MusicInformation>
     <remote>
       <info>Back</info>
+      <menu>OSD</menu>
     </remote>
   </MusicInformation>
   <MovieInformation>
     <remote>
       <info>Back</info>
+      <menu>OSD</menu>
     </remote>
   </MovieInformation>
-  <PictureInfo>
+  <AddonInformation>
     <remote>
       <info>Back</info>
+      <menu>OSD</menu>
     </remote>
-  </PictureInfo>
+  </AddonInformation>
 
   <!-- TV and PVR related -->
   <Teletext>
@@ -185,40 +200,56 @@
     <remote>
       <channel_up>ChannelUp</channel_up>
       <channel_down>ChannelDown</channel_down>
+      <guide>Back</guide>
     </remote>
   </PVROSDChannels>
   <PVRChannelGuide>
     <remote>
       <channel_up>ChannelUp</channel_up>
       <channel_down>ChannelDown</channel_down>
+      <guide>Back</guide>
     </remote>
   </PVRChannelGuide>
   <TVChannels>
     <remote>
       <channel_up>ChannelUp</channel_up>
       <channel_down>ChannelDown</channel_down>
+      <guide>Back</guide>
     </remote>
   </TVChannels>
   <TVGuide>
     <remote>
       <channel_up>ChannelUp</channel_up>
       <channel_down>ChannelDown</channel_down>
+      <guide>Back</guide>
     </remote>
   </TVGuide>
   <RadioChannels>
     <remote>
       <channel_up>ChannelUp</channel_up>
       <channel_down>ChannelDown</channel_down>
+      <guide>Back</guide>
     </remote>
   </RadioChannels>
   <RadioGuide>
     <remote>
       <channel_up>ChannelUp</channel_up>
       <channel_down>ChannelDown</channel_down>
+      <guide>Back</guide>
     </remote>
   </RadioGuide>
 
   <!-- Specific menu's with specific actions -->
+  <Weather>
+    <remote>
+      <back>PreviousMenu</back>
+    </remote>
+  </Weather>
+  <AddonBrowser>
+    <remote>
+      <back>PreviousMenu</back>
+    </remote>
+  </AddonBrowser>
   <OSDVideoSettings>
     <remote>
       <back>PreviousMenu</back>
@@ -229,26 +260,11 @@
       <back>PreviousMenu</back>
     </remote>
   </OSDAudioSettings>
-  <Weather>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
-  </Weather>
   <Settings>
     <remote>
       <back>PreviousMenu</back>
     </remote>
   </Settings>
-  <AddonBrowser>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
-  </AddonBrowser>
-  <AddonInformation>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
-  </AddonInformation>
   <AddonSettings>
     <remote>
       <back>PreviousMenu</back>
@@ -279,6 +295,21 @@
       <back>PreviousMenu</back>
     </remote>
   </InterfaceSettings>
+  <LockSettings>
+    <remote>
+      <back>PreviousMenu</back>
+    </remote>
+  </LockSettings>
+  <ProfileSettings>
+    <remote>
+      <back>PreviousMenu</back>
+    </remote>
+  </ProfileSettings>
+  <PVRSettings>
+    <remote>
+      <back>PreviousMenu</back>
+    </remote>
+  </PVRSettings>
   <Profiles>
     <remote>
       <back>PreviousMenu</back>
@@ -299,21 +330,6 @@
       <back>PreviousMenu</back>
     </remote>
   </submenu>
-  <LockSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
-  </LockSettings>
-  <ProfileSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
-  </ProfileSettings>
-  <PVRSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
-  </PVRSettings>
 
   <!-- Unused screens part of default file -->
   <FullscreenLiveTvPreview>
@@ -348,8 +364,6 @@
   </Videos>
   <VideoPlaylist>
   </VideoPlaylist>
-  <Home>
-  </Home>
   <TVRecordings>
   </TVRecordings>
   <TVTimers>

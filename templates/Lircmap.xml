@@ -27,10 +27,10 @@
         <fullscreen>KEY_FULLSCREEN</fullscreen>
         <eject>KEY_EJECT</eject>
         <dvd>KEY_DVD</dvd>
-        <open>KEY_OPEN</open>
         <text>KEY_TEXT</text>
+        <props>KEY_PROPS</props>
 
-        <ok>KEY_OK</ok>
+        <select>KEY_OK</select>
         <up>KEY_UP</up>
         <right>KEY_RIGHT</right>
         <down>KEY_DOWN</down>
@@ -40,9 +40,9 @@
         <exit>KEY_EXIT</exit>
         <power>KEY_POWER</power>
         <back>KEY_BACK</back>
-        <media>KEY_MEDIA</media>
-        <props>KEY_PROPS</props>
-        <menu>KEY_MENU</menu>
+        <menu>KEY_OPEN</menu>
+        <home>KEY_MEDIA</home>
+        <guide>KEY_MENU</guide>
 
         <num_0>KEY_0</num_0>
         <num_1>KEY_1</num_1>
