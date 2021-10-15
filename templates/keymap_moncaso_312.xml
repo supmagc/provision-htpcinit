@@ -1,352 +1,325 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- This file contains the mapping of remote keys to actions within Kodi.                -->
-<!--                                                                                      -->
-<!-- The format is:                                                                       -->
-<!--  <window>                                                                            -->
-<!--    <device>                                                                          -->
-<!--      <button>action</button>                                                         -->
-<!--    </device>                                                                         -->
-<!--  </window>                                                                           -->
-<!--                                                                                      -->
-<!-- The <global> section is a fall through - they will only be used if the button is     -->
-<!-- not used in the current window's section.                                            -->
-<!--                                                                                      -->
-<!-- Actions can be built-in functions.                                                   -->
-<!--  eg <B>ActivateWindow(Music)</B>                                                     -->
-<!-- would automatically go to Music on the press of the B button.                        -->
-<!--                                                                                      -->
-<!-- An empty action removes the corresponding mapping from default and parent keymaps.   -->
-<!-- This is different from a "noop" action, which disables a button.                     -->
-<!--                                                                                      -->
-<!-- More documentation on keymaps can be found on http://kodi.wiki/view/keymaps          -->
+<!--
+Notice:
+    Due to placement on the Moneual remote, the 'Open' button is used for 'Menu' functionality
+-->
 <keymap>
   <!-- Default actions -->
   <global>
-    <remote>
-      <play>PlayPause</play>
-      <pause>Pause</pause>
-      <stop>Stop</stop>
-      <forward>FastForward</forward>
-      <reverse>Rewind</reverse>
-      <next>SkipNext</next>
-      <previous>SkipPrevious</previous>
-      <left>Left</left>
-      <right>Right</right>
-      <up>Up</up>
-      <down>Down</down>
-      <channel_up>Up</channel_up>
-      <channel_down>Down</channel_down>
-      <home>ActivateWindow(Home)</home>
-      <select>Select</select>
-      <back>Back</back>
-      <menu>ContextMenu</menu>
-      <record>Record</record>
-      <eject>EjectTray()</eject>
-      <volume_up>ChapterOrBigStepForward</volume_up>
-      <volume_downus>ChapterOrBigStepBack</volume_downus>
-      <mute>Mute</mute>
-      <info>Info</info>
-      <exit>Close</exit>
-      <power>ShutDown()</power>
-      <video>ActivateWindow(Videos,Movies)</video>
-      <audio>ActivateWindow(Music)</audio>
-      <photos>ActivateWindow(Pictures)</photos>
-      <tv>PlayPvrTV</tv>
-      <num_0>Number0</num_0>
-      <num_1>Number1</num_1>
-      <num_2>Number2</num_2>
-      <num_3>Number3</num_3>
-      <num_4>Number4</num_4>
-      <num_5>Number5</num_5>
-      <num_6>Number6</num_6>
-      <num_7>Number7</num_7>
-      <num_8>Number8</num_8>
-      <num_9>Number9</num_9>
-    </remote>
+    <universalremote>
+      <!-- Play --> <obc001>PlayPause</obc001>
+      <!-- Pause --> <obc002>Pause</obc002>
+      <!-- Stop --> <obc003>Stop</obc003>
+      <!-- Next --> <obc004>SkipNext</obc004>
+      <!-- Previous --> <obc005>SkipPrevious</obc005>
+      <!-- Forward --> <obc006>FastForward</obc006>
+      <!-- Reverse --> <obc007>Rewind</obc007>
+
+      <!-- Mute --> <obc008>Mute</obc008>
+      <!-- VolumeUp --> <obc009>VolumeUp</obc009>
+      <!-- VolumeDown --> <obc010>VolumeDown</obc010>
+      <!-- ChannelUp --> <obc011>PageUp</obc011>
+      <!-- ChannelDown --> <obc012>PageDown</obc012>
+      <!-- Red --> <obc013>ActivateWindow(Videos,Movies)</obc013>
+      <!-- Green --> <obc016>ActivateWindow(Videos,TvShows)</obc016>
+      <!-- Yellow --> <obc015>ActivateWindow(Music)</obc015>
+      <!-- Blue --> <obc014>PlayPvrTV</obc014>
+  
+      <!-- Ok --> <obc017>Select</obc017>
+      <!-- Left --> <obc018>Left</obc018>
+      <!-- Up --> <obc019>Up</obc019>
+      <!-- Down --> <obc020>Down</obc020>
+      <!-- Right --> <obc021>Right</obc021>
+      <!-- Open --> <obc022>ContextMenu</obc022>
+      <!-- Back --> <obc024>Back</obc024>
+      <!-- Exit --> <obc025>Close</obc025>
+      <!-- Info --> <obc026>Info</obc026>
+      <!-- Home --> <obc027>ActivateWindow(Home)</obc027>
+      <!-- Power --> <obc028>Shutdown()</obc028>
+  
+      <!-- 2 --> <obc031>JumpSMS2</obc031>
+      <!-- 3 --> <obc032>JumpSMS3</obc032>
+      <!-- 4 --> <obc033>JumpSMS4</obc033>
+      <!-- 5 --> <obc034>JumpSMS5</obc034>
+      <!-- 6 --> <obc035>JumpSMS6</obc035>
+      <!-- 7 --> <obc036>JumpSMS7</obc036>
+      <!-- 8 --> <obc037>JumpSMS8</obc037>
+      <!-- 9 --> <obc038>JumpSMS9</obc038>
+  
+      <!-- Fullscreen --> <obc039>FullScreen</obc039>
+      <!-- Zoom --> <obc040>FullScreen</obc040>
+      <!-- TaskSwitch --> <obc041>FullScreen</obc041>
+    </universalremote>
   </global>
 
   <Home>
-    <remote>
-      <guide>ActivateWindow(TVGuide)</guide>
-    </remote>
+    <universalremote>
+      <!-- Guide --> <obc023>ActivateWindow(TVGuide)</obc023>
+    </universalremote>
   </Home>
 
   <!-- Media viewing -->
   <FullscreenVideo>
-    <remote>
-      <menu>OSD</menu>
-      <guide>ShowVideoMenu</guide>
-      <left>StepBack</left>
-      <right>StepForward</right>
-      <up>ChapterOrBigStepForward</up>
-      <down>ChapterOrBigStepBack</down>
-    </remote>
+    <universalremote>
+      <!-- Open --> <obc022>OSD</obc022>
+      <!-- Guide --> <obc023>ShowVideoMenu</obc023>
+      <!-- Left --> <obc018>StepBack</obc018>
+      <!-- Right --> <obc021>StepForward</obc021>
+      <!-- Up --> <obc019>ChapterOrBigStepForward</obc019>
+      <!-- Down --> <obc020>ChapterOrBigStepBack</obc020>
+    </universalremote>
   </FullscreenVideo>
   <FullscreenGame>
-    <remote>
-      <menu>OSD</menu>
-      <left>StepBack</left>
-      <right>StepForward</right>
-      <up>ChapterOrBigStepForward</up>
-      <down>ChapterOrBigStepBack</down>
-    </remote>
+    <universalremote>
+      <!-- Open --> <obc022>OSD</obc022>
+      <!-- Left --> <obc018>StepBack</obc018>
+      <!-- Right --> <obc021>StepForward</obc021>
+      <!-- Up --> <obc019>ChapterOrBigStepForward</obc019>
+      <!-- Down --> <obc020>ChapterOrBigStepBack</obc020>
+    </universalremote>
   </FullscreenGame>
   <Visualisation>
-    <remote>
-      <menu>OSD</menu>
-      <guide>Playlist</guide>
-      <left>StepBack</left>
-      <right>StepForward</right>
-      <up>IncreaseRating</up>
-      <down>DecreaseRating</down>
-      <channel_up>IncreaseRating</channel_up>
-      <channel_down>DecreaseRating</channel_down>
-    </remote>
+    <universalremote>
+      <!-- Open --> <obc022>OSD</obc022>
+      <!-- Guide --> <obc023>Playlist</obc023>
+      <!-- Left --> <obc018>StepBack</obc018>
+      <!-- Right --> <obc021>StepForward</obc021>
+      <!-- Up --> <obc019>IncreaseRating</obc019>
+      <!-- Down --> <obc020>DecreaseRating</obc020>
+      <!-- ChannelUp --> <obc011>IncreaseRating</obc011>
+      <!-- ChannelDown --> <obc012>DecreaseRating</obc012>
+    </universalremote>
   </Visualisation>
   <VideoMenu>
-    <remote>
-      <menu>OSD</menu>
-      <guide>Back</guide>
-    </remote>
+    <universalremote>
+      <!-- Open --> <obc022>OSD</obc022>
+      <!-- Guide --> <obc023>Back</obc023>
+    </universalremote>
   </VideoMenu>
   <SlideShow>
-    <remote>
-      <menu>OSD</menu>
-      <right>NextPicture</right>
-      <left>PreviousPicture</left>
-      <up>ZoomIn</up>
-      <down>ZoomOut</down>
-    </remote>
+    <universalremote>
+      <!-- Open --> <obc022>OSD</obc022>
+      <!-- Right --> <obc021>NextPicture</obc021>
+      <!-- Left --> <obc018>PreviousPicture</obc018>
+      <!-- Up --> <obc019>ZoomIn</obc019>
+      <!-- Down --> <obc020>ZoomOut</obc020>
+    </universalremote>
   </SlideShow>
+  <FullscreenLiveTV>
+    <universalremote>
+      <!-- Left --> <obc018>StepBack</obc018>
+      <!-- Right --> <obc021>StepForward</obc021>
+      <!-- Up --> <obc019>ChannelUp</obc019>
+      <!-- Down --> <obc020>ChannelDown</obc020>
+      <!-- ChannelUp --> <obc011>ChannelUp</obc011>
+      <!-- ChannelDown --> <obc012>ChannelDown</obc012>
+      <!-- 0 --> <obc029>Number0</obc029>
+      <!-- 1 --> <obc030>Number1</obc030>
+      <!-- 2 --> <obc031>Number2</obc031>
+      <!-- 3 --> <obc032>Number3</obc032>
+      <!-- 4 --> <obc033>Number4</obc033>
+      <!-- 5 --> <obc034>Number5</obc034>
+      <!-- 6 --> <obc035>Number6</obc035>
+      <!-- 7 --> <obc036>Number7</obc036>
+      <!-- 8 --> <obc037>Number8</obc037>
+      <!-- 9 --> <obc038>Number9</obc038>
+    </universalremote>
+  </FullscreenLiveTV>
+  <FullscreenRadio>
+    <universalremote>
+      <!-- Left --> <obc018>StepBack</obc018>
+      <!-- Right --> <obc021>StepForward</obc021>
+      <!-- Up --> <obc019>ChannelUp</obc019>
+      <!-- Down --> <obc020>ChannelDown</obc020>
+      <!-- ChannelUp --> <obc011>PagChannelUpeUp</obc011>
+      <!-- ChannelDown --> <obc012>ChannelDown</obc012>
+      <!-- 0 --> <obc029>Number0</obc029>
+      <!-- 1 --> <obc030>Number1</obc030>
+      <!-- 2 --> <obc031>Number2</obc031>
+      <!-- 3 --> <obc032>Number3</obc032>
+      <!-- 4 --> <obc033>Number4</obc033>
+      <!-- 5 --> <obc034>Number5</obc034>
+      <!-- 6 --> <obc035>Number6</obc035>
+      <!-- 7 --> <obc036>Number7</obc036>
+      <!-- 8 --> <obc037>Number8</obc037>
+      <!-- 9 --> <obc038>Number9</obc038>
+    </universalremote>
+  </FullscreenRadio>
 
   <!-- Information menu's -->
   <FullscreenInfo>
-    <remote>
-      <info>Back</info>
-    </remote>
+    <universalremote>
+      <!-- Info --> <obc026>Back</obc026>
+    </universalremote>
   </FullscreenInfo>
   <PlayerControls>
-    <remote>
-      <menu>Back</menu>
-    </remote>
+    <universalremote>
+      <!-- Open --> <obc022>Back</obc022>
+    </universalremote>
   </PlayerControls>
   <MusicOSD>
-    <remote>
-      <menu>Back</menu>
-    </remote>
+    <universalremote>
+      <!-- Open --> <obc022>Back</obc022>
+    </universalremote>
   </MusicOSD>
   <VideoOSD>
-    <remote>
-      <menu>Back</menu>
-    </remote>
+    <universalremote>
+      <!-- Open --> <obc022>Back</obc022>
+    </universalremote>
   </VideoOSD>
   <PictureInfo>
-    <remote>
-      <info>Back</info>
-      <menu>OSD</menu>
-    </remote>
+    <universalremote>
+      <!-- Info --> <obc026>Back</obc026>
+      <!-- Open --> <obc022>OSD</obc022>
+    </universalremote>
   </PictureInfo>
   <MusicInformation>
-    <remote>
-      <info>Back</info>
-      <menu>OSD</menu>
-    </remote>
+    <universalremote>
+      <!-- Info --> <obc026>Back</obc026>
+      <!-- Open --> <obc022>OSD</obc022>
+    </universalremote>
   </MusicInformation>
   <MovieInformation>
-    <remote>
-      <info>Back</info>
-      <menu>OSD</menu>
-    </remote>
+    <universalremote>
+      <!-- Info --> <obc026>Back</obc026>
+      <!-- Open --> <obc022>OSD</obc022>
+    </universalremote>
   </MovieInformation>
   <AddonInformation>
-    <remote>
-      <info>Back</info>
-      <menu>OSD</menu>
-    </remote>
+    <universalremote>
+      <!-- Info --> <obc026>Back</obc026>
+      <!-- Open --> <obc022>OSD</obc022>
+    </universalremote>
   </AddonInformation>
-
-  <!-- TV and PVR related -->
-  <Teletext>
-    <remote>
-      <video>Red</video>
-      <audio>Green</audio>
-      <photos>Yellow</photos>
-      <tv>Blue</tv>
-      <menu>Back</menu>
-      <text>Back</text>
-    </remote>
-  </Teletext>
-  <FullscreenLiveTV>
-    <remote>
-      <video>Red</video>
-      <audio>Green</audio>
-      <photos>Yellow</photos>
-      <tv>Blue</tv>
-      <left>StepBack</left>
-      <right>StepForward</right>
-      <up>ChannelUp</up>
-      <down>ChannelDown</down>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
-    </remote>
-  </FullscreenLiveTV>
-  <FullscreenRadio>
-    <remote>
-      <video>Red</video>
-      <audio>Green</audio>
-      <photos>Yellow</photos>
-      <tv>Blue</tv>
-      <left>StepBack</left>
-      <right>StepForward</right>
-      <up>ChannelUp</up>
-      <down>ChannelDown</down>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
-    </remote>
-  </FullscreenRadio>
   <PVROSDChannels>
-    <remote>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
-      <guide>Back</guide>
-    </remote>
+    <universalremote>
+      <!-- Guide --> <obc023>Back</obc023>
+    </universalremote>
   </PVROSDChannels>
   <PVRChannelGuide>
-    <remote>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
-      <guide>Back</guide>
-    </remote>
+    <universalremote>
+      <!-- Guide --> <obc023>Back</obc023>
+    </universalremote>
   </PVRChannelGuide>
   <TVChannels>
-    <remote>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
-      <guide>Back</guide>
-    </remote>
+    <universalremote>
+      <!-- Guide --> <obc023>Back</obc023>
+    </universalremote>
   </TVChannels>
   <TVGuide>
-    <remote>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
-      <guide>Back</guide>
-    </remote>
+    <universalremote>
+      <!-- Guide --> <obc023>Back</obc023>
+    </universalremote>
   </TVGuide>
   <RadioChannels>
-    <remote>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
-      <guide>Back</guide>
-    </remote>
+    <universalremote>
+      <!-- Guide --> <obc023>Back</obc023>
+    </universalremote>
   </RadioChannels>
   <RadioGuide>
-    <remote>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
-      <guide>Back</guide>
-    </remote>
+    <universalremote>
+      <!-- Guide --> <obc023>Back</obc023>
+    </universalremote>
   </RadioGuide>
-
-  <!-- Specific menu's with specific actions -->
   <VideoPlaylist>
-    <remote>
-      <guide>Back</guide>
-    </remote>
+    <universalremote>
+      <!-- Guide --> <obc023>Back</obc023>
+    </universalremote>
   </VideoPlaylist>
   <MusicPlaylist>
-    <remote>
-      <guide>Back</guide>
-    </remote>
+    <universalremote>
+      <!-- Guide --> <obc023>Back</obc023>
+    </universalremote>
   </MusicPlaylist>
   <Weather>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </Weather>
   <AddonBrowser>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </AddonBrowser>
   <OSDVideoSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </OSDVideoSettings>
   <OSDAudioSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </OSDAudioSettings>
   <Settings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </Settings>
   <AddonSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </AddonSettings>
   <PlayerSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </PlayerSettings>
   <MediaSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </MediaSettings>
   <SystemSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </SystemSettings>
   <ServiceSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </ServiceSettings>
   <InterfaceSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </InterfaceSettings>
   <LockSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </LockSettings>
   <ProfileSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </ProfileSettings>
   <PVRSettings>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </PVRSettings>
   <Profiles>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </Profiles>
   <systeminfo>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </systeminfo>
   <shutdownmenu>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </shutdownmenu>
   <submenu>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
+    <universalremote>
+      <!-- Back --> <obc024>PreviousMenu</obc024>
+    </universalremote>
   </submenu>
 
   <!-- Unused screens part of default file -->
@@ -408,4 +381,6 @@
   </VirtualKeyboard>
   <NumericInput>
   </NumericInput>
+  <Teletext>
+  </Teletext>
 </keymap>
