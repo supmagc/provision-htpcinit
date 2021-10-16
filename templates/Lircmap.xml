@@ -1,66 +1,58 @@
 <lircmap>
     <remote device="Moncaso_312">
-          <!-- Media Control -->
-          <obc001>KEY_PLAY</obc001>
-          <obc002>KEY_PAUSE</obc002>
-          <obc003>KEY_STOP</obc003>
-          <obc004>KEY_NEXT</obc004>
-          <obc005>KEY_PREVIOUS</obc005>
-          <obc006>KEY_FORWARD</obc006>
-          <obc007>KEY_REVERSE</obc007>
+        <play>KEY_PLAY</play>
+        <pause>KEY_PAUSE</pause>
+        <stop>KEY_STOP</stop>
+        <reverse>KEY_REVERSE</reverse>
+        <forward>KEY_FORWARD</forward>
+        <previous>KEY_PREVIOUS</previous>
+        <next>KEY_NEXT</next>
 
-          <!-- Common remote buttons -->
-          <obc008>KEY_MUTE</obc008>
-          <obc009>KEY_VOLUMEUP</obc009>
-          <obc010>KEY_VOLUMEDOWN</obc010>
-          <obc011>KEY_CHANNELUP</obc011>
-          <obc012>KEY_CHANNELDOWN</obc012>
-          <obc013>KEY_RED</obc013>
-          <obc014>KEY_BLUE</obc014>
-          <obc015>KEY_YELLOW</obc015>
-          <obc016>KEY_GREEN</obc016>
+        <mute>KEY_MUTE</mute>
+        <volume_up>KEY_VOLUMEUP</volume_up>
+        <volume_down>KEY_VOLUMEDOWN</volume_down>
 
-          <!-- Required navigation buttons -->
-          <obc017>KEY_OK</obc017>
-          <obc018>KEY_LEFT</obc018>
-          <obc019>KEY_UP</obc019>
-          <obc020>KEY_DOWN</obc020>
-          <obc021>KEY_RIGHT</obc021>
-          <obc022>KEY_OPEN</obc022>
-          <obc023>KEY_GUIDE</obc023>
-          <obc024>KEY_BACK</obc024>
-          <obc025>KEY_EXIT</obc025>
-          <obc026>KEY_INFO</obc026>
-          <obc027>KEY_HOME</obc027>
-          <obc028>KEY_POWER</obc028>
+        <record>KEY_RECORD</record>
+        <channel_up>KEY_CHANNELUP</channel_up>
+        <channel_down>KEY_CHANNELDOWN</channel_down>
 
-          <!-- Numerical buttons -->
-          <obc029>KEY_0</obc029>
-          <obc030>KEY_1</obc030>
-          <obc031>KEY_2</obc031>
-          <obc032>KEY_3</obc032>
-          <obc033>KEY_4</obc033>
-          <obc034>KEY_5</obc034>
-          <obc035>KEY_6</obc035>
-          <obc036>KEY_7</obc036>
-          <obc037>KEY_8</obc037>
-          <obc038>KEY_9</obc038>
+        <video>KEY_VIDEO</video>
+        <pvr>KEY_PVR</pvr>
+        <photo>KEY_PHOTO</photo>
+        <tv>KEY_TV</tv>
+        <audio>KEY_AUDIO</audio>
+        <sleep>KEY_SLEEP</sleep>
+        <taskswitch>KEY_TASKSWITCH</taskswitch>
+        <zoom>KEY_ZOOM</zoom>
+        <fullscreen>KEY_FULLSCREEN</fullscreen>
+        <eject>KEY_EJECT</eject>
+        <dvd>KEY_DVD</dvd>
+        <text>KEY_TEXT</text>
+        <props>KEY_PROPS</props>
 
-          <!-- Optional buttons that are mapped -->
-          <obc039>KEY_FULLSCREEN</obc039>
-          <obc040>KEY_ZOOM</obc040>
-          <obc041>KEY_TASKSWITCH</obc041>
+        <select>KEY_OK</select>
+        <up>KEY_UP</up>
+        <right>KEY_RIGHT</right>
+        <down>KEY_DOWN</down>
+        <left>KEY_LEFT</left>
 
-          <!-- Unmapped buttons -->
-          <!--
-          <obc042>KEY_MENU</obc042>
-          <obc043>KEY_RECORD</obc043>
-          <obc044>KEY_DVD</obc044>
-          <obc045>KEY_TIMER</obc045>
-          <obc046>KEY_SLEEP</obc046>
-          <obc047>KEY_PROPS</obc047>
-          <obc048>KEY_EJECT</obc048>
-          -->
-    </remote>
+        <info>KEY_INFO</info>
+        <exit>KEY_EXIT</exit>
+        <power>KEY_POWER</power>
+        <back>KEY_BACK</back>
+        <menu>KEY_OPEN</menu>
+        <home>KEY_MEDIA</home>
+        <guide>KEY_MENU</guide>
+
+        <num_0>KEY_0</num_0>
+        <num_1>KEY_1</num_1>
+        <num_2>KEY_2</num_2>
+        <num_3>KEY_3</num_3>
+        <num_4>KEY_4</num_4>
+        <num_5>KEY_5</num_5>
+        <num_6>KEY_6</num_6>
+        <num_7>KEY_7</num_7>
+        <num_8>KEY_8</num_8>
+        <num_9>KEY_9</num_9>
     </remote>
 </lircmap>
