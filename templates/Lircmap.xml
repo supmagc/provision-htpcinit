@@ -23,7 +23,7 @@
         <green>KEY_GREEN</green>
         <yellow>KEY_YELLOW</yellow>
         <blue>KEY_BLUE</blue>
-        <rootmenu>KEY_EXIT</rootmenu>
+        <display>KEY_EXIT</display>
         <info>KEY_INFO</info>
         <power>KEY_POWER</power>
         <back>KEY_BACK</back>

@@ -36,7 +36,7 @@
       <down>Down</down>
       <channelplus>PageUp</channelplus>
       <channeldown>PageDown</channeldown>
-      <rootmenu>ActivateWindow(Home)</rootmenu>
+      <display>ActivateWindow(Home)</display>
       <select>Select</select>
       <back>Back</back>
       <menu>ContextMenu</menu>
@@ -45,8 +45,8 @@
       <mute>Mute</mute>
       <info>Info</info>
       <power>ShutDown()</power>
-      <red>ActivateWindow(Videos,Movies,Titles)</red>
-      <green>ActivateWindow(Videos,TvShows,Titles)</green>
+      <red>ActivateWindow(Videos,MovieTitles)</red>
+      <green>ActivateWindow(Videos,TvShowTitles)</green>
       <yellow>ActivateWindow(Music,Albums)</yellow>
       <blue>PlayPvrTV</blue>
       <!--
@@ -67,7 +67,7 @@
   <Home>
     <remote>
       <guide>ActivateWindow(TVGuide)</guide>
-      <rootmenu>Fullscreen</rootmenu>
+      <display>Fullscreen</display>
     </remote>
   </Home>
 
@@ -116,6 +116,7 @@
   </SlideShow>
   <FullscreenLiveTV>
     <remote>
+      <guide>ActivateWindow(TVGuide)</guide>
       <zero>Number0</zero>
       <one>Number1</one>
       <two>Number2</two>
@@ -136,6 +137,7 @@
   </FullscreenLiveTV>
   <FullscreenRadio>
     <remote>
+      <guide>ActivateWindow(TVGuide)</guide>
       <zero>Number0</zero>
       <one>Number1</one>
       <two>Number2</two>
@@ -233,7 +235,7 @@
   <VideoPlaylist>
     <remote>
       <guide>Back</guide>
-      <rootmenu>Fullscreen</rootmenu>
+      <display>Fullscreen</display>
     </remote>
   </VideoPlaylist>
   <MusicPlaylist>
