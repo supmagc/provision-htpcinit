@@ -45,9 +45,9 @@
       <mute>Mute</mute>
       <info>Info</info>
       <power>ShutDown()</power>
-      <red>ActivateWindow(Videos,MovieTitles)</red>
-      <green>ActivateWindow(Videos,TvShowTitles)</green>
-      <yellow>ActivateWindow(Music,Albums)</yellow>
+      <red>ActivateWindow(Videos,MovieTitles,true)</red>
+      <green>ActivateWindow(Videos,TvShowTitles,true)</green>
+      <yellow>ActivateWindow(Music,Albums,true)</yellow>
       <blue>PlayPvrTV</blue>
       <!--
       <zero>JumpSMS0</zero>
