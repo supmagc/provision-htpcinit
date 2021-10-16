@@ -5,54 +5,53 @@
         <stop>KEY_STOP</stop>
         <reverse>KEY_REVERSE</reverse>
         <forward>KEY_FORWARD</forward>
-        <previous>KEY_PREVIOUS</previous>
-        <next>KEY_NEXT</next>
+        <skipmin>KEY_PREVIOUS</skipmin>
+        <skipplus>KEY_NEXT</skipplus>
 
         <mute>KEY_MUTE</mute>
-        <volume_up>KEY_VOLUMEUP</volume_up>
-        <volume_down>KEY_VOLUMEDOWN</volume_down>
-
-        <record>KEY_RECORD</record>
-        <channel_up>KEY_CHANNELUP</channel_up>
-        <channel_down>KEY_CHANNELDOWN</channel_down>
-
-        <video>KEY_VIDEO</video>
-        <pvr>KEY_PVR</pvr>
-        <photo>KEY_PHOTO</photo>
-        <tv>KEY_TV</tv>
-        <audio>KEY_AUDIO</audio>
-        <sleep>KEY_SLEEP</sleep>
-        <taskswitch>KEY_TASKSWITCH</taskswitch>
-        <zoom>KEY_ZOOM</zoom>
-        <fullscreen>KEY_FULLSCREEN</fullscreen>
-        <eject>KEY_EJECT</eject>
-        <dvd>KEY_DVD</dvd>
-        <text>KEY_TEXT</text>
-        <props>KEY_PROPS</props>
-
+        <volumeplus>KEY_VOLUMEUP</volumeplus>
+        <volumemin>KEY_VOLUMEDOWN</volumemin>
+        <channelplus>KEY_CHANNELUP</channelplus>
+        <channelmin>KEY_CHANNELDOWN</channelmin>
         <select>KEY_OK</select>
         <up>KEY_UP</up>
         <right>KEY_RIGHT</right>
         <down>KEY_DOWN</down>
         <left>KEY_LEFT</left>
 
+        <red>KEY_RED</red>
+        <green>KEY_GREEN</green>
+        <yellow>KEY_YELLOW</yellow>
+        <blue>KEY_BLUE</blue>
+        <rootmenu>KEY_EXIT</rootmenu>
         <info>KEY_INFO</info>
-        <exit>KEY_EXIT</exit>
         <power>KEY_POWER</power>
         <back>KEY_BACK</back>
         <menu>KEY_OPEN</menu>
-        <home>KEY_MEDIA</home>
-        <guide>KEY_MENU</guide>
+        <guide>KEY_GUIDE</guide>
 
-        <num_0>KEY_0</num_0>
-        <num_1>KEY_1</num_1>
-        <num_2>KEY_2</num_2>
-        <num_3>KEY_3</num_3>
-        <num_4>KEY_4</num_4>
-        <num_5>KEY_5</num_5>
-        <num_6>KEY_6</num_6>
-        <num_7>KEY_7</num_7>
-        <num_8>KEY_8</num_8>
-        <num_9>KEY_9</num_9>
+        <zero>KEY_0</zero>
+        <one>KEY_1</one>
+        <two>KEY_2</two>
+        <three>KEY_3</three>
+        <four>KEY_4</four>
+        <five>KEY_5</five>
+        <six>KEY_6</six>
+        <seven>KEY_7</seven>
+        <eight>KEY_8</eight>
+        <nine>KEY_9</nine>
+
+        <!--
+        <taskswitch>KEY_TASKSWITCH</taskswitch>
+        <zoom>KEY_ZOOM</zoom>
+        <fullscreen>KEY_FULLSCREEN</fullscreen>
+        <sleep>KEY_SLEEP</sleep>
+        <eject>KEY_EJECT</eject>
+        <dvd>KEY_DVD</dvd>
+        <props>KEY_PROPS</props>
+        <record>KEY_RECORD</record>
+        <media>KEY_MEDIA</media>
+        <pvr>KEY_TIMER</pvr>
+        -->
     </remote>
 </lircmap>

@@ -28,46 +28,46 @@
       <stop>Stop</stop>
       <forward>FastForward</forward>
       <reverse>Rewind</reverse>
-      <next>SkipNext</next>
-      <previous>SkipPrevious</previous>
+      <skipplus>SkipNext</skipplus>
+      <skipmin>SkipPrevious</skipmin>
       <left>Left</left>
       <right>Right</right>
       <up>Up</up>
       <down>Down</down>
-      <channel_up>Up</channel_up>
-      <channel_down>Down</channel_down>
-      <home>ActivateWindow(Home)</home>
+      <channelplus>PageUp</channelplus>
+      <channeldown>PageDown</channeldown>
+      <rootmenu>ActivateWindow(Home)</rootmenu>
       <select>Select</select>
       <back>Back</back>
       <menu>ContextMenu</menu>
-      <record>Record</record>
-      <eject>EjectTray()</eject>
-      <volume_up>ChapterOrBigStepForward</volume_up>
-      <volume_downus>ChapterOrBigStepBack</volume_downus>
+      <volumeplus>VolumeUp</volumeplus>
+      <volumemin>VolumeDown</volumemin>
       <mute>Mute</mute>
       <info>Info</info>
-      <exit>Close</exit>
       <power>ShutDown()</power>
-      <video>ActivateWindow(Videos,Movies)</video>
-      <audio>ActivateWindow(Music)</audio>
-      <photos>ActivateWindow(Pictures)</photos>
-      <tv>PlayPvrTV</tv>
-      <num_0>Number0</num_0>
-      <num_1>Number1</num_1>
-      <num_2>Number2</num_2>
-      <num_3>Number3</num_3>
-      <num_4>Number4</num_4>
-      <num_5>Number5</num_5>
-      <num_6>Number6</num_6>
-      <num_7>Number7</num_7>
-      <num_8>Number8</num_8>
-      <num_9>Number9</num_9>
+      <red>ActivateWindow(Videos,Movies,Titles)</red>
+      <green>ActivateWindow(Videos,TvShows,Titles)</green>
+      <yellow>ActivateWindow(Music,Albums)</yellow>
+      <blue>PlayPvrTV</blue>
+      <!--
+      <zero>JumpSMS0</zero>
+      <one>JumpSMS1</one>
+      -->
+      <two>JumpSMS2</two>
+      <three>JumpSMS3</three>
+      <four>JumpSMS4</four>
+      <five>JumpSMS5</five>
+      <six>JumpSMS6</six>
+      <seven>JumpSMS7</seven>
+      <eight>JumpSMS8</eight>
+      <nine>JumpSMS9</nine>
     </remote>
   </global>
 
   <Home>
     <remote>
       <guide>ActivateWindow(TVGuide)</guide>
+      <rootmenu>Fullscreen</rootmenu>
     </remote>
   </Home>
 
@@ -85,10 +85,6 @@
   <FullscreenGame>
     <remote>
       <menu>OSD</menu>
-      <left>StepBack</left>
-      <right>StepForward</right>
-      <up>ChapterOrBigStepForward</up>
-      <down>ChapterOrBigStepBack</down>
     </remote>
   </FullscreenGame>
   <Visualisation>
@@ -97,10 +93,10 @@
       <guide>Playlist</guide>
       <left>StepBack</left>
       <right>StepForward</right>
-      <up>IncreaseRating</up>
-      <down>DecreaseRating</down>
-      <channel_up>IncreaseRating</channel_up>
-      <channel_down>DecreaseRating</channel_down>
+      <up>SkipNext</up>
+      <down>SkipPrevious</down>
+      <channelplus>IncreaseRating</channelplus>
+      <channelmin>DecreaseRating</channelmin>
     </remote>
   </Visualisation>
   <VideoMenu>
@@ -118,6 +114,46 @@
       <down>ZoomOut</down>
     </remote>
   </SlideShow>
+  <FullscreenLiveTV>
+    <remote>
+      <zero>Number0</zero>
+      <one>Number1</one>
+      <two>Number2</two>
+      <three>Number3</three>
+      <four>Number4</four>
+      <five>Number5</five>
+      <six>Number6</six>
+      <seven>Number7</seven>
+      <eight>Number8</eight>
+      <nine>Number9</nine>
+      <left>StepBack</left>
+      <right>StepForward</right>
+      <up>ChannelUp</up>
+      <down>ChannelDown</down>
+      <channelplus>ChannelUp</channelplus>
+      <channelmin>ChannelDown</channelmin>
+    </remote>
+  </FullscreenLiveTV>
+  <FullscreenRadio>
+    <remote>
+      <zero>Number0</zero>
+      <one>Number1</one>
+      <two>Number2</two>
+      <three>Number3</three>
+      <four>Number4</four>
+      <five>Number5</five>
+      <six>Number6</six>
+      <seven>Number7</seven>
+      <eight>Number8</eight>
+      <nine>Number9</nine>
+      <left>StepBack</left>
+      <right>StepForward</right>
+      <up>ChannelUp</up>
+      <down>ChannelDown</down>
+      <channelplus>ChannelUp</channelplus>
+      <channelmin>ChannelDown</channelmin>
+    </remote>
+  </FullscreenRadio>
 
   <!-- Information menu's -->
   <FullscreenInfo>
@@ -164,93 +200,40 @@
       <menu>OSD</menu>
     </remote>
   </AddonInformation>
-
-  <!-- TV and PVR related -->
-  <Teletext>
-    <remote>
-      <video>Red</video>
-      <audio>Green</audio>
-      <photos>Yellow</photos>
-      <tv>Blue</tv>
-      <menu>Back</menu>
-      <text>Back</text>
-    </remote>
-  </Teletext>
-  <FullscreenLiveTV>
-    <remote>
-      <video>Red</video>
-      <audio>Green</audio>
-      <photos>Yellow</photos>
-      <tv>Blue</tv>
-      <left>StepBack</left>
-      <right>StepForward</right>
-      <up>ChannelUp</up>
-      <down>ChannelDown</down>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
-    </remote>
-  </FullscreenLiveTV>
-  <FullscreenRadio>
-    <remote>
-      <video>Red</video>
-      <audio>Green</audio>
-      <photos>Yellow</photos>
-      <tv>Blue</tv>
-      <left>StepBack</left>
-      <right>StepForward</right>
-      <up>ChannelUp</up>
-      <down>ChannelDown</down>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
-    </remote>
-  </FullscreenRadio>
   <PVROSDChannels>
     <remote>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
       <guide>Back</guide>
     </remote>
   </PVROSDChannels>
   <PVRChannelGuide>
     <remote>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
       <guide>Back</guide>
     </remote>
   </PVRChannelGuide>
   <TVChannels>
     <remote>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
       <guide>Back</guide>
     </remote>
   </TVChannels>
   <TVGuide>
     <remote>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
       <guide>Back</guide>
     </remote>
   </TVGuide>
   <RadioChannels>
     <remote>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
       <guide>Back</guide>
     </remote>
   </RadioChannels>
   <RadioGuide>
     <remote>
-      <channel_up>ChannelUp</channel_up>
-      <channel_down>ChannelDown</channel_down>
       <guide>Back</guide>
     </remote>
   </RadioGuide>
-
-  <!-- Specific menu's with specific actions -->
   <VideoPlaylist>
     <remote>
       <guide>Back</guide>
+      <rootmenu>Fullscreen</rootmenu>
     </remote>
   </VideoPlaylist>
   <MusicPlaylist>
@@ -408,4 +391,6 @@
   </VirtualKeyboard>
   <NumericInput>
   </NumericInput>
+  <Teletext>
+  </Teletext>
 </keymap>
