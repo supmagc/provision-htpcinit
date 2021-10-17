@@ -29,7 +29,7 @@
       <forward>FastForward</forward>
       <reverse>Rewind</reverse>
       <skipplus>SkipNext</skipplus>
-      <skipmin>SkipPrevious</skipmin>
+      <skipminus>SkipPrevious</skipminus>
       <left>Left</left>
       <right>Right</right>
       <up>Up</up>
@@ -41,7 +41,7 @@
       <back>Back</back>
       <menu>ContextMenu</menu>
       <volumeplus>VolumeUp</volumeplus>
-      <volumemin>VolumeDown</volumemin>
+      <volumeminus>VolumeDown</volumeminus>
       <mute>Mute</mute>
       <info>Info</info>
       <power>ShutDown()</power>
@@ -49,10 +49,8 @@
       <green>ActivateWindow(Videos,TvShowTitles,true)</green>
       <yellow>ActivateWindow(Music,Albums,true)</yellow>
       <blue>PlayPvrTV</blue>
-      <!--
-      <zero>JumpSMS0</zero>
-      <one>JumpSMS1</one>
-      -->
+      <zero>Number0</zero>
+      <one>Number1</one>
       <two>JumpSMS2</two>
       <three>JumpSMS3</three>
       <four>JumpSMS4</four>
@@ -96,7 +94,7 @@
       <up>SkipNext</up>
       <down>SkipPrevious</down>
       <channelplus>IncreaseRating</channelplus>
-      <channelmin>DecreaseRating</channelmin>
+      <channelminus>DecreaseRating</channelminus>
     </remote>
   </Visualisation>
   <VideoMenu>
@@ -132,7 +130,7 @@
       <up>ChannelUp</up>
       <down>ChannelDown</down>
       <channelplus>ChannelUp</channelplus>
-      <channelmin>ChannelDown</channelmin>
+      <channelminus>ChannelDown</channelminus>
     </remote>
   </FullscreenLiveTV>
   <FullscreenRadio>
@@ -153,7 +151,7 @@
       <up>ChannelUp</up>
       <down>ChannelDown</down>
       <channelplus>ChannelUp</channelplus>
-      <channelmin>ChannelDown</channelmin>
+      <channelminus>ChannelDown</channelminus>
     </remote>
   </FullscreenRadio>
 
@@ -241,6 +239,7 @@
   <MusicPlaylist>
     <remote>
       <guide>Back</guide>
+      <display>Fullscreen</display>
     </remote>
   </MusicPlaylist>
   <Weather>
@@ -248,11 +247,6 @@
       <back>PreviousMenu</back>
     </remote>
   </Weather>
-  <AddonBrowser>
-    <remote>
-      <back>PreviousMenu</back>
-    </remote>
-  </AddonBrowser>
   <OSDVideoSettings>
     <remote>
       <back>PreviousMenu</back>
@@ -395,4 +389,6 @@
   </NumericInput>
   <Teletext>
   </Teletext>
+  <AddonBrowser>
+  </AddonBrowser>
 </keymap>

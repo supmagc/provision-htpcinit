@@ -5,14 +5,14 @@
         <stop>KEY_STOP</stop>
         <reverse>KEY_REVERSE</reverse>
         <forward>KEY_FORWARD</forward>
-        <skipmin>KEY_PREVIOUS</skipmin>
+        <skipminus>KEY_PREVIOUS</skipminus>
         <skipplus>KEY_NEXT</skipplus>
 
         <mute>KEY_MUTE</mute>
         <volumeplus>KEY_VOLUMEUP</volumeplus>
-        <volumemin>KEY_VOLUMEDOWN</volumemin>
+        <volumeminus>KEY_VOLUMEDOWN</volumeminus>
         <channelplus>KEY_CHANNELUP</channelplus>
-        <channelmin>KEY_CHANNELDOWN</channelmin>
+        <channelminus>KEY_CHANNELDOWN</channelminus>
         <select>KEY_OK</select>
         <up>KEY_UP</up>
         <right>KEY_RIGHT</right>
