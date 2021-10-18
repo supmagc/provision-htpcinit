@@ -62,12 +62,58 @@
     </remote>
   </global>
 
+  <!-- Specials and exceptions -->
   <Home>
     <remote>
       <guide>ActivateWindow(TVGuide)</guide>
       <display>Fullscreen</display>
     </remote>
   </Home>
+  <Videos>
+    <remote>
+      <channelplus>NextLetter</channelplus>
+      <channeldown>PrevLetter</channeldown>
+    </remote>
+  </Videos>
+  <Music>
+    <remote>
+      <channelplus>NextLetter</channelplus>
+      <channeldown>PrevLetter</channeldown>
+    </remote>
+  </Music>
+  <VirtualKeyboard>
+    <remote>
+      <zero>Number0</zero>
+      <one>Number1</one>
+      <two>Number2</two>
+      <three>Number3</three>
+      <four>Number4</four>
+      <five>Number5</five>
+      <six>Number6</six>
+      <seven>Number7</seven>
+      <eight>Number8</eight>
+      <nine>Number9</nine>
+      <back>BackSpace</back>
+      <display>Back</display>
+    </remote>
+  </VirtualKeyboard>
+  <NumericInput>
+    <remote>
+      <zero>Number0</zero>
+      <one>Number1</one>
+      <two>Number2</two>
+      <three>Number3</three>
+      <four>Number4</four>
+      <five>Number5</five>
+      <six>Number6</six>
+      <seven>Number7</seven>
+      <eight>Number8</eight>
+      <nine>Number9</nine>
+      <back>Back</back>
+      <back>BackSpace</back>
+      <display>Back</display>
+    </remote>
+  </NumericInput>
 
   <!-- Media viewing -->
   <FullscreenVideo>
@@ -155,7 +201,7 @@
     </remote>
   </FullscreenRadio>
 
-  <!-- Information menu's -->
+  <!-- Return button mappings -->
   <FullscreenInfo>
     <remote>
       <info>Back</info>
@@ -357,8 +403,6 @@
   </ScreenCalibration>
   <VideoBookmarks>
   </VideoBookmarks>
-  <Videos>
-  </Videos>
   <TVRecordings>
   </TVRecordings>
   <TVTimers>
@@ -377,18 +421,12 @@
   </FileBrowser>
   <MusicPlaylistEditor>
   </MusicPlaylistEditor>
-  <Music>
-  </Music>
-  <Pictures>
-  </Pictures>
   <VideoTimeSeek>
   </VideoTimeSeek>
-  <VirtualKeyboard>
-  </VirtualKeyboard>
-  <NumericInput>
-  </NumericInput>
   <Teletext>
   </Teletext>
   <AddonBrowser>
   </AddonBrowser>
+  <Pictures>
+  </Pictures>
 </keymap>
