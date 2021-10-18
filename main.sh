@@ -418,7 +418,7 @@ add_kodi_addon "repository.zachmorris" "https://github.com/zach-morris/repositor
 add_kodi_addon "repository.kodi_libretro_buildbot_game_addons" "https://github.com/zach-morris/kodi_libretro_buildbot_game_addons/raw/main/repository.kodi_libretro_buildbot_game_addons.zip" # Emulators
 add_kodi_addon "plugin.audio.spotify-master" "https://github.com/ldsz/plugin.audio.spotify/releases/download/1.2.3/plugin.audio.spotify-1.2.3.zip" # spotify
 add_kodi_addon "script.cinemavision" "./install/script.cinemavision.zip" # cinemavision
-add_kodi_addon "context.cinemavision.zip" "./install/context.cinemavision.zip" # cinemavision
+add_kodi_addon "context.cinemavision" "./install/context.cinemavision.zip" # cinemavision
 
 # Ensure correct permissions
 set_rights /home/$USERNAME/.ssh
