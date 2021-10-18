@@ -35,7 +35,7 @@
       <up>Up</up>
       <down>Down</down>
       <channelplus>PageUp</channelplus>
-      <channeldown>PageDown</channeldown>
+      <channelminus>PageDown</channelminus>
       <display>ActivateWindow(Home)</display>
       <select>Select</select>
       <back>Back</back>
@@ -72,13 +72,13 @@
   <Videos>
     <remote>
       <channelplus>NextLetter</channelplus>
-      <channeldown>PrevLetter</channeldown>
+      <channelminus>PrevLetter</channelminus>
     </remote>
   </Videos>
   <Music>
     <remote>
       <channelplus>NextLetter</channelplus>
-      <channeldown>PrevLetter</channeldown>
+      <channelminus>PrevLetter</channelminus>
     </remote>
   </Music>
   <VirtualKeyboard>
