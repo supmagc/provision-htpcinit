@@ -118,7 +118,7 @@ function add_kodi_addon {
   local KR_NAME="$1"
   local KR_URL="$2"
 
-  if [[ "$KR_URL" =~ '^https?:.*']]; then
+  if [[ "$KR_URL" =~ '^https?:.*' ]]; then
     wget -O "/var/tmp/$KR_NAME.zip" "$KR_URL"
   else
     cp "$KR_URL" "/var/tmp/$KR_NAME.zip"
