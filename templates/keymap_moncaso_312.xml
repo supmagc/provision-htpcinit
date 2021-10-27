@@ -60,6 +60,13 @@
       <eight>JumpSMS8</eight>
       <nine>JumpSMS9</nine>
     </remote>
+    <universalremote>
+        <obc001>ActivateWindow(Playlist)</obc001> <!-- Playlist -->
+        <obc002>Close</obc002> <!-- Close -->
+        <obc003>ActivateWindow(Favourites)</obc003> <!-- Favourites -->
+        <obc004>ActivateWindow(Home)</obc004> <!-- Open smart menu -->
+        <obc005>ActivateWindow(Home)</obc005> <!-- Open net -->
+    </universalremote>
   </global>
 
   <!-- Specials and exceptions -->
@@ -94,7 +101,6 @@
       <eight>Number8</eight>
       <nine>Number9</nine>
       <back>BackSpace</back>
-      <display>Back</display>
     </remote>
   </VirtualKeyboard>
   <NumericInput>
@@ -109,9 +115,7 @@
       <seven>Number7</seven>
       <eight>Number8</eight>
       <nine>Number9</nine>
-      <back>Back</back>
       <back>BackSpace</back>
-      <display>Back</display>
     </remote>
   </NumericInput>
 

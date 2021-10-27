@@ -27,8 +27,9 @@
         <info>KEY_INFO</info>
         <power>KEY_POWER</power>
         <back>KEY_BACK</back>
-        <menu>KEY_OPEN</menu>
+        <menu>KEY_MENU</menu>
         <guide>KEY_GUIDE</guide>
+        <display>KEY_FULLSCREEN</display>
 
         <zero>KEY_0</zero>
         <one>KEY_1</one>
@@ -41,17 +42,19 @@
         <eight>KEY_8</eight>
         <nine>KEY_9</nine>
 
+        <obc001>KEY_OPEN</obc001> <!-- Playlist -->
+        <obc002>KEY_EXIT</obc002> <!-- Close -->
+        <obc003>KEY_TIMER</obc003> <!-- Favourites -->
+        <obc004>KEY_ZOOM</obc004> <!-- Open smart menu -->
+        <obc005>KEY_TASKSWITCH</obc005> <!-- Open net -->
         <!--
-        <taskswitch>KEY_TASKSWITCH</taskswitch>
         <zoom>KEY_ZOOM</zoom>
-        <fullscreen>KEY_FULLSCREEN</fullscreen>
         <sleep>KEY_SLEEP</sleep>
         <eject>KEY_EJECT</eject>
         <dvd>KEY_DVD</dvd>
         <props>KEY_PROPS</props>
         <record>KEY_RECORD</record>
         <media>KEY_MEDIA</media>
-        <pvr>KEY_TIMER</pvr>
         -->
     </remote>
 </lircmap>
