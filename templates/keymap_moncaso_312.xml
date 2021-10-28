@@ -61,7 +61,7 @@
       <nine>JumpSMS9</nine>
     </remote>
     <universalremote>
-        <obc001>ActivateWindow(Playlist)</obc001> <!-- Playlist -->
+        <obc001>Playlist</obc001> <!-- Playlist -->
         <obc002>Close</obc002> <!-- Close -->
         <obc003>ActivateWindow(Favourites)</obc003> <!-- Favourites -->
         <obc004>ActivateWindow(Home)</obc004> <!-- Open smart menu -->
@@ -150,7 +150,7 @@
   <VideoMenu>
     <remote>
       <menu>OSD</menu>
-      <guide>Back</guide>
+      <guide>ShowVideoMenu</guide>
     </remote>
   </VideoMenu>
   <SlideShow>
@@ -219,29 +219,34 @@
   <MusicOSD>
     <remote>
       <menu>Back</menu>
+      <display>Fullscreen</display>
     </remote>
   </MusicOSD>
   <VideoOSD>
     <remote>
       <menu>Back</menu>
+      <display>Fullscreen</display>
     </remote>
   </VideoOSD>
   <PictureInfo>
     <remote>
       <info>Back</info>
       <menu>OSD</menu>
+      <display>Fullscreen</display>
     </remote>
   </PictureInfo>
   <MusicInformation>
     <remote>
       <info>Back</info>
       <menu>OSD</menu>
+      <display>Fullscreen</display>
     </remote>
   </MusicInformation>
   <MovieInformation>
     <remote>
       <info>Back</info>
       <menu>OSD</menu>
+      <display>Fullscreen</display>
     </remote>
   </MovieInformation>
   <AddonInformation>
@@ -285,12 +290,18 @@
       <guide>Back</guide>
       <display>Fullscreen</display>
     </remote>
+    <universalremote>
+        <obc001>Back</obc001> <!-- Playlist -->
+    </universalremote>
   </VideoPlaylist>
   <MusicPlaylist>
     <remote>
       <guide>Back</guide>
       <display>Fullscreen</display>
     </remote>
+    <universalremote>
+        <obc001>Back</obc001> <!-- Playlist -->
+    </universalremote>
   </MusicPlaylist>
   <Weather>
     <remote>

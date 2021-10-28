@@ -416,6 +416,7 @@ add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addon
 add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/raw/master/repository.jurialmunkey-2.2.zip" # Arctic
 add_kodi_addon "repository.zachmorris" "https://github.com/zach-morris/repository.zachmorris/raw/master/repository.zachmorris/repository.zachmorris-1.0.0.zip" # Game internet archive
 add_kodi_addon "repository.kodi_libretro_buildbot_game_addons" "https://github.com/zach-morris/kodi_libretro_buildbot_game_addons/raw/main/repository.kodi_libretro_buildbot_game_addons.zip" # Emulators
+add_kodi_addon "repository.jmooremcc" "https://github.com/jmooremcc/Repository.jmooremcc/raw/master/jmooremcc.repo.zip" # Super Favourites
 add_kodi_addon "plugin.audio.spotify-master" "https://github.com/ldsz/plugin.audio.spotify/releases/download/1.2.3/plugin.audio.spotify-1.2.3.zip" # spotify
 add_kodi_addon "script.cinemavision" "./install/script.cinemavision.zip" # cinemavision
 add_kodi_addon "context.cinemavision" "./install/context.cinemavision.zip" # cinemavision
