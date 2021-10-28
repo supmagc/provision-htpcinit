@@ -42,11 +42,11 @@
         <eight>KEY_8</eight>
         <nine>KEY_9</nine>
 
-        <obc001>KEY_OPEN</obc001> <!-- Playlist -->
-        <obc002>KEY_EXIT</obc002> <!-- Close -->
-        <obc003>KEY_TIMER</obc003> <!-- Favourites -->
-        <obc004>KEY_ZOOM</obc004> <!-- Open smart menu -->
-        <obc005>KEY_TASKSWITCH</obc005> <!-- Open net -->
+        <obc254>KEY_OPEN</obc254> <!-- Playlist -->
+        <obc253>KEY_EXIT</obc253> <!-- Close -->
+        <obc252>KEY_TIMER</obc252> <!-- Favourites -->
+        <obc251>KEY_ZOOM</obc251> <!-- Open smart menu -->
+        <obc250>KEY_TASKSWITCH</obc250> <!-- Open net -->
         <!--
         <zoom>KEY_ZOOM</zoom>
         <sleep>KEY_SLEEP</sleep>

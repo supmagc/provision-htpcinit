@@ -61,11 +61,11 @@
       <nine>JumpSMS9</nine>
     </remote>
     <universalremote>
-        <obc001>Playlist</obc001> <!-- Playlist -->
-        <obc002>Close</obc002> <!-- Close -->
-        <obc003>ActivateWindow(Favourites)</obc003> <!-- Favourites -->
-        <obc004>ActivateWindow(Home)</obc004> <!-- Open smart menu -->
-        <obc005>ActivateWindow(Home)</obc005> <!-- Open net -->
+        <obc254>Playlist</obc254> <!-- Playlist -->
+        <obc253>Close</obc253> <!-- Close -->
+        <obc252>ActivateWindow(Favourites)</obc252> <!-- Favourites -->
+        <obc251>ActivateWindow(Home)</obc251> <!-- Open smart menu -->
+        <obc250>ActivateWindow(Home)</obc250> <!-- Open net -->
     </universalremote>
   </global>
 
@@ -291,7 +291,7 @@
       <display>Fullscreen</display>
     </remote>
     <universalremote>
-        <obc001>Back</obc001> <!-- Playlist -->
+        <obc254>Back</obc254> <!-- Playlist -->
     </universalremote>
   </VideoPlaylist>
   <MusicPlaylist>
@@ -300,7 +300,7 @@
       <display>Fullscreen</display>
     </remote>
     <universalremote>
-        <obc001>Back</obc001> <!-- Playlist -->
+        <obc254>Back</obc254> <!-- Playlist -->
     </universalremote>
   </MusicPlaylist>
   <Weather>
