@@ -303,6 +303,11 @@
         <obc254>Back</obc254> <!-- Playlist -->
     </universalremote>
   </MusicPlaylist>
+  <Favourites>
+    <universalremote>
+        <obc252>Back</obc252> <!-- Favourites -->
+    </universalremote>
+  </Favourites>
   <Weather>
     <remote>
       <back>PreviousMenu</back>
@@ -398,8 +403,6 @@
   </FullscreenLiveTvInput>
   <FullscreenRadioInput>
   </FullscreenRadioInput>
-  <Favourites>
-  </Favourites>
   <Addon>
   </Addon>
   <PlayerProcessInfo>
