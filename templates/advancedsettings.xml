@@ -41,6 +41,14 @@
             <from>smb://{NAS_IP}/Pictures/</from>
             <to>/mnt/pictures/</to>
         </substitute>
+        <substitute>
+            <from>smb://{NAS_HOSTNAME}/Phones/</from>
+            <to>/mnt/phones/</to>
+        </substitute>
+        <substitute>
+            <from>smb://{NAS_IP}/Phones/</from>
+            <to>/mnt/phones/</to>
+        </substitute>
     </pathsubstitution>
     <videolibrary>
         <tvshowextraart>

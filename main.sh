@@ -370,6 +370,7 @@ add_nfs_mount "series"
 add_nfs_mount "music"
 add_nfs_mount "pictures"
 add_nfs_mount "phones"
+add_nfs_mount "games"
 mount -a
 
 # Basic configuration for kodi
