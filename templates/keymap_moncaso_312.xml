@@ -128,6 +128,7 @@
       <right>StepForward</right>
       <up>ChapterOrBigStepForward</up>
       <down>ChapterOrBigStepBack</down>
+      <select>PlayPause</select>
     </remote>
   </FullscreenVideo>
   <FullscreenGame>
@@ -145,12 +146,14 @@
       <down>SkipPrevious</down>
       <channelplus>IncreaseRating</channelplus>
       <channelminus>DecreaseRating</channelminus>
+      <select>PlayPause</select>
     </remote>
   </Visualisation>
   <VideoMenu>
     <remote>
       <menu>OSD</menu>
       <guide>ShowVideoMenu</guide>
+      <select>PlayPause</select>
     </remote>
   </VideoMenu>
   <SlideShow>
