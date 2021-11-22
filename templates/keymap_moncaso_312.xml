@@ -45,9 +45,9 @@
       <mute>Mute</mute>
       <info>Info</info>
       <power>ShutDown()</power>
-      <red>ActivateWindow(Videos,MovieTitles,true)</red>
-      <green>ActivateWindow(Videos,TvShowTitles,true)</green>
-      <yellow>ActivateWindow(Music,Albums,true)</yellow>
+      <red>ActivateWindow(Videos,MovieTitles,return)</red>
+      <green>ActivateWindow(Videos,TvShowTitles,return)</green>
+      <yellow>ActivateWindow(Music,Albums,return)</yellow>
       <blue>PlayPvrTV</blue>
       <zero>Number0</zero>
       <one>Number1</one>
@@ -81,12 +81,18 @@
       <channelplus>NextLetter</channelplus>
       <channelminus>PrevLetter</channelminus>
     </remote>
+    <universalremote>
+        <obc253>ActivateWindow(Home)</obc253> <!-- Close -->
+    </universalremote>
   </Videos>
   <Music>
     <remote>
       <channelplus>NextLetter</channelplus>
       <channelminus>PrevLetter</channelminus>
     </remote>
+    <universalremote>
+        <obc253>ActivateWindow(Home)</obc253> <!-- Close -->
+    </universalremote>
   </Music>
   <VirtualKeyboard>
     <remote>
