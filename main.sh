@@ -476,5 +476,5 @@ sed -i "/127.0.0.1/d" /etc/hosts
 sed -i "1 i 127.0.0.1\t$HOSTNAME.$DOMAIN\t$HOSTNAME" /etc/hosts
 sed -i "1 i 127.0.0.1\tlocalhost" /etc/hosts
 resolvconf -u
-nmcli connection modify "$NET_CONN" ipv4.method "manual" ipv4.dns "$NET_DNS" ipv4.addresses "$NET_IP" ipv4.gateway "$NET_GATE"
+nmcli connection modify "$NET_CONN" ipv4.method "manual" ipv4.dns "$NET_DNS" ipv4.addresses "$NET_IP" ipv4.gateway "$NET_GATE" ipv4.dns-search "$DOMAIN"
 systemctl restart network-manager.service
