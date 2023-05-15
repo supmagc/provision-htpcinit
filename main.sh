@@ -414,7 +414,7 @@ add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodi-addons/raw/
 # add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip" # Aeon MQ
 add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.7.zip" # Emby
 add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addons/repository.marcelveldt/raw/master/repository.marcelveldt-1.0.3.zip" # Old school addons
-add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/blob/master/repository.jurialmunkey-3.3.zip" # Arctic
+add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/raw/master/repository.jurialmunkey-3.3.zip" # Arctic
 add_kodi_addon "repository.zachmorris" "https://github.com/zach-morris/repository.zachmorris/releases/download/1.0.4/repository.zachmorris-1.0.4.zip" # Game internet archive
 add_kodi_addon "repository.kodi_libretro_buildbot_game_addons" "https://github.com/zach-morris/kodi_libretro_buildbot_game_addons/raw/main/repository.kodi_libretro_buildbot_game_addons.zip" # Emulators
 add_kodi_addon "plugin.audio.spotify-master" "https://github.com/ldsz/plugin.audio.spotify/releases/download/1.2.3/plugin.audio.spotify-1.2.3.zip" # spotify
