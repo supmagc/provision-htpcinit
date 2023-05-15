@@ -409,7 +409,7 @@ add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_IP" 
 add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_HOSTNAME" "$NAS_USERNAME" "$NAS_PASSWORD"
 
 # Add addons
-add_kodi_addon "repository.castagnait" "https://github.com/castagnait/repository.castagnait/raw/kodi/repository.castagnait-2.0.0.zipp" # Netflix
+add_kodi_addon "repository.castagnait" "https://github.com/castagnait/repository.castagnait/raw/kodi/repository.castagnait-2.0.0.zip" # Netflix
 add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodi-addons/raw/master/repository.supmagc/repository.supmagc-1.2.1.zip" # My own
 # add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip" # Aeon MQ
 add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.7.zip" # Emby
