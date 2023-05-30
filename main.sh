@@ -146,7 +146,7 @@ function add_nfs_mount {
   local KA_NAME="$1"
   sed -i "/mnt\\/$KA_NAME/d" /etc/fstab
   if [[ ! -d /mnt/$KA_NAME ]]; then mkdir -pv /mnt/$KA_NAME ; fi
-  echo "$NAS_IP:/mnt/leftpool/multimedia/$KA_NAME /mnt/$KA_NAME nfs _netdev,rw,hard,intr 0 0" >> /etc/fstab
+  echo "$NAS_IP:/mnt/leftpool/multimedia/$KA_NAME /mnt/$KA_NAME nfs _netdev,rw,hard,intr,bg 0 0" >> /etc/fstab
 }
 
 function add_or_replace_line_in_file {
@@ -244,6 +244,7 @@ apt-get install -y openssh-server \
 apt-get install --install-suggests -y \
   kodi libdvd-pkg \
   kodi-eventclients-kodi-send \
+  kodi-inputstream-* \
   kodi-visualization-* \
   kodi-peripheral-* \
   kodi-game-* \
@@ -411,13 +412,11 @@ add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_HOST
 # Add addons
 add_kodi_addon "repository.castagnait" "https://github.com/castagnait/repository.castagnait/raw/kodi/repository.castagnait-2.0.0.zip" # Netflix
 add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodi-addons/raw/master/repository.supmagc/repository.supmagc-1.2.1.zip" # My own
-# add_kodi_addon "repository.kodibrasilforum" "http://files.xbmcbrasil.net/Repository/repository.kodibrasilforum.zip" # Aeon MQ
 add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.7.zip" # Emby
 add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addons/repository.marcelveldt/raw/master/repository.marcelveldt-1.0.3.zip" # Old school addons
 add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/raw/master/repository.jurialmunkey-3.3.zip" # Arctic
 add_kodi_addon "repository.zachmorris" "https://github.com/zach-morris/repository.zachmorris/releases/download/1.0.4/repository.zachmorris-1.0.4.zip" # Game internet archive
 add_kodi_addon "repository.kodi_libretro_buildbot_game_addons" "https://github.com/zach-morris/kodi_libretro_buildbot_game_addons/raw/main/repository.kodi_libretro_buildbot_game_addons.zip" # Emulators
-add_kodi_addon "plugin.audio.spotify-master" "https://github.com/ldsz/plugin.audio.spotify/releases/download/1.2.3/plugin.audio.spotify-1.2.3.zip" # spotify
 add_kodi_addon "script.cinemavision" "./install/script.cinemavision.zip" # cinemavision
 add_kodi_addon "context.cinemavision" "./install/context.cinemavision.zip" # cinemavision
 
