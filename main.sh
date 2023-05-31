@@ -323,9 +323,9 @@ fi
 
 # Configure sound
 copy_and_parse_file "templates/.asoundrc" "/home/$USERNAME/.asoundrc"
-add_or_replace_line_in_file "/etc/pulse/default.pa" "load-module module-stream-restore" "load-module module-stream-restore restore_device=false"
-add_or_replace_line_in_file "/etc/pulse/default.pa" "load-module module-alsa-sink" "load-module module-alsa-sink device=hw:1,1" # 1,1 is detected from pactl list
-add_or_replace_line_in_file "/etc/pulse/default.pa" "set-default-sink" "set-default-sink 0"
+#add_or_replace_line_in_file "/etc/pulse/default.pa" "load-module module-stream-restore" "load-module module-stream-restore restore_device=false"
+#add_or_replace_line_in_file "/etc/pulse/default.pa" "load-module module-alsa-sink" "load-module module-alsa-sink device=hw:1,1" # 1,1 is detected from pactl list
+#add_or_replace_line_in_file "/etc/pulse/default.pa" "set-default-sink" "set-default-sink 0"
 
 # Configure Steam on virtualbox
 #if [[ -z "$(lspci -v | grep nvidia)" ]]; then
