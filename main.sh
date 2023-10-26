@@ -394,7 +394,6 @@ copy_and_parse_file "templates/Lircmap.xml" "$KODI_USERDATA/Lircmap.xml"
 copy_and_parse_file "templates/keymap_moncaso_312.xml" "$KODI_USERDATA/keymaps/keymap_moncaso_312.xml"
 
 # Add additional files to the sources.xml
-add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Tv Addons" "http://fusion.tvaddons.co"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Extras" "smb://$NAS_IP/Extras/"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Movies" "smb://$NAS_IP/Movies"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Series" "smb://$NAS_IP/Series"
@@ -417,6 +416,7 @@ add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addon
 add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/raw/master/repository.jurialmunkey-3.3.zip" # Arctic
 add_kodi_addon "repository.zachmorris" "https://github.com/zach-morris/repository.zachmorris/releases/download/1.0.4/repository.zachmorris-1.0.4.zip" # Game internet archive
 add_kodi_addon "repository.kodi_libretro_buildbot_game_addons" "https://github.com/zach-morris/kodi_libretro_buildbot_game_addons/raw/main/repository.kodi_libretro_buildbot_game_addons.zip" # Emulators
+add_kodi_addon "repository.dobbelina" "https://dobbelina.github.io/repository.dobbelina-1.0.4.zip" # Cumincation
 add_kodi_addon "script.cinemavision" "./install/script.cinemavision.zip" # cinemavision
 add_kodi_addon "context.cinemavision" "./install/context.cinemavision.zip" # cinemavision
 
