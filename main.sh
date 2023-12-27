@@ -245,7 +245,6 @@ apt-get install --install-suggests -y \
   kodi libdvd-pkg \
   kodi-eventclients-kodi-send \
   kodi-inputstream-* \
-  kodi-visualization-* \
   kodi-peripheral-* \
   kodi-game-* \
   kodi-vfs-* \
@@ -276,7 +275,7 @@ set_rights /home/$USERNAME/.ssh
 # Force locale and keymap settings
 locale-gen "$LOCALE_LANG"
 localectl set-x11-keymap "$LOCALE_KEYMAP"
-localectl set-keymap "$LOCALE_KEYMAP"
+# localectl set-keymap "$LOCALE_KEYMAP"
 
 # Disable unneeded xsessions and add htpc xsession
 mkdir -p /usr/share/xsessions/hidden
