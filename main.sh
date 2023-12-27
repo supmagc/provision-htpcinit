@@ -403,20 +403,26 @@ add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Phones" "smb://$
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Skinbackup" "$KODI_USERDATA/addon_data/script.skin.helper.skinbackup"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "pictures" "Pictures" "smb://$NAS_IP/Pictures"
 add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "pictures" "Phones" "smb://$NAS_IP/Phones"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Addons: GLK1001 (Spotify)" "https://glk1001.github.io/"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Addons: Dobbeline (Cumination)" "https://dobbelina.github.io/"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Addons: JurialMunkey (Arctic)" "https://jurialmunkey.github.io/repository.jurialmunkey/"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Addons: Emby (Emby)" "http://kodi.emby.media"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Addons: Marcelveldt (Oldschool)" "https://kodi-community-addons.github.io/repository.marcelveldt/"
+add_files_to_kodi_sources "$KODI_USERDATA/sources.xml" "files" "Addons: Castagnait (Netflix)" "https://castagnait.github.io/repository.castagnait/"
 
 # Add network credentials
 add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_IP" "$NAS_USERNAME" "$NAS_PASSWORD"
 add_samba_credential_to_kodi_passwords "$KODI_USERDATA/passwords.xml" "$NAS_HOSTNAME" "$NAS_USERNAME" "$NAS_PASSWORD"
 
 # Add addons
-add_kodi_addon "repository.castagnait" "https://github.com/castagnait/repository.castagnait/raw/kodi/repository.castagnait-2.0.0.zip" # Netflix
 add_kodi_addon "repository.supmagc" "https://github.com/supmagc/kodi-addons/raw/master/repository.supmagc/repository.supmagc-1.2.1.zip" # My own
-add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.7.zip" # Emby
-add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addons/repository.marcelveldt/raw/master/repository.marcelveldt-1.0.3.zip" # Old school addons
-add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/raw/master/repository.jurialmunkey-3.3.zip" # Arctic
+# add_kodi_addon "repository.castagnait" "https://github.com/castagnait/repository.castagnait/raw/kodi/repository.castagnait-2.0.0.zip" # Netflix
+# add_kodi_addon "repository.emby.kodi" "http://kodi.emby.media/repository.emby.kodi-1.0.7.zip" # Emby
+# add_kodi_addon "repository.marcelveldt" "https://github.com/kodi-community-addons/repository.marcelveldt/raw/master/repository.marcelveldt-1.0.3.zip" # Old school addons
+# add_kodi_addon "repository.jurialmunkey" "https://github.com/jurialmunkey/repository.jurialmunkey/raw/master/repository.jurialmunkey-3.3.zip" # Arctic
 add_kodi_addon "repository.zachmorris" "https://github.com/zach-morris/repository.zachmorris/releases/download/1.0.4/repository.zachmorris-1.0.4.zip" # Game internet archive
 add_kodi_addon "repository.kodi_libretro_buildbot_game_addons" "https://github.com/zach-morris/kodi_libretro_buildbot_game_addons/raw/main/repository.kodi_libretro_buildbot_game_addons.zip" # Emulators
-add_kodi_addon "repository.dobbelina" "https://dobbelina.github.io/repository.dobbelina-1.0.4.zip" # Cumincation
+# add_kodi_addon "repository.dobbelina" "https://dobbelina.github.io/repository.dobbelina-1.0.4.zip" # Cumincation
 add_kodi_addon "script.cinemavision" "./install/script.cinemavision.zip" # cinemavision
 add_kodi_addon "context.cinemavision" "./install/context.cinemavision.zip" # cinemavision
 
